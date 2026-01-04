@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X, Home, User, Briefcase, GraduationCap, Award, FileText, Lightbulb, Mail } from "lucide-react";
+import { Menu, X, Home, User, Briefcase, GraduationCap, Award, FileText, Lightbulb, Mail, BookOpen } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const navItems = [
@@ -12,6 +12,7 @@ const navItems = [
   { label: "Awards", href: "#awards", icon: Award },
   { label: "Publications", href: "#publications", icon: FileText },
   { label: "Patents", href: "#patents", icon: Lightbulb },
+  { label: "Courses", href: "#courses", icon: BookOpen },
   { label: "Contact", href: "#contact", icon: Mail },
 ];
 

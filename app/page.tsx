@@ -7,6 +7,7 @@ import AwardsSection from "@/components/AwardsSection";
 import CertificationsSection from "@/components/CertificationsSection";
 import PublicationsSection from "@/components/PublicationsSection";
 import PatentsSection from "@/components/PatentsSection";
+import CoursesSection from "@/components/CoursesSection";
 import HobbiesSection from "@/components/HobbiesSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
@@ -23,6 +24,7 @@ export default function Home() {
       <CertificationsSection />
       <PublicationsSection />
       <PatentsSection />
+      <CoursesSection />
       <HobbiesSection />
       <ContactSection />
       <Footer />
