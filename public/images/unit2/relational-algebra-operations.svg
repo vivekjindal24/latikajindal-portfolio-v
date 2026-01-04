@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620" role="img" aria-label="Relational algebra operations cheatsheet">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .panel { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 2; rx: 18; }
+      .title { font: 700 26px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .subtitle { font: 500 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #475569; }
+      .op { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 14; }
+      .sym { font: 800 30px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #1d4ed8; }
+      .name { font: 700 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .desc { font: 500 14px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #334155; }
+      .ex { font: 600 13px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #64748b; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="620" />
+  <text class="title" x="40" y="58">Relational Algebra — Core Operations</text>
+  <text class="subtitle" x="40" y="86">All operations take relations as input and produce a relation as output (closure property).</text>
+
+  <rect class="panel" x="30" y="120" width="1140" height="470" />
+
+  <!-- Row 1 -->
+  <rect class="op" x="70" y="160" width="340" height="120" />
+  <text class="sym" x="95" y="220">σ</text>
+  <text class="name" x="150" y="198">Selection</text>
+  <text class="desc" x="150" y="224">Filters rows using a condition.</text>
+  <text class="ex" x="150" y="252">Example: σ(age &gt; 20)(Student)</text>
+
+  <rect class="op" x="430" y="160" width="340" height="120" />
+  <text class="sym" x="455" y="220">π</text>
+  <text class="name" x="510" y="198">Projection</text>
+  <text class="desc" x="510" y="224">Selects columns; removes duplicates.</text>
+  <text class="ex" x="510" y="252">Example: π(name, dept)(Student)</text>
+
+  <rect class="op" x="790" y="160" width="340" height="120" />
+  <text class="sym" x="815" y="220">⋈</text>
+  <text class="name" x="870" y="198">Join</text>
+  <text class="desc" x="870" y="224">Combines related tuples by condition.</text>
+  <text class="ex" x="870" y="252">Example: Student ⋈ Enrollment</text>
+
+  <!-- Row 2 -->
+  <rect class="op" x="70" y="300" width="340" height="120" />
+  <text class="sym" x="95" y="360">∪</text>
+  <text class="name" x="150" y="338">Union</text>
+  <text class="desc" x="150" y="364">Tuples in R or S (same schema).</text>
+  <text class="ex" x="150" y="392">Example: CS_Students ∪ IT_Students</text>
+
+  <rect class="op" x="430" y="300" width="340" height="120" />
+  <text class="sym" x="455" y="360">−</text>
+  <text class="name" x="510" y="338">Difference</text>
+  <text class="desc" x="510" y="364">Tuples in R but not in S.</text>
+  <text class="ex" x="510" y="392">Example: Student − EnrolledStudent</text>
+
+  <rect class="op" x="790" y="300" width="340" height="120" />
+  <text class="sym" x="815" y="360">×</text>
+  <text class="name" x="870" y="338">Cartesian Product</text>
+  <text class="desc" x="870" y="364">All combinations of tuples from R and S.</text>
+  <text class="ex" x="870" y="392">Often followed by σ to form a join.</text>
+
+  <!-- Row 3 -->
+  <rect class="op" x="70" y="440" width="340" height="120" />
+  <text class="sym" x="95" y="500">ρ</text>
+  <text class="name" x="150" y="478">Rename</text>
+  <text class="desc" x="150" y="504">Renames relations/attributes (helps self-joins).</text>
+  <text class="ex" x="150" y="532">Example: ρ(E)(Employee)</text>
+
+  <rect class="op" x="430" y="440" width="340" height="120" />
+  <text class="sym" x="455" y="500">γ</text>
+  <text class="name" x="510" y="478">Group/Aggregate</text>
+  <text class="desc" x="510" y="504">Groups tuples and computes aggregates.</text>
+  <text class="ex" x="510" y="532">Example: γ(dept, AVG(sal))(Emp)</text>
+
+  <rect class="op" x="790" y="440" width="340" height="120" />
+  <text class="sym" x="815" y="500">÷</text>
+  <text class="name" x="870" y="478">Division</text>
+  <text class="desc" x="870" y="504">Finds “for all” matches (advanced).</text>
+  <text class="ex" x="870" y="532">Example: Enroll(S,C) ÷ Course(C)</text>
+</svg>

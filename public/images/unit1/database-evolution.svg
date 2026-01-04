@@ -1,0 +1,98 @@
+<svg width="1300" height="680" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="1300" height="680" fill="#f9fafb"/>
+  
+  <!-- Title -->
+  <text x="650" y="40" text-anchor="middle" font-size="26" font-weight="bold" fill="#111827">
+    Evolution of Database Models
+  </text>
+  <text x="650" y="65" text-anchor="middle" font-size="14" fill="#6b7280">
+    From Hierarchical to Relational Paradigm
+  </text>
+  
+  <!-- Timeline -->
+  <line x1="150" y1="330" x2="1150" y2="330" stroke="#374151" stroke-width="4"/>
+  <polygon points="1150,330 1140,325 1140,335" fill="#374151"/>
+  
+  <!-- Hierarchical Model (1960s-1970s) -->
+  <circle cx="230" cy="330" r="10" fill="#3b82f6"/>
+  <rect x="110" y="120" width="240" height="180" fill="#dbeafe" stroke="#3b82f6" stroke-width="3" rx="8"/>
+  <text x="230" y="150" text-anchor="middle" font-size="17" font-weight="bold" fill="#1e40af">Hierarchical Model</text>
+  <text x="230" y="175" text-anchor="middle" font-size="13" fill="#374151">🌳 Tree Structure</text>
+  <line x1="130" y1="190" x2="330" y2="190" stroke="#3b82f6" stroke-width="1"/>
+  <text x="230" y="213" text-anchor="middle" font-size="12" fill="#6b7280">• 1:N relationships only</text>
+  <text x="230" y="235" text-anchor="middle" font-size="12" fill="#6b7280">• Parent-child hierarchy</text>
+  <text x="230" y="257" text-anchor="middle" font-size="12" fill="#6b7280">• IBM IMS (1968)</text>
+  <text x="230" y="279" text-anchor="middle" font-size="12" fill="#6b7280">• Limited flexibility</text>
+  <line x1="230" y1="300" x2="230" y2="320" stroke="#3b82f6" stroke-width="2"/>
+  
+  <rect x="175" y="345" width="110" height="32" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" rx="4"/>
+  <text x="230" y="368" text-anchor="middle" font-size="13" font-weight="bold" fill="#1e40af">1960s-1970s</text>
+  
+  <!-- Network Model (1970s) -->
+  <circle cx="550" cy="330" r="10" fill="#8b5cf6"/>
+  <rect x="430" y="120" width="240" height="180" fill="#ede9fe" stroke="#8b5cf6" stroke-width="3" rx="8"/>
+  <text x="550" y="150" text-anchor="middle" font-size="17" font-weight="bold" fill="#6b21a8">Network Model</text>
+  <text x="550" y="175" text-anchor="middle" font-size="13" fill="#374151">🕸️ Graph Structure</text>
+  <line x1="450" y1="190" x2="650" y2="190" stroke="#8b5cf6" stroke-width="1"/>
+  <text x="550" y="213" text-anchor="middle" font-size="12" fill="#6b7280">• M:N relationships</text>
+  <text x="550" y="235" text-anchor="middle" font-size="12" fill="#6b7280">• Records with pointers</text>
+  <text x="550" y="257" text-anchor="middle" font-size="12" fill="#6b7280">• CODASYL standard</text>
+  <text x="550" y="279" text-anchor="middle" font-size="12" fill="#6b7280">• Complex navigation</text>
+  <line x1="550" y1="300" x2="550" y2="320" stroke="#8b5cf6" stroke-width="2"/>
+  
+  <rect x="495" y="345" width="110" height="32" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2" rx="4"/>
+  <text x="550" y="368" text-anchor="middle" font-size="13" font-weight="bold" fill="#6b21a8">1970s</text>
+  
+  <!-- Relational Model (1970-present) -->
+  <circle cx="930" cy="330" r="10" fill="#10b981"/>
+  <circle cx="930" cy="330" r="16" fill="none" stroke="#10b981" stroke-width="3"/>
+  <rect x="810" y="100" width="240" height="200" fill="#d1fae5" stroke="#10b981" stroke-width="4" rx="8"/>
+  <text x="930" y="130" text-anchor="middle" font-size="17" font-weight="bold" fill="#065f46">Relational Model</text>
+  <text x="930" y="155" text-anchor="middle" font-size="13" fill="#374151">📊 Table Structure</text>
+  <line x1="830" y1="170" x2="1030" y2="170" stroke="#10b981" stroke-width="1"/>
+  <text x="930" y="193" text-anchor="middle" font-size="12" fill="#6b7280">• Flexible relationships</text>
+  <text x="930" y="215" text-anchor="middle" font-size="12" fill="#6b7280">• SQL standard language</text>
+  <text x="930" y="237" text-anchor="middle" font-size="12" fill="#6b7280">• Data independence</text>
+  <text x="930" y="259" text-anchor="middle" font-size="12" fill="#6b7280">• ACID transactions</text>
+  <text x="930" y="281" text-anchor="middle" font-size="13" fill="#dc2626" font-weight="bold">⭐ DOMINANT TODAY ⭐</text>
+  <line x1="930" y1="300" x2="930" y2="320" stroke="#10b981" stroke-width="2"/>
+  
+  <rect x="865" y="345" width="130" height="32" fill="#d1fae5" stroke="#10b981" stroke-width="2" rx="4"/>
+  <text x="930" y="368" text-anchor="middle" font-size="13" font-weight="bold" fill="#065f46">1970 - Present</text>
+  
+  <!-- Progress arrows -->
+  <polygon points="430,330 410,325 410,335" fill="#9ca3af"/>
+  <polygon points="810,330 790,325 790,335" fill="#9ca3af"/>
+  
+  <!-- Bottom info boxes with more spacing -->
+  <rect x="50" y="420" width="330" height="230" fill="#fef3c7" stroke="#f59e0b" stroke-width="3" rx="8"/>
+  <text x="215" y="452" text-anchor="middle" font-size="16" font-weight="bold" fill="#92400e">🏆 Why Relational Won</text>
+  <line x1="70" y1="465" x2="360" y2="465" stroke="#f59e0b" stroke-width="1"/>
+  <text x="65" y="492" font-size="12" fill="#374151">✓ <tspan font-weight="bold">Simplicity:</tspan> Easy-to-understand tables</text>
+  <text x="65" y="518" font-size="12" fill="#374151">✓ <tspan font-weight="bold">Flexibility:</tspan> Ad-hoc query capability</text>
+  <text x="65" y="544" font-size="12" fill="#374151">✓ <tspan font-weight="bold">Standard:</tspan> SQL universal language</text>
+  <text x="65" y="570" font-size="12" fill="#374151">✓ <tspan font-weight="bold">Independence:</tspan> Logic ≠ Storage</text>
+  <text x="65" y="596" font-size="12" fill="#374151">✓ <tspan font-weight="bold">ACID:</tspan> Reliable transactions</text>
+  <text x="65" y="622" font-size="12" fill="#374151">✓ <tspan font-weight="bold">Math:</tspan> Formal optimization</text>
+  
+  <rect x="430" y="420" width="330" height="230" fill="#e0e7ff" stroke="#4f46e5" stroke-width="3" rx="8"/>
+  <text x="595" y="452" text-anchor="middle" font-size="16" font-weight="bold" fill="#3730a3">💻 Modern Usage</text>
+  <line x1="450" y1="465" x2="740" y2="465" stroke="#4f46e5" stroke-width="1"/>
+  <text x="445" y="492" font-size="12" fill="#374151"><tspan font-weight="bold">Hierarchical:</tspan> Legacy systems (rare)</text>
+  <text x="445" y="518" font-size="12" fill="#374151"><tspan font-weight="bold">Network:</tspan> Specialized apps (rare)</text>
+  <text x="445" y="544" font-size="12" fill="#065f46" font-weight="bold">Relational (95%+ of apps):</text>
+  <text x="455" y="570" font-size="12" fill="#374151">• MySQL, PostgreSQL</text>
+  <text x="455" y="596" font-size="12" fill="#374151">• Oracle, SQL Server, DB2</text>
+  <text x="455" y="622" font-size="12" fill="#374151">• Banking, E-commerce, etc.</text>
+  
+  <rect x="810" y="420" width="330" height="230" fill="#fce7f3" stroke="#ec4899" stroke-width="3" rx="8"/>
+  <text x="975" y="452" text-anchor="middle" font-size="16" font-weight="bold" fill="#be185d">📈 Key Innovation</text>
+  <line x1="830" y1="465" x2="1120" y2="465" stroke="#ec4899" stroke-width="1"/>
+  <text x="975" y="500" text-anchor="middle" font-size="13" fill="#374151" font-weight="bold">E.F. Codd (1970)</text>
+  <text x="975" y="528" text-anchor="middle" font-size="12" fill="#6b7280">Published "A Relational</text>
+  <text x="975" y="550" text-anchor="middle" font-size="12" fill="#6b7280">Model of Data for Large</text>
+  <text x="975" y="572" text-anchor="middle" font-size="12" fill="#6b7280">Shared Data Banks"</text>
+  <text x="975" y="602" text-anchor="middle" font-size="12" fill="#374151">Revolutionized database</text>
+  <text x="975" y="624" text-anchor="middle" font-size="12" fill="#374151">design forever!</text>
+</svg>

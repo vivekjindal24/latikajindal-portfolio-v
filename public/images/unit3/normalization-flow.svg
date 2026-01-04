@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="560" viewBox="0 0 1200 560" role="img" aria-label="Normalization flow from 1NF to BCNF with anomalies removed">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: 700 26px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .sub { font: 500 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #475569; }
+      .stage { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 2; rx: 18; }
+      .h { font: 800 18px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .t { font: 500 14px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #334155; }
+      .chip { fill: #eef2ff; stroke: #6366f1; stroke-width: 2; rx: 999; }
+      .chipText { font: 700 13px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #3730a3; }
+      .arrow { stroke: #64748b; stroke-width: 3; fill: none; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="560" />
+  <text class="title" x="40" y="58">Normalization — From Redundancy to Clean Design</text>
+  <text class="sub" x="40" y="86">Each step removes a class of anomalies using functional dependencies.</text>
+
+  <!-- stages -->
+  <rect class="stage" x="40" y="140" width="260" height="360" />
+  <rect class="stage" x="330" y="140" width="260" height="360" />
+  <rect class="stage" x="620" y="140" width="260" height="360" />
+  <rect class="stage" x="910" y="140" width="260" height="360" />
+
+  <text class="h" x="70" y="185">1NF</text>
+  <text class="t" x="70" y="215">Atomic values</text>
+  <text class="t" x="70" y="238">No repeating groups</text>
+  <rect class="chip" x="70" y="270" width="200" height="34" />
+  <text class="chipText" x="90" y="292">Fix: nested lists/arrays</text>
+
+  <text class="h" x="360" y="185">2NF</text>
+  <text class="t" x="360" y="215">1NF + no partial</text>
+  <text class="t" x="360" y="238">dependency on composite key</text>
+  <rect class="chip" x="360" y="270" width="200" height="34" />
+  <text class="chipText" x="380" y="292">Fix: partial dependency</text>
+
+  <text class="h" x="650" y="185">3NF</text>
+  <text class="t" x="650" y="215">2NF + no transitive</text>
+  <text class="t" x="650" y="238">dependency (non-key → non-key)</text>
+  <rect class="chip" x="650" y="270" width="200" height="34" />
+  <text class="chipText" x="670" y="292">Fix: transitive dependency</text>
+
+  <text class="h" x="940" y="185">BCNF</text>
+  <text class="t" x="940" y="215">Every determinant is</text>
+  <text class="t" x="940" y="238">a superkey</text>
+  <rect class="chip" x="940" y="270" width="200" height="34" />
+  <text class="chipText" x="960" y="292">Fix: key anomalies</text>
+
+  <!-- arrows -->
+  <path class="arrow" d="M 300 320 C 315 320, 315 320, 330 320" marker-end="url(#arrow)" />
+  <path class="arrow" d="M 590 320 C 605 320, 605 320, 620 320" marker-end="url(#arrow)" />
+  <path class="arrow" d="M 880 320 C 895 320, 895 320, 910 320" marker-end="url(#arrow)" />
+
+  <!-- bottom notes -->
+  <text class="t" x="70" y="360">Prevents: insertion/update</text>
+  <text class="t" x="70" y="382">issues caused by non-atomic fields.</text>
+
+  <text class="t" x="360" y="360">Prevents: repeating student info</text>
+  <text class="t" x="360" y="382">in an Enrollment table.</text>
+
+  <text class="t" x="650" y="360">Prevents: storing DeptName</text>
+  <text class="t" x="650" y="382">via DeptID inside Employee rows.</text>
+
+  <text class="t" x="940" y="360">Stricter than 3NF; sometimes</text>
+  <text class="t" x="940" y="382">trade-offs needed for dependency preservation.</text>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="RBAC model: users, roles, permissions">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .title { font: 700 26px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .sub { font: 500 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #475569; }
+      .card { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 2; rx: 18; }
+      .boxU { fill: #ffffff; stroke: #93c5fd; stroke-width: 2; rx: 14; }
+      .boxR { fill: #ffffff; stroke: #c4b5fd; stroke-width: 2; rx: 14; }
+      .boxP { fill: #ffffff; stroke: #86efac; stroke-width: 2; rx: 14; }
+      .h { font: 800 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .t { font: 600 13px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #334155; }
+      .line { stroke: #64748b; stroke-width: 3; }
+      .tag { font: 800 13px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="520" />
+  <text class="title" x="40" y="58">Role-Based Access Control (RBAC)</text>
+  <text class="sub" x="40" y="86">Users get permissions by being assigned to roles. This simplifies permission management and supports least privilege.</text>
+
+  <rect class="card" x="30" y="120" width="1140" height="360" />
+
+  <text class="tag" x="110" y="160">USERS</text>
+  <text class="tag" x="540" y="160">ROLES</text>
+  <text class="tag" x="940" y="160">PERMISSIONS</text>
+
+  <!-- Users -->
+  <rect class="boxU" x="80" y="190" width="220" height="60" />
+  <text class="h" x="110" y="225">Alice</text>
+  <text class="t" x="110" y="246">(HR staff)</text>
+
+  <rect class="boxU" x="80" y="270" width="220" height="60" />
+  <text class="h" x="110" y="305">Bob</text>
+  <text class="t" x="110" y="326">(Sales rep)</text>
+
+  <rect class="boxU" x="80" y="350" width="220" height="60" />
+  <text class="h" x="110" y="385">Carol</text>
+  <text class="t" x="110" y="406">(DBA)</text>
+
+  <!-- Roles -->
+  <rect class="boxR" x="490" y="200" width="260" height="60" />
+  <text class="h" x="520" y="235">HR_MANAGER</text>
+
+  <rect class="boxR" x="490" y="290" width="260" height="60" />
+  <text class="h" x="520" y="325">SALES_REP</text>
+
+  <rect class="boxR" x="490" y="380" width="260" height="60" />
+  <text class="h" x="520" y="415">DB_ADMIN</text>
+
+  <!-- Permissions -->
+  <rect class="boxP" x="890" y="190" width="250" height="60" />
+  <text class="h" x="920" y="225">SELECT Employees</text>
+  <text class="t" x="920" y="246">UPDATE Employees</text>
+
+  <rect class="boxP" x="890" y="270" width="250" height="60" />
+  <text class="h" x="920" y="305">SELECT Customers</text>
+  <text class="t" x="920" y="326">INSERT Orders</text>
+
+  <rect class="boxP" x="890" y="350" width="250" height="90" />
+  <text class="h" x="920" y="385">ALL PRIVILEGES</text>
+  <text class="t" x="920" y="406">CREATE / DROP / GRANT</text>
+  <text class="t" x="920" y="427">Backup / Restore</text>
+
+  <!-- assignments -->
+  <line class="line" x1="300" y1="220" x2="490" y2="230" marker-end="url(#arrow)" />
+  <line class="line" x1="300" y1="300" x2="490" y2="320" marker-end="url(#arrow)" />
+  <line class="line" x1="300" y1="380" x2="490" y2="410" marker-end="url(#arrow)" />
+
+  <line class="line" x1="750" y1="230" x2="890" y2="220" marker-end="url(#arrow)" />
+  <line class="line" x1="750" y1="320" x2="890" y2="300" marker-end="url(#arrow)" />
+  <line class="line" x1="750" y1="410" x2="890" y2="395" marker-end="url(#arrow)" />
+</svg>

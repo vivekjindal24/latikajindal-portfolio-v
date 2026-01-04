@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="ER cardinality examples: one-to-one, one-to-many, many-to-many">
+  <defs>
+    <style>
+      .bg { fill: #ffffff; }
+      .panel { fill: #f8fafc; stroke: #e2e8f0; stroke-width: 2; rx: 18; }
+      .title { font: 700 26px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .h { font: 700 20px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .t { font: 500 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #334155; }
+      .box { fill: #ffffff; stroke: #94a3b8; stroke-width: 2; rx: 14; }
+      .label { font: 700 16px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #0f172a; }
+      .rel { fill: #eef2ff; stroke: #6366f1; stroke-width: 2; rx: 14; }
+      .relLabel { font: 700 15px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #3730a3; }
+      .line { stroke: #475569; stroke-width: 3; }
+      .card { font: 700 18px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #1d4ed8; }
+      .note { font: 500 13px ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; fill: #64748b; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="520" />
+  <text class="title" x="40" y="58">ER Cardinality — Visual Examples</text>
+  <text class="t" x="40" y="88">Cardinality tells how many entity instances can be related across a relationship.</text>
+
+  <!-- Panels -->
+  <rect class="panel" x="30" y="120" width="360" height="360" />
+  <rect class="panel" x="420" y="120" width="360" height="360" />
+  <rect class="panel" x="810" y="120" width="360" height="360" />
+
+  <!-- 1:1 -->
+  <text class="h" x="60" y="165">1 : 1 (One-to-One)</text>
+  <rect class="box" x="70" y="210" width="120" height="62" />
+  <text class="label" x="95" y="248">Person</text>
+  <rect class="rel" x="200" y="216" width="110" height="50" />
+  <text class="relLabel" x="217" y="247">HAS</text>
+  <rect class="box" x="310" y="210" width="120" height="62" />
+  <text class="label" x="338" y="248">Passport</text>
+  <line class="line" x1="190" y1="241" x2="200" y2="241" marker-end="url(#arrow)" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" />
+  <line class="line" x1="310" y1="241" x2="310" y2="241" marker-end="url(#arrow)" />
+  <text class="card" x="185" y="206">1</text>
+  <text class="card" x="310" y="206">1</text>
+  <text class="note" x="60" y="315">Example: each person has at most one passport,</text>
+  <text class="note" x="60" y="336">and each passport belongs to one person.</text>
+
+  <!-- 1:N -->
+  <text class="h" x="450" y="165">1 : N (One-to-Many)</text>
+  <rect class="box" x="460" y="210" width="140" height="62" />
+  <text class="label" x="487" y="248">Department</text>
+  <rect class="rel" x="612" y="216" width="120" height="50" />
+  <text class="relLabel" x="635" y="247">HAS</text>
+  <rect class="box" x="740" y="195" width="120" height="55" />
+  <text class="label" x="770" y="228">Course</text>
+  <rect class="box" x="740" y="255" width="120" height="55" />
+  <text class="label" x="770" y="288">Course</text>
+  <rect class="box" x="740" y="315" width="120" height="55" />
+  <text class="label" x="770" y="348">Course</text>
+  <line class="line" x1="600" y1="241" x2="612" y2="241" marker-end="url(#arrow)" />
+  <line class="line" x1="732" y1="241" x2="740" y2="222" marker-end="url(#arrow)" />
+  <line class="line" x1="732" y1="241" x2="740" y2="282" marker-end="url(#arrow)" />
+  <line class="line" x1="732" y1="241" x2="740" y2="342" marker-end="url(#arrow)" />
+  <text class="card" x="595" y="206">1</text>
+  <text class="card" x="736" y="206">N</text>
+  <text class="note" x="450" y="400">Example: one department offers many courses.</text>
+
+  <!-- M:N -->
+  <text class="h" x="840" y="165">M : N (Many-to-Many)</text>
+  <rect class="box" x="850" y="210" width="120" height="62" />
+  <text class="label" x="878" y="248">Student</text>
+  <rect class="rel" x="980" y="216" width="140" height="50" />
+  <text class="relLabel" x="1006" y="247">ENROLLS</text>
+  <rect class="box" x="1125" y="210" width="120" height="62" transform="translate(-65 0)" />
+  <text class="label" x="1076" y="248">Course</text>
+  <line class="line" x1="970" y1="241" x2="980" y2="241" marker-end="url(#arrow)" />
+  <line class="line" x1="1120" y1="241" x2="1130" y2="241" marker-end="url(#arrow)" />
+  <text class="card" x="965" y="206">M</text>
+  <text class="card" x="1120" y="206">N</text>
+
+  <rect class="box" x="890" y="310" width="290" height="140" />
+  <text class="label" x="912" y="346">Enrollment (junction table)</text>
+  <text class="t" x="912" y="375">StudentID + CourseID (+ Grade, Semester)</text>
+  <text class="note" x="912" y="410">Used to implement M:N in relational databases.</text>
+
+  <line class="line" x1="910" y1="272" x2="960" y2="310" marker-end="url(#arrow)" />
+  <line class="line" x1="1060" y1="272" x2="1030" y2="310" marker-end="url(#arrow)" />
+</svg>
