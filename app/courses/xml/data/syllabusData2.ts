@@ -44,13 +44,11 @@ export const clos: CLO[] = [
   },
   {
     id: 'CLO03',
-    description:
-      'Query and navigate XML documents using XPath expressions and axes.',
+    description: 'Query and navigate XML documents using XPath expressions and axes.',
   },
   {
     id: 'CLO04',
-    description:
-      'Transform XML into other formats using XSLT templates and processing rules.',
+    description: 'Transform XML into other formats using XSLT templates and processing rules.',
   },
   {
     id: 'CLO05',
@@ -96,231 +94,204 @@ export const units: Unit[] = [
         id: 'xml-overview',
         title: 'XML Overview & Markup Languages',
         subtopics: [
-          'What is XML?',
+          'Why XML exists',
           'Markup languages',
           'XML vs HTML',
-          'Where XML is used',
-          'XML ecosystem (DTD/XSD/XPath/XSLT)',
+          'Real-world use cases',
+          'XML family (DTD/XSD/XPath/XSLT)',
         ],
         clos: ['CLO01'],
         cos: ['CO01'],
         content: {
           introduction:
-            'XML (eXtensible Markup Language) is a text-based standard for representing structured information. Unlike HTML (which focuses on presentation), XML focuses on meaning and structure. This topic builds the foundation: what markup is, why XML was created, where XML is used, and how DTD, XSD, XPath, and XSLT form a pipeline for validation, querying, and transformation.',
-          concept: `## Markup: structure + meaning
+            'XML is a standards-based way to package meaning and structure in plain text. It grew out of SGML to make data exchange predictable across tools, platforms, and decades. Think of it as a contract for how information is organized—not how it looks.',
+          concept: `## Markup in practice
 
-A markup language embeds tags in text to describe structure.
+A markup language labels parts of a document so humans and programs agree on what each part means.
 
-- In HTML, tags mostly describe presentation and document structure.
-- In XML, tags primarily describe data meaning and relationships.
+- HTML labels how to display; XML labels what the data *is*.
+- XML is a meta-language: you mint tags that match your domain (student, invoice, sensor, book).
 
-### Why "extensible" matters
+### Why extensible matters
 
-XML does not provide a fixed vocabulary. You create tags that match your domain, for example:
-
-- \`<student>\`, \`<course>\`, \`<invoice>\`, \`<patient>\`
-
-This is why XML is used in data exchange: it lets different systems agree on a vocabulary and validate it.
+You are not locked to a fixed tag set. New elements can be added without breaking existing parsers as long as they stay well-formed.
 
 ### Well-formed vs valid
 
-- Well-formed: follows XML syntax rules.
-- Valid: well-formed and conforms to a schema (DTD/XSD).
+- Well-formed: syntax rules are respected (single root, proper nesting, quoted attributes).
+- Valid: well-formed *and* obeys a schema (DTD or XSD).`,
+          technicalDepth: `## Tree mental model
 
-### The XML family in one line
+XML documents are ordered trees:
+- Root element contains everything.
+- Elements may hold text, other elements, and attributes.
+- Attributes are name/value metadata on elements.
 
-- DTD/XSD: define and validate structure
-- XPath: select nodes
-- XSLT: transform XML into another format
-`,
-          technicalDepth: `## XML as a tree model
+### When to use elements vs attributes
+- Use elements for repeatable or structured data (titles, items, nested records).
+- Use attributes for identifiers, flags, short metadata (id, type, status).
 
-XML documents form a rooted, ordered tree:
+### XML ecosystem map
+- Structure guardrails: DTD / XSD
+- Navigation: XPath
+- Transformation: XSLT
 
-- Document root
-- Elements (nodes)
-- Attributes (name/value metadata)
-- Text nodes
-- Comments and processing instructions
-
-Thinking in trees is essential for XPath and XSLT.
-
-### Elements vs attributes (exam-friendly guidance)
-
-Use elements for repeatable or structured content and nested data.
-
-Use attributes for identifiers, flags, and small metadata.
-
-### XML ecosystem mapping
-
-| Need | Technology |
-|---|---|
-| enforce structure | DTD / XSD |
-| enforce datatypes | XSD |
-| select data | XPath |
-| generate output formats | XSLT |
-
-### Parsing overview
-
-Typical steps:
-
-1. Parse XML (must be well-formed)
-2. Validate (optional): DTD/XSD
-3. Query/Transform: XPath/XSLT
-4. Serialize output
-`,
-          examples: `## Example: a simple XML document
+### Parsing flow
+1) Parse for well-formedness.
+2) (Optional) Validate against DTD/XSD.
+3) Query or transform with XPath/XSLT.
+4) Serialize output for transport or storage.`,
+          examples: `## Tiny XML sample
 
 ~~~xml
 <?xml version="1.0" encoding="UTF-8"?>
 <student id="S1">
-  <name>Vivek</name>
+  <name>Meera</name>
   <dept>CSE</dept>
   <cgpa>9.1</cgpa>
 </student>
 ~~~
 
-### Example: XML vs HTML
+### HTML vs XML side by side
+- HTML: <h1>Title</h1> (presentation)
+- XML: <title>Distributed Systems</title> (meaning)`,
+          practical: `## Quick hands-on
 
-- HTML: \`<h1>Title</h1>\` (display heading)
-- XML: \`<title>DBMS</title>\` (data meaning)
-`,
-          practical: `## Practical
+- Draft one XML document for a dataset you like (books, courses, products).
+- Check well-formedness with any strict parser.
+- Add comments and attributes sparingly to see how tools display them.
 
-- Create an XML file for any dataset (students, books, movies).
-- Make sure it is well-formed:
-  - single root
-  - properly nested tags
-  - quoted attribute values
-  - matching start/end tags
+Common pitfalls to avoid: missing end tags, multiple roots, unescaped & or <, and unquoted attributes.`,
+          exam: `## Exam checkpoints
 
-### Common pitfalls
-
-- Mismatched tags
-- Unescaped special characters (\`&\`, \`<\`, \`>\`)
-- Multiple root elements
-`,
-          exam: `## Exam points
-
-### 2-mark
-
-- Define XML.
-- List differences between XML and HTML.
-- What is well-formed vs valid?
-
-### 5-mark
-
-- Explain the XML ecosystem and where DTD/XSD/XPath/XSLT fit.
-
-### 10-mark
-
-- Discuss XML as a meta-language and compare it to HTML with examples.
-`,
+- Short: define XML; list 3 differences vs HTML; explain "extensible".
+- Medium: describe well-formed vs valid with one example each.
+- Long: explain how XML + DTD/XSD + XPath + XSLT form a pipeline.`,
           takeaways: `## Takeaways
 
-- XML describes structure and meaning, not presentation.
-- Well-formedness is syntax; validity requires DTD/XSD.
-- Model XML as a tree for XPath/XSLT.
-`,
+- XML captures meaning; presentation is handled elsewhere.
+- Treat every XML document as a tree.
+- Validation is optional but crucial when systems exchange data.`,
         },
       },
       {
         id: 'xml-syntax',
         title: 'XML Syntax, Namespaces, and Well-Formedness',
         subtopics: [
-          'XML declaration',
-          'Elements and attributes',
+          'XML prolog',
+          'Elements vs attributes',
           'Entities and escaping',
           'Namespaces and prefixes',
-          'Common parser errors',
+          'Parser error patterns',
         ],
         clos: ['CLO01'],
         cos: ['CO01'],
         content: {
           introduction:
-            'Real XML systems depend on strict syntax rules so that any conforming parser produces the same tree. This topic focuses on well-formedness rules, escaping, and namespaces. Namespaces allow multiple vocabularies to coexist without collisions—essential for XSD and many industry XML formats.',
+            'Syntax discipline is what lets any conforming parser build the same tree. This topic sharpens the core rules—proper nesting, entity handling, and namespace hygiene—so downstream validation and transforms stay predictable.',
           concept: `## Well-formedness rules
 
-A document is well-formed if:
+1) Exactly one root element.
+2) Properly nested tags; every start tag closes.
+3) Attribute values are quoted.
+4) Reserved characters (\`<\`, \`>\`, \`&\`) are escaped inside text.
 
-1. Exactly one root element exists.
-2. Tags are properly nested.
-3. Every start tag has a matching end tag (or uses empty-element syntax).
-4. Attribute values are quoted.
+### Predefined entities table
 
-### Escaping special characters
+| Character | Entity | When to use |
+|-----------|--------|-------------|
+| \`<\` | \`&lt;\` | Less-than symbol in text |
+| \`>\` | \`&gt;\` | Greater-than symbol in text |
+| \`&\` | \`&amp;\` | Ampersand in text |
+| \`"\` | \`&quot;\` | Double quote in attributes |
+| \`'\` | \`&apos;\` | Single quote (apostrophe) in attributes |
 
-In text content:
+### Validity reminder
+Valid = well-formed + conforms to a schema (DTD/XSD).`,
+          technicalDepth: `## Namespaces in action
 
-- \`&\` becomes \`&amp;\`
-- \`<\` becomes \`&lt;\`
+Namespaces prevent name collisions when mixing vocabularies.
 
-### Entities (basic)
-
-Predefined entities: \`&amp; &lt; &gt; &quot; &apos;\`
-`,
-          technicalDepth: `## Namespaces
-
-Namespaces prevent collisions by qualifying names with a URI.
-
+With prefix:
 ~~~xml
 <bk:book xmlns:bk="http://example.com/book">
-  <bk:title>XML</bk:title>
+  <bk:title>XML Handbook</bk:title>
 </bk:book>
 ~~~
 
-### Default namespace
-
+Default namespace:
 ~~~xml
 <book xmlns="http://example.com/book">
-  <title>XML</title>
+  <title>XML Handbook</title>
 </book>
 ~~~
 
-Note: unprefixed attributes do not automatically belong to the default namespace in XML 1.0.
-`,
-          examples: `## Examples
+Notes:
+- Attributes are not in the default namespace unless prefixed.
+- Choose stable, resolvable URIs for namespaces even if they are not fetched at runtime.`,
+          examples: `## Visual: Good vs bad nesting
 
-### Valid nesting
-
+**✅ Correct nesting** (tags open and close in the right order)
 ~~~xml
-<a>
-  <b>
-    <c />
-  </b>
-</a>
+<order>
+  <item>
+    <sku>123</sku>
+  </item>
+</order>
 ~~~
 
-### Invalid nesting
-
+**❌ Broken nesting** (item closes after order—parser error)
 ~~~xml
-<a><b></a></b>
+<order><item></order></item>
 ~~~
 
-### Escaping
+## Entity usage examples
 
+**Problem:** You want to show "if value < 10 & flag = true" in XML
+
+**❌ Wrong** (parser treats \`<\` and \`&\` as markup)
 ~~~xml
-<msg>Use &amp; to represent an ampersand.</msg>
+<condition>if value < 10 & flag = true</condition>
 ~~~
-`,
-          practical: `## Practical
 
-- Create an XML file that uses a namespace prefix (e.g., \`lib\`, \`inv\`).
-- Validate well-formedness with any strict parser.
-- Intentionally introduce 3 errors and note the error messages.
-`,
-          exam: `## Exam
+**✅ Correct** (entities escape special characters)
+~~~xml
+<condition>if value &lt; 10 &amp; flag = true</condition>
+~~~
+
+## Visual: Namespace collision
+
+**Problem:** Two vocabularies both use \`<title>\`
+~~~xml
+<!-- Without namespaces—ambiguous -->
+<document>
+  <title>Book Title</title>
+  <title>Page Title</title>
+</document>
+~~~
+
+**Solution:** Use prefixes to distinguish
+~~~xml
+<doc xmlns:bk="http://books.com" xmlns:pg="http://pages.com">
+  <bk:title>Book Title</bk:title>
+  <pg:title>Page Title</pg:title>
+</doc>
+~~~`,
+          practical: `## Practice
+
+- Add a namespace prefix to an existing XML file and run it through a validator.
+- Intentionally break three rules (double root, bad nesting, unescaped <) and read the parser errors.
+- Add meaningful attributes (id, status) and confirm they remain quoted.`,
+          exam: `## Exam focus
 
 - Define namespace and default namespace.
-- Explain well-formedness rules.
-- Explain namespaces (prefix/URI mapping) and why they are needed.
-`,
+- List the five predefined entities.
+- Explain difference between well-formed and valid with one-liner examples.`,
           takeaways: `## Takeaways
 
-- Well-formedness is required for parsing.
-- Escape special characters correctly.
-- Namespaces prevent collisions and enable schema-driven validation.
-`,
+- Namespaces are non-negotiable when combining vocabularies.
+- Most parser errors come from nesting or unescaped characters.
+- Stick to UTF-8 in the prolog to avoid encoding surprises.`,
         },
       },
     ],
@@ -343,48 +314,29 @@ Note: unprefixed attributes do not automatically belong to the default namespace
         cos: ['CO02'],
         content: {
           introduction:
-            'DTD (Document Type Definition) defines the allowed structure of an XML document. A DTD acts as a contract: which elements can appear, in what order, how many times, and with what attributes. While many modern systems prefer XSD, DTD remains important for legacy systems and for understanding validation.',
-          concept: `## What a DTD specifies
+            'A DTD is the original grammar for XML. It lists which elements exist, how they nest, and which attributes are allowed. Even if XSD is richer, DTD fluency is essential for legacy systems and exam answers.',
+          concept: `## What a DTD captures
 
-A DTD can define:
+- Allowed elements and their order.
+- Cardinality using ?, *, +.
+- Allowed attributes with types (CDATA, ID, IDREF, enumerations).
+- Entities for reusable text.
 
-- allowed elements and their content models
-- allowed attributes and their types
-- entities (reusable text)
-
-### Internal vs external DTD
-
-- Internal: inside \`<!DOCTYPE ... [ ... ]>\`
-- External: referenced via system/public identifiers
-`,
-          technicalDepth: `## Core declarations
-
-### Element declarations
+### Internal vs external
+- Internal: rules declared inside the DOCTYPE.
+- External: referenced with system/public identifiers for reuse.`,
+          technicalDepth: `## Element and attribute declarations
 
 ~~~dtd
 <!ELEMENT library (book+)>
 <!ELEMENT book (title, author, price)>
 <!ELEMENT title (#PCDATA)>
-<!ELEMENT author (#PCDATA)>
-<!ELEMENT price (#PCDATA)>
-~~~
-
-Operators:
-
-- \`?\` optional
-- \`*\` zero or more
-- \`+\` one or more
-- \`|\` choice
-- \, sequence
-
-### Attribute list
-
-~~~dtd
 <!ATTLIST book id ID #REQUIRED>
 <!ATTLIST book category (cs|ee|me) "cs">
 ~~~
-`,
-          examples: `## Example: XML + internal DTD
+
+Operators recap: ? optional, * zero-or-more, + one-or-more, | choice, comma = sequence.`,
+          examples: `## Library with internal DTD
 
 ~~~xml
 <?xml version="1.0"?>
@@ -403,27 +355,22 @@ Operators:
     <price>499</price>
   </book>
 </library>
-~~~
-`,
-          practical: `## Practical
+~~~`,
+          practical: `## Hands-on
 
-- Write XML and DTD for \`library\`.
-- Test errors:
-  - remove a required element
-  - change order
-  - remove a required attribute
-`,
-          exam: `## Exam
+- Draft a DTD for a course catalog with course, credits, faculty.
+- Validate one XML sample, then break rules (wrong order, missing attribute) to see error messages.
+- Move rules to an external DTD and reference it from your XML.`,
+          exam: `## Exam prep
 
-- Define DTD and #PCDATA.
-- Explain internal vs external DTD.
-- Design a DTD for a simple application.
-`,
+- Define #PCDATA and EMPTY.
+- Write one element declaration using + and |.
+- Sketch a DOCTYPE for an employee file with required id attribute.`,
           takeaways: `## Takeaways
 
-- DTD provides a grammar for XML structure.
-- It validates ordering and occurrence but has limited datatypes.
-`,
+- DTD gives structural validation but almost no data typing.
+- Keep content models simple; deeply nested choices become unreadable.
+- External DTDs promote reuse across documents.`,
         },
       },
       {
@@ -433,57 +380,46 @@ Operators:
           'General and parameter entities',
           'Mixed content models',
           'ID/IDREF relationships',
-          'DTD limitations vs XSD',
+          'Why XSD replaces many DTD roles',
         ],
         clos: ['CLO02'],
         cos: ['CO02'],
         content: {
           introduction:
-            'Advanced DTD topics include entities for reuse and mixed content models. At the same time, DTD has major limitations: weak typing and limited constraint support. Understanding these strengths and limits helps you justify XSD in modern applications.',
-          concept: `## Entities
+            'This topic is about reuse and realism. Entities keep repeated text consistent, mixed content supports text with inline tags, and ID/IDREF mimic primary/foreign keys. You also learn where DTDs fall short so you can justify XSD.',
+          concept: `## Entity toolkit
 
-Entities define reusable fragments.
-
-- General entities: used in XML content
-- Parameter entities: used inside the DTD
+- General entity: reusable text inside XML instances.
+- Parameter entity: reusable fragments inside the DTD itself.
 
 ## Mixed content
 
-Mixed content allows text interleaved with inline elements.
-`,
-          technicalDepth: `## General entity example
+Allows text with inline elements, e.g., paragraphs that contain <b> and <i>.`,
+          technicalDepth: `## Patterns to remember
 
+General entity
 ~~~dtd
 <!ENTITY company "ACME Pvt Ltd">
-~~~
-
-Usage:
-
-~~~xml
+...
 <name>&company;</name>
 ~~~
 
-## Parameter entity example
-
+Parameter entity
 ~~~dtd
 <!ENTITY % commonAttrs "id ID #REQUIRED created CDATA #IMPLIED">
 <!ATTLIST book %commonAttrs;>
 ~~~
 
-## Mixed content pattern
-
+Mixed content
 ~~~dtd
 <!ELEMENT p (#PCDATA|b|i)*>
 ~~~
 
-## DTD limitations
-
-- limited datatypes
-- weak constraints (no ranges/patterns)
-- not XML syntax
-- weak namespace integration
-`,
-          examples: `## Example: mixed content
+Limitations
+- No native data ranges or regex patterns.
+- Poor namespace story.
+- Not written in XML, so tooling reuse is limited.`,
+          examples: `## Sample with mixed content
 
 ~~~xml
 <!DOCTYPE doc [
@@ -495,26 +431,22 @@ Usage:
 <doc>
   <p>XML is <b>structured</b> and <i>portable</i>.</p>
 </doc>
-~~~
-`,
-          practical: `## Practical
+~~~`,
+          practical: `## Try it
 
-- Add general entities for repeated organization name.
-- Add one parameter entity to share attributes.
-- Create one mixed-content element (e.g., \`p\`).
-`,
-          exam: `## Exam
+- Add a general entity for your institute name and reuse it in two elements.
+- Create a paragraph element that allows bold/italic mixed with text.
+- Add ID/IDREF to link a book to a publisher element.`,
+          exam: `## Exam cues
 
-- Define entity.
-- Explain mixed content with DTD syntax.
-- Compare DTD and XSD with at least 6 points.
-`,
+- Difference between general and parameter entities.
+- Mixed content syntax and why the * is required.
+- Three crisp limitations of DTD vs XSD.`,
           takeaways: `## Takeaways
 
-- Entities support reuse and modularity.
-- Mixed content uses \`(#PCDATA|...)*\`.
-- XSD addresses many DTD limitations.
-`,
+- Entities reduce duplication; parameter entities keep DTDs DRY.
+- Mixed content is essential for narrative text with inline markup.
+- Use XSD when you need types, namespaces, and stricter constraints.`,
         },
       },
     ],
@@ -527,7 +459,7 @@ Usage:
         id: 'xsd-fundamentals',
         title: 'XSD Fundamentals: Namespaces, Types, and Structure',
         subtopics: [
-          'Schema basics',
+          'Schema document shape',
           'targetNamespace and qualification',
           'Simple vs complex types',
           'sequence/choice/all',
@@ -537,17 +469,14 @@ Usage:
         cos: ['CO03'],
         content: {
           introduction:
-            'XML Schema (XSD) is the W3C-recommended language for describing XML structure and constraints. XSD is more expressive than DTD: it is XML-based, supports namespaces properly, and provides rich datatypes and restriction mechanisms.',
-          concept: `## Why XSD?
+            'XSD is the W3C recommendation for expressing XML structure and datatypes using XML syntax itself. It brings namespaces, strong typing, and precise control over order and cardinality.',
+          concept: `## Why XSD beats DTD
 
-XSD improves on DTD by adding:
-
-- XML syntax (schemas are XML documents)
-- namespaces support
-- rich data types (integer, date, decimal, boolean)
-- constraint facets (pattern, enumeration, ranges)
-`,
-          technicalDepth: `## Core schema skeleton
+- Written in XML, so it can be parsed and validated like any other XML.
+- Rich built-in types: string, boolean, decimal, date, dateTime, integer, etc.
+- Namespaces are first-class, preventing collisions in large vocabularies.
+- Facets add business rules (length, pattern, ranges).`,
+          technicalDepth: `## Skeleton to memorize
 
 ~~~xml
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -569,59 +498,67 @@ XSD improves on DTD by adding:
 </xs:schema>
 ~~~
 
-### sequence vs choice vs all
+### Model groups
+- xs:sequence → ordered children.
+- xs:choice → one of the listed children.
+- xs:all → any order, each 0 or 1 by design.
 
-- \`xs:sequence\`: ordered children
-- \`xs:choice\`: one of many
-- \`xs:all\`: any order (with restrictions)
-`,
-          examples: `## Example: repeating element
+### Occurrence constraints
+minOccurs / maxOccurs mirrors ?, *, + from DTD.`,
+          examples: `## Repeating element example
 
 ~~~xml
 <xs:element name="book" type="BookType" minOccurs="0" maxOccurs="unbounded"/>
 ~~~
-`,
-          practical: `## Practical
 
-- Write an XSD for \`library\` or \`student\`.
-- Include one repeating element and one required attribute.
-`,
-          exam: `## Exam
+## Attribute example
+~~~xml
+<xs:attribute name="status" type="xs:string" use="optional"/>
+~~~`,
+          practical: `## Build it
 
-- Define XSD and explain \`targetNamespace\`.
-- Explain simple vs complex types.
-`,
+- Write an XSD for a student or inventory dataset.
+- Add one required attribute and one repeating child.
+- Validate at least two XML instances against it.`,
+          exam: `## Exam must-knows
+
+- Role of targetNamespace and elementFormDefault.
+- Difference between simpleType and complexType.
+- When to use sequence vs choice vs all.`,
           takeaways: `## Takeaways
 
-- XSD is namespace-aware and typed.
-- Learn core constructs: types, sequence/choice, occurrences.
-`,
+- Start with a clear namespace; keep it consistent across XML and XSD.
+- Choose the right model group to match business order requirements.
+- Occurrence constraints are your first line of validation.`,
         },
       },
       {
         id: 'xsd-advanced',
         title: 'Advanced XSD: Restrictions, Extensions, and Identity Constraints',
-        subtopics: ['Facets', 'Enumeration', 'Pattern', 'Derivation', 'key/keyref'],
+        subtopics: ['Facets', 'Enumerations', 'Patterns', 'Type derivation', 'key/unique/keyref'],
         clos: ['CLO02', 'CLO05'],
         cos: ['CO03'],
         content: {
           introduction:
-            'Advanced schemas capture business rules. XSD can restrict values (ranges, patterns, enumerations), derive new types via extension/restriction, and enforce identity constraints like unique keys.',
-          concept: `## Facets (restrictions)
+            'Beyond structure, XSD lets you express business rules: allowed ranges, controlled vocabularies, and relational links. It also supports reuse through type derivation.',
+          concept: `## Facets = constraints
 
-Common facets:
+- Range: minInclusive, maxInclusive, minExclusive, maxExclusive.
+- Vocabulary: enumeration.
+- Shape: length, minLength, maxLength.
+- Pattern: regular expressions for formats (phone, code, ids).
 
-- \`minInclusive\`, \`maxInclusive\`
-- \`pattern\`
-- \`enumeration\`
+## Derivation strategies
+- Restriction: narrow an existing type.
+- Extension: add elements/attributes to an existing type.
 
-## Derivation
+## Identity constraints
+- xs:unique → values must be unique in scope.
+- xs:key → primary-key-like constraint.
+- xs:keyref → foreign-key-like reference.`,
+          technicalDepth: `## Concrete snippets
 
-- extension: add new fields
-- restriction: narrow allowed values
-`,
-          technicalDepth: `## Restriction example
-
+Range restriction
 ~~~xml
 <xs:simpleType name="CgpaType">
   <xs:restriction base="xs:decimal">
@@ -631,17 +568,35 @@ Common facets:
 </xs:simpleType>
 ~~~
 
-## Enumeration example
-
+Enumeration
 ~~~xml
 <xs:simpleType name="DeptType">
   <xs:restriction base="xs:string">
     <xs:enumeration value="CSE"/>
     <xs:enumeration value="ECE"/>
+    <xs:enumeration value="ME"/>
   </xs:restriction>
 </xs:simpleType>
 ~~~
-`,
+
+Identity constraints
+~~~xml
+<xs:element name="library">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="book" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:attribute name="id" type="xs:ID" use="required"/>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+    <xs:key name="bookId">
+      <xs:selector xpath="book"/>
+      <xs:field xpath="@id"/>
+    </xs:key>
+  </xs:complexType>
+</xs:element>
+~~~`,
           examples: `## Pattern example
 
 ~~~xml
@@ -651,22 +606,32 @@ Common facets:
   </xs:restriction>
 </xs:simpleType>
 ~~~
-`,
-          practical: `## Practical
 
-- Add restrictions to your schema (enum, range, pattern).
-- Create one derived type using extension.
-`,
-          exam: `## Exam
+## Extension example
+~~~xml
+<xs:complexType name="StaffType">
+  <xs:complexContent>
+    <xs:extension base="PersonType">
+      <xs:attribute name="role" type="xs:string" use="required"/>
+    </xs:extension>
+  </xs:complexContent>
+</xs:complexType>
+~~~`,
+          practical: `## Do it
 
-- Explain facets and type derivation.
-- Discuss identity constraints (key/keyref) conceptually.
-`,
+- Add an enumeration for department codes and a pattern for phone numbers.
+- Introduce xs:key for unique IDs and xs:keyref for referencing them.
+- Derive one new type using extension (e.g., StaffType extends PersonType).`,
+          exam: `## Exam direction
+
+- Explain how facets differ from derivation.
+- Write one example each for key and keyref.
+- State two real benefits of identity constraints in XML integration.`,
           takeaways: `## Takeaways
 
-- Restrictions encode business rules early.
-- Type derivation improves reuse.
-`,
+- Facets encode business rules; derivation encodes reuse.
+- Identity constraints give XML relational-style integrity.
+- Always document the scope of selectors when using keys.`,
         },
       },
     ],
@@ -683,22 +648,22 @@ Common facets:
         cos: ['CO04'],
         content: {
           introduction:
-            'XSLT transforms XML into other formats such as HTML. XSLT is declarative: you describe output rules for parts of the source tree using templates. This topic covers templates, XPath selection, and producing a simple HTML report.',
-          concept: `## XSLT idea
+            'XSLT is a rule-driven language that walks an XML tree with XPath and emits another document (HTML, text, XML, PDF via FO). Mastering templates and context selection is the gateway to clean transformations.',
+          concept: `## Core ideas
 
-XSLT is a rule-based transformation language: when a node matches a rule, a template generates output.
-`,
-          technicalDepth: `## Minimal XSLT structure
+- Templates match nodes; matching sets the current context.
+- apply-templates delegates processing; value-of pulls text.
+- for-each iterates when you need full control over ordering.
+- output method controls whether you emit XML, HTML, or text.`,
+          technicalDepth: `## Minimal, exam-ready stylesheet
 
 ~~~xml
-<xsl:stylesheet version="1.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:output method="html" indent="yes"/>
 
   <xsl:template match="/">
     <html><body>
-      <h1>Report</h1>
+      <h1>Library</h1>
       <xsl:apply-templates select="library/book"/>
     </body></html>
   </xsl:template>
@@ -706,34 +671,46 @@ XSLT is a rule-based transformation language: when a node matches a rule, a temp
   <xsl:template match="book">
     <p><xsl:value-of select="title"/></p>
   </xsl:template>
-
 </xsl:stylesheet>
 ~~~
-`,
-          examples: `## Input XML
 
+Sorting inside for-each:
+~~~xml
+<xsl:for-each select="library/book">
+  <xsl:sort select="number(price)" data-type="number" order="descending"/>
+  <xsl:value-of select="title"/>
+</xsl:for-each>
+~~~`,
+          examples: `## Input vs output
+
+Input XML
 ~~~xml
 <library>
-  <book id="b1"><title>XML</title></book>
+  <book id="b1"><title>XML</title><price>499</price></book>
 </library>
 ~~~
-`,
-          practical: `## Practical
 
-- Create XML input.
-- Write XSLT that generates an HTML table.
-- Add one sort.
-`,
-          exam: `## Exam
+HTML output (simplified)
+~~~html
+<h1>Library</h1>
+<p>XML</p>
+~~~`,
+          practical: `## Build a starter transform
 
-- Define XSLT.
-- Explain match vs select.
-`,
+- Generate an HTML table from book.xml.
+- Add a header row with <th>.
+- Sort by price descending using xsl:sort.
+- Validate that the XSLT runs in a browser or xsltproc.`,
+          exam: `## Exam prompts
+
+- Difference between match and select.
+- Role of apply-templates vs for-each.
+- What does xsl:output method="html" do?`,
           takeaways: `## Takeaways
 
-- XSLT uses templates and XPath selection.
-- Start from the root template and delegate with apply-templates.
-`,
+- Think in templates; keep the root template small.
+- Use apply-templates for extensibility; reach for for-each when you must control order explicitly.
+- Sorting and formatting are driven by XPath expressions.`,
         },
       },
       {
@@ -744,14 +721,16 @@ XSLT is a rule-based transformation language: when a node matches a rule, a temp
         cos: ['CO04', 'CO05'],
         content: {
           introduction:
-            'Advanced transformations require branching logic, computed values, and structured templates. This topic introduces conditional constructs, sorting, and maintainable stylesheet organization.',
-          concept: `## Conditional logic
+            'Real-world transforms branch, classify, and reuse logic. Conditions, variables, and separate templates keep stylesheets maintainable. You also learn to compute values (totals, averages) and to modularize code.',
+          concept: `## Control and reuse
 
-- \`xsl:if\`: single condition
-- \`xsl:choose\`: if/else-if/else
-`,
-          technicalDepth: `## choose example
+- xsl:if for single checks; xsl:choose for multi-branch logic.
+- Variables hold computed values or XPath results (immutable once set).
+- Named templates enable reuse across documents.
+- Import/include split large stylesheets for teams.`,
+          technicalDepth: `## Snippets worth memorizing
 
+Branching
 ~~~xml
 <xsl:choose>
   <xsl:when test="price &gt; 500">Expensive</xsl:when>
@@ -759,16 +738,17 @@ XSLT is a rule-based transformation language: when a node matches a rule, a temp
 </xsl:choose>
 ~~~
 
-## Sorting
-
+Variables and totals
 ~~~xml
-<xsl:for-each select="library/book">
-  <xsl:sort select="number(price)" data-type="number" order="descending"/>
-  <xsl:value-of select="title"/>
-</xsl:for-each>
+<xsl:variable name="total" select="sum(/library/book/price)"/>
+<p>Total: <xsl:value-of select="$total"/></p>
 ~~~
-`,
-          examples: `## Example: classify a node
+
+Modularity
+~~~xml
+<xsl:call-template name="renderRow"/>
+~~~`,
+          examples: `## Classification example
 
 ~~~xml
 <xsl:template match="book">
@@ -783,22 +763,29 @@ XSLT is a rule-based transformation language: when a node matches a rule, a temp
   </tr>
 </xsl:template>
 ~~~
-`,
-          practical: `## Practical
 
-- Add conditional output (labels or styling).
-- Add computed values (totals/averages).
-`,
-          exam: `## Exam
+## Sorting with numbers
+~~~xml
+<xsl:for-each select="library/book">
+  <xsl:sort select="number(price)" data-type="number" order="ascending"/>
+  <xsl:value-of select="title"/>
+</xsl:for-each>
+~~~`,
+          practical: `## Apply it
 
-- Differentiate xsl:if and xsl:choose.
-- Explain xsl:sort usage.
-`,
+- Add a price band label using xsl:choose.
+- Compute a grand total and average with sum() and count().
+- Move row rendering into a named template and call it, keeping the root template slim.`,
+          exam: `## Likely questions
+
+- Contrast xsl:if with xsl:choose.
+- How does xsl:sort treat numbers vs strings?
+- Two advantages of named templates or imports.`,
           takeaways: `## Takeaways
 
-- Use choose for robust branching.
-- Sort with xsl:sort; convert to numbers when needed.
-`,
+- Conditions make transforms context-aware.
+- Variables simplify repeated calculations.
+- Modular stylesheets stay maintainable as projects grow.`,
         },
       },
     ],
@@ -810,36 +797,36 @@ XSLT is a rule-based transformation language: when a node matches a rule, a temp
       {
         id: 'xpath',
         title: 'XPath: Node Selection, Axes, Predicates, and Functions',
-        subtopics: ['paths', 'predicates', 'axes', 'attributes', 'functions'],
+        subtopics: ['Absolute vs relative paths', 'Predicates', 'Axes', 'Functions', 'Attributes'],
         clos: ['CLO03'],
         cos: ['CO04'],
         content: {
           introduction:
-            'XPath (XML Path Language) is the standard way to navigate an XML tree and select nodes. It is the query core for XSLT and many XML processing APIs. This topic covers path expressions, predicates, axes, and common functions used in exams.',
-          concept: `## XPath essentials
+            'XPath is the query backbone for XML. XSLT, XQuery, DOM APIs, and validators all lean on it. You will learn to move across the tree with axes, filter with predicates, and compute with built-in functions.',
+          concept: `## Essentials
 
-- Absolute paths start with \`/\`
-- Relative paths start from the current context
-- Predicates filter with brackets
-`,
-          technicalDepth: `## Axes
+- Absolute path starts with /; relative starts at the current node.
+- Predicates [ ] filter nodes by position or condition.
+- Axes describe direction: child, parent, ancestor, descendant, following-sibling, preceding-sibling, attribute.
+- Functions help aggregate, test, and convert values.`,
+          technicalDepth: `## Syntax patterns
 
-Common axes:
+Common selections
+~~~
+/library/book/title
+//book[@id='b2']/price
+//book[price &gt; 500]
+//@id
+~~~
 
-- child:: (default)
-- parent::
-- ancestor::
-- descendant::
-- following-sibling::
+Handy functions
+- count(/library/book)
+- sum(/library/book/price)
+- string-length(title)
+- contains(title, 'XML')`,
+          examples: `## Working sample
 
-Examples:
-
-- \`/library/book/title\`
-- \`//book[@id='b2']/price/text()\`
-- \`count(/library/book)\`
-`,
-          examples: `## Example XML
-
+XML
 ~~~xml
 <library>
   <book id="b1"><title>XML</title><price>499</price></book>
@@ -847,90 +834,82 @@ Examples:
 </library>
 ~~~
 
-## XPath queries
+Queries
+- Titles → /library/book/title
+- Expensive books → /library/book[price &gt; 550]
+- Price of b2 → //book[@id='b2']/price/text()
+- Count → count(/library/book)
+- Sort-like selection → /library/book[1] (first), /library/book[last()] (last)`,
+          practical: `## Do-now exercises
 
-- Titles: \`/library/book/title\`
-- Expensive: \`/library/book[price &gt; 500]\`
-- Price of b2: \`//book[@id='b2']/price/text()\`
-`,
-          practical: `## Practical
+- Write 10 XPath queries against your project XML and verify them in an online tester.
+- Use predicates for both value filters and positional filters.
+- Try an axis you rarely use (following-sibling or ancestor) and note the result.`,
+          exam: `## What examiners like
 
-- Write 10 XPath expressions for your dataset.
-- Verify results using an XPath tester.
-`,
-          exam: `## Exam
-
-- Define XPath and predicate.
-- Explain axes with examples.
-`,
+- Define predicate with an example.
+- Explain two axes and where they are useful.
+- Show one function that returns a number and one that returns a string.`,
           takeaways: `## Takeaways
 
-- Predicates are the main filtering tool.
-- Axes provide powerful relative navigation.
-`,
+- XPath is context-sensitive; always know your current node.
+- Predicates and axes together unlock precise navigation.
+- Practice writing and reading XPath faster than memorizing it.`,
         },
       },
       {
         id: 'xml-project',
         title: 'Mini Project: XML + XSD + XPath + XSLT Pipeline',
-        subtopics: ['dataset', 'XML', 'XSD', 'XPath', 'XSLT', 'report'],
+        subtopics: ['Dataset modeling', 'XML instances', 'XSD validation', 'XPath queries', 'XSLT report'],
         clos: ['CLO05'],
         cos: ['CO05'],
         content: {
           introduction:
-            'This mini project integrates the full XML toolchain. Model a realistic dataset in XML, validate it with XSD, extract insights using XPath, and transform it into an HTML report using XSLT.',
-          concept: `## Objective
+            'This capstone brings everything together. You will model a small but realistic dataset, validate it with XSD, query it with XPath, and publish a report via XSLT.',
+          concept: `## Project blueprint
 
-Build a complete pipeline:
+1) Define the vocabulary (elements, attributes, namespace).
+2) Draft XML instances that reflect realistic data.
+3) Create XSD with constraints that matter (enums, ranges, required attributes).
+4) Prepare XPath queries that answer meaningful questions.
+5) Author XSLT to render a clean HTML or text report.`,
+          technicalDepth: `## Suggested folder layout
 
-1. Define a dataset and vocabulary
-2. Author XML instances
-3. Validate using XSD
-4. Query with XPath
-5. Transform with XSLT to generate an HTML report
-`,
-          technicalDepth: `## Suggested folder structure
+- data/ → XML instances
+- schema/ → XSD
+- transform/ → XSLT
+- report/ → generated output
 
-- data/ (XML instances)
-- schema/ (XSD)
-- transform/ (XSLT)
-- report/ (generated HTML)
+Quality checklist
+- No well-formedness errors.
+- Schema enforces keys and value ranges.
+- XPath queries documented with expected outputs.
+- XSLT uses templates, sorting, and at least one conditional.`,
+          examples: `## Deliverables snapshot
 
-### Quality checklist
+- 1–2 XML files for the dataset (e.g., courses, orders, patients).
+- 1 XSD capturing constraints (id uniqueness, enums, min/max).
+- 5–10 XPath queries with short notes.
+- 1 XSLT that generates an HTML dashboard/table.`,
+          practical: `## Step-by-step
 
-- well-formed XML
-- meaningful XSD constraints
-- documented XPath queries
-- clean HTML output from XSLT
-`,
-          examples: `## Deliverables
+1. Pick a dataset you can describe in 8–12 elements.
+2. Write a draft XML and validate well-formedness.
+3. Write XSD and iterate until validation passes.
+4. Run XPath queries in a tester and capture expected results.
+5. Build XSLT that sorts and labels data; verify in browser or cli.
+6. Ship a short README explaining assumptions and how to run.`,
+          exam: `## Viva prompts
 
-- 1 XML instance
-- 1 XSD schema
-- 5–10 XPath expressions (documented)
-- 1 XSLT file producing an HTML report
-`,
-          practical: `## Practical steps
-
-1. Pick dataset and define element structure.
-2. Create XML instance(s).
-3. Create XSD for validation.
-4. Write XPath expressions.
-5. Write XSLT to generate report.
-6. Document assumptions and tests.
-`,
-          exam: `## Viva questions
-
-- Why elements vs attributes?
-- Which XSD constraints did you add and why?
-- Explain 2 XPath expressions.
-- Explain your XSLT template structure.
-`,
+- Why did you choose certain attributes vs elements?
+- Which XSD constraints caught errors during testing?
+- Show a query that fails after you intentionally break the XML.
+- How does your XSLT pick which nodes to render first?`,
           takeaways: `## Takeaways
 
-- Combining validation + querying + transformation is the key value of the XML ecosystem.
-- A good schema catches errors early.
-`,
+- Real value comes from combining validation, querying, and transformation.
+- A clear namespace and consistent IDs reduce downstream bugs.
+- Documenting your pipeline makes handover painless.`,
         },
       },
     ],
