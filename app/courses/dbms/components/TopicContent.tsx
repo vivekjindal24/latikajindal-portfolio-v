@@ -1,6 +1,6 @@
 'use client';
 
-import { Topic, units } from '@/data/syllabus';
+import { Topic, units } from '../data/syllabus';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';

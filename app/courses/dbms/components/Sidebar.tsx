@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { units } from '@/data/syllabus';
+import { units } from '../data/syllabus';
 
 const Sidebar = () => {
   return (
