@@ -19,7 +19,7 @@ const Sidebar = () => {
                 {unit.topics.map((topic) => (
                   <li key={topic.id}>
                     <Link
-                      href={`/${unit.id}/${topic.id}`}
+                      href={`/courses/dbms/${unit.id}/${topic.id}`}
                       className="block py-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
                     >
                       {topic.title}

@@ -6,19 +6,19 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-900">
+            <Link href="/courses/dbms" className="text-xl font-bold text-gray-900">
               DBMS Notes
             </Link>
           </div>
           <nav className="flex items-center gap-6">
             <Link
-              href="/"
+              href="/courses/dbms"
               className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors"
             >
               Home
             </Link>
             <Link
-              href="/syllabus"
+              href="/courses/dbms/syllabus"
               className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors"
             >
               Syllabus
