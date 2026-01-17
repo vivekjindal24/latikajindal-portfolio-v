@@ -1,7 +1,6 @@
-
 'use client';
 
-import { Topic, units } from '../data/syllabus';
+import { Topic, units } from '@/data/syllabus';
 import Link from 'next/link';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
@@ -37,7 +36,15 @@ const Markdown = ({ content }: { content: string }) => (
         <img
           src={src ?? ''}
           alt={alt ?? ''}
-          className="my-4 rounded-lg shadow-md w-full"
+          className="my-4 rounded-lg shadow-md bg-white dark:bg-gray-900 mx-auto"
+          style={{ 
+            mixBlendMode: 'multiply',
+            maxWidth: '100%',
+            maxHeight: '600px',
+            width: 'auto',
+            height: 'auto',
+            objectFit: 'contain'
+          }}
         />
       ),
       a: ({ href, children }) => (
@@ -302,7 +309,7 @@ const TopicContent = ({ topic, unitId, topicId }: TopicContentProps) => {
       <div className="flex justify-between items-center gap-4 pt-8 mt-16 border-t border-gray-200">
         {prevTopic && prevUnit ? (
           <Link
-            href={`/courses/dbms/${prevUnit.id}/${prevTopic.id}`}
+            href={`/${prevUnit.id}/${prevTopic.id}`}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
           >
             <span className="group-hover:-translate-x-1 transition-transform">←</span>
@@ -317,7 +324,7 @@ const TopicContent = ({ topic, unitId, topicId }: TopicContentProps) => {
         
         {nextTopic && nextUnit ? (
           <Link
-            href={`/courses/dbms/${nextUnit.id}/${nextTopic.id}`}
+            href={`/${nextUnit.id}/${nextTopic.id}`}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group text-right ml-auto"
           >
             <div>

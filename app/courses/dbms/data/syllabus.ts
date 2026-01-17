@@ -62,8 +62,8 @@ export const units: Unit[] = [
         content: {
           introduction: "Database systems form the backbone of modern information management, handling everything from banking transactions to social media interactions. A Database Management System (DBMS) is a collection of interrelated data and a set of programs to access that data, providing a convenient and efficient way to store and retrieve database information. The primary goal is to manage data in a way that minimizes redundancy and ensures data integrity while allowing multiple users concurrent access.",
           concept: "A database is a collection of related data organized to serve multiple applications efficiently. Data represents recordable facts with implicit meaning, such as names, addresses, and balances. A DBMS serves as an interface between the database and end users or application programs.\n\n### Data vs Information (Quick Comparison)\n\n| Data | Information |\n|---|---|\n| Raw facts and figures | Processed, organized, and meaningful output |\n| May be unorganized (numbers, symbols, text) | Interpretable and useful for decision-making |\n| Input to a system | Output of processing |\n| Example: 95, 88, 76 | Example: Average = 86.33, Grade = A |\n| By itself may not add value | Adds value and context |\n\n### Key Characteristics of the Database Approach\n\n1. Self-describing nature: Database contains not only data but also metadata (data about data) in the system catalog\n\n2. Insulation between programs and data: Program-data independence allows changing data structure without modifying programs\n\n3. Support for multiple views: Different users can have different perspectives of the same data\n\n4. Sharing of data and multiuser transaction processing: Multiple users can access database simultaneously while maintaining consistency\n\n![Advantages of DBMS](/images/unit1/Advantages%20of%20DBMS.png)\n\n### Advantages of Using a DBMS\n- Controlling redundancy: Eliminates duplicate data storage\n- Restricting unauthorized access: Security and authorization mechanisms\n- Providing persistent storage: Data outlives programs that create it\n- Providing backup and recovery: Protection against hardware/software failures\n- Enforcing integrity constraints: Rules to maintain data accuracy\n- Permitting inference and actions using rules: Database triggers and stored procedures\n\n![Drawbacks of File Systems](/images/unit1/Drawbacks%20of%20using%20file%20systems%20to%20store%20data.png)\n\n### Disadvantages of File-Based Systems\nThe file-based approach suffers from data redundancy, inconsistency, difficulty in accessing data, data isolation, integrity problems, atomicity issues, concurrent access anomalies, and security problems — all of which are addressed by a DBMS.",
-          technicalDepth: "DATABASE MODELS EVOLUTION:\n\n![Database Models Overview](/images/unit1/er%20data%20model.png)\n\n1. HIERARCHICAL MODEL (1960s-1970s):\n\n![Hierarchical Data Model](/images/unit1/hirerarchical%20data%20model.png)\n\nStructure: Tree-like hierarchy with parent-child relationships\nCharacteristics:\n  • One-to-many (1:N) relationships only\n  • Single root for each tree\n  • Each child has exactly one parent\n  • Navigation through explicit paths\n\nExample: IMS (Information Management System) by IBM\nLimitations:\n  • Difficulty handling many-to-many relationships\n  • Data redundancy when representing complex relationships\n  • Limited query flexibility\n  • Reorganization is difficult\n\n2. NETWORK MODEL (1970s):\n\n![Network Data Model](/images/unit1/network%20data%20model.png)\n\nStructure: Graph-based with records (nodes) and sets (edges)\nCharacteristics:\n  • Many-to-many (M:N) relationships supported\n  • Records connected through pointers\n  • Set construct for 1:N relationships\n  • CODASYL (Conference on Data Systems Languages) standard\n\nExample: IDMS (Integrated Database Management System)\nAdvantages over Hierarchical:\n  • More flexible relationship representation\n  • Better for complex queries\nLimitations:\n  • Complex navigation logic\n  • Difficult to modify structure\n  • Application programs tightly coupled with database structure\n\n3. RELATIONAL MODEL (1970-present):\n\n![Relational Data Model](/images/unit1/relational%20data%20model.png)\n\nFoundation: E.F. Codd's relational model (1970)\nStructure: Data organized in tables (relations)\n\nCore Concepts:\n  • Relation: Table with rows (tuples) and columns (attributes)\n  • Domain: Set of allowed values for an attribute\n  • Primary Key: Unique identifier for tuples\n  • Foreign Key: Reference to primary key in another relation\n\nCharacteristics:\n  • Simple tabular structure\n  • Data independence (logical and physical)\n  • Declarative query language (SQL)\n  • Mathematical foundation (relational algebra/calculus)\n  • ACID properties (Atomicity, Consistency, Isolation, Durability)\n\nAdvantages:\n  • Structural independence: Changes in structure don't affect applications\n  • Ad hoc query capability: Flexible data retrieval\n  • Data integrity through constraints\n  • Normalization to reduce redundancy\n\nExamples: MySQL, PostgreSQL, Oracle, SQL Server, DB2\n\nCOMPARATIVE ANALYSIS:\n\nFeature          | Hierarchical | Network  | Relational\n-----------------|--------------|----------|-------------\nStructure        | Tree         | Graph    | Tables\nRelationships    | 1:N          | M:N      | Any\nNavigation       | Procedural   | Procedural| Declarative\nFlexibility      | Low          | Medium   | High\nQuery Language   | Proprietary  | Proprietary| SQL (Standard)\nData Independence| Low          | Low      | High\nPerformance      | Fast         | Fast     | Moderate\n\nWhy Relational Model Dominates:\n1. Simplicity: Easy to understand and use\n2. Flexibility: Ad hoc queries without predefined access paths\n3. Data Independence: Separation of logical and physical views\n4. Standard Language: SQL is universally adopted\n5. Mathematical Foundation: Formal query optimization\n6. ACID Guarantees: Reliable transaction processing",
-          examples: "EXAMPLE 1: HIERARCHICAL DATABASE\n\nUniversity Structure (Tree):\n                University\n                    |\n        -------------------------\n        |                       |\n    Department              Department\n   (Computer Science)        (Mathematics)\n        |                       |\n    ----------              ----------\n    |        |              |        |\n  Faculty  Students      Faculty  Students\n\nLimitation: A student double-majoring requires duplication or complex workarounds.\n\nEXAMPLE 2: NETWORK DATABASE\n\nStudent-Course Registration (Graph):\nStudents <-------- Enrollment --------> Courses\n   |                    |                   |\n   |              (Properties: Grade,       |\n   |               Semester)                |\n   |                                        |\nDepartments                          Instructors\n\nNetwork allows M:N relationships directly but requires complex pointer navigation.\n\nEXAMPLE 3: RELATIONAL DATABASE\n\nUniversity Schema (Tables):\n\nSTUDENTS Table:\nStudentID | Name        | Major    | Email\n----------|-------------|----------|------------------\n101       | John Doe    | CS       | john@uni.edu\n102       | Jane Smith  | Math     | jane@uni.edu\n103       | Bob Johnson | CS       | bob@uni.edu\n\nCOURSES Table:\nCourseID | CourseName           | Credits | Department\n---------|---------------------|---------|------------\nCS101    | Intro to Programming | 3       | CS\nCS202    | Database Systems     | 4       | CS\nMATH101  | Calculus I          | 4       | Math\n\nENROLLMENT Table (Junction):\nStudentID | CourseID | Semester | Grade\n----------|----------|----------|------\n101       | CS101    | Fall2024 | A\n101       | CS202    | Fall2024 | B+\n102       | MATH101  | Fall2024 | A\n103       | CS101    | Fall2024 | B\n\nSQL Query Examples:\n\n-- Find all students enrolled in Database Systems\nSELECT S.Name, S.Email\nFROM STUDENTS S\nJOIN ENROLLMENT E ON S.StudentID = E.StudentID\nJOIN COURSES C ON E.CourseID = C.CourseID\nWHERE C.CourseName = 'Database Systems';\n\n-- Count enrollments per course\nSELECT C.CourseName, COUNT(E.StudentID) as Enrollment_Count\nFROM COURSES C\nLEFT JOIN ENROLLMENT E ON C.CourseID = E.CourseID\nGROUP BY C.CourseName;\n\nREAL-WORLD APPLICATIONS:\n\n1. Banking Systems: Account management, transactions, customer data\n   • Relational model ensures ACID properties for financial transactions\n   • Complex queries for fraud detection and reporting\n\n2. Airline Reservation Systems: Flight schedules, bookings, passenger info\n   • High concurrency handling thousands of simultaneous bookings\n   • Complex relationships between flights, passengers, seats\n\n3. E-Commerce Platforms: Products, orders, customers, inventory\n   • Flexible schema for diverse product catalogs\n   • Transaction support for payment processing\n\n4. Healthcare Systems: Patient records, appointments, prescriptions\n   • Data integrity critical for patient safety\n   • HIPAA compliance through access control",
+          technicalDepth: "DATABASE MODELS EVOLUTION:\n\n1. HIERARCHICAL MODEL (1960s-1970s):\n\n![Hierarchical Data Model](/images/unit1/hirerarchical%20data%20model.png)\n\nStructure: Tree-like hierarchy with parent-child relationships\nCharacteristics:\n  • One-to-many (1:N) relationships only\n  • Single root for each tree\n  • Each child has exactly one parent\n  • Navigation through explicit paths\n\nExample: IMS (Information Management System) by IBM\nLimitations:\n  • Difficulty handling many-to-many relationships\n  • Data redundancy when representing complex relationships\n  • Limited query flexibility\n  • Reorganization is difficult\n\n2. NETWORK MODEL (1970s):\n\n![Network Data Model](/images/unit1/network%20data%20model.png)\n\nStructure: Graph-based with records (nodes) and sets (edges)\nCharacteristics:\n  • Many-to-many (M:N) relationships supported\n  • Records connected through pointers\n  • Set construct for 1:N relationships\n  • CODASYL (Conference on Data Systems Languages) standard\n\nExample: IDMS (Integrated Database Management System)\nAdvantages over Hierarchical:\n  • More flexible relationship representation\n  • Better for complex queries\nLimitations:\n  • Complex navigation logic\n  • Difficult to modify structure\n  • Application programs tightly coupled with database structure\n\n3. RELATIONAL MODEL (1970-present):\n\n![Relational Data Model](/images/unit1/relational%20data%20model.png)\n\nFoundation: E.F. Codd's relational model (1970)\nStructure: Data organized in tables (relations)\n\nCore Concepts:\n  • Relation: Table with rows (tuples) and columns (attributes)\n  • Domain: Set of allowed values for an attribute\n  • Primary Key: Unique identifier for tuples\n  • Foreign Key: Reference to primary key in another relation\n\nCharacteristics:\n  • Simple tabular structure\n  • Data independence (logical and physical)\n  • Declarative query language (SQL)\n  • Mathematical foundation (relational algebra/calculus)\n  • ACID properties (Atomicity, Consistency, Isolation, Durability)\n\nAdvantages:\n  • Structural independence: Changes in structure don't affect applications\n  • Ad hoc query capability: Flexible data retrieval\n  • Data integrity through constraints\n  • Normalization to reduce redundancy\n\nExamples: MySQL, PostgreSQL, Oracle, SQL Server, DB2\n\nCOMPARATIVE ANALYSIS:\n\nFeature          | Hierarchical | Network  | Relational\n-----------------|--------------|----------|-------------\nStructure        | Tree         | Graph    | Tables\nRelationships    | 1:N          | M:N      | Any\nNavigation       | Procedural   | Procedural| Declarative\nFlexibility      | Low          | Medium   | High\nQuery Language   | Proprietary  | Proprietary| SQL (Standard)\nData Independence| Low          | Low      | High\nPerformance      | Fast         | Fast     | Moderate\n\nWhy Relational Model Dominates:\n1. Simplicity: Easy to understand and use\n2. Flexibility: Ad hoc queries without predefined access paths\n3. Data Independence: Separation of logical and physical views\n4. Standard Language: SQL is universally adopted\n5. Mathematical Foundation: Formal query optimization\n6. ACID Guarantees: Reliable transaction processing",
+          examples: "EXAMPLE 1: HIERARCHICAL DATABASE\n\nUniversity Structure (Tree):\n\n![Hierarchical Database Model](/images/unit1/hierarchical-database-model.svg)\n\nLimitation: A student double-majoring requires duplication or complex workarounds.\n\nEXAMPLE 2: NETWORK DATABASE\n\nStudent-Course Registration (Graph):\n\n![Network Database Model](/images/unit1/network-database-model.svg)\n\nNetwork allows M:N relationships directly but requires complex pointer navigation.\n\nEXAMPLE 3: RELATIONAL DATABASE\n\nUniversity Schema (Tables):\n\nSTUDENTS Table:\nStudentID | Name        | Major    | Email\n----------|-------------|----------|------------------\n101       | John Doe    | CS       | john@uni.edu\n102       | Jane Smith  | Math     | jane@uni.edu\n103       | Bob Johnson | CS       | bob@uni.edu\n\nCOURSES Table:\nCourseID | CourseName           | Credits | Department\n---------|---------------------|---------|------------\nCS101    | Intro to Programming | 3       | CS\nCS202    | Database Systems     | 4       | CS\nMATH101  | Calculus I          | 4       | Math\n\nENROLLMENT Table (Junction):\nStudentID | CourseID | Semester | Grade\n----------|----------|----------|------\n101       | CS101    | Fall2024 | A\n101       | CS202    | Fall2024 | B+\n102       | MATH101  | Fall2024 | A\n103       | CS101    | Fall2024 | B\n\nSQL Query Examples:\n\n-- Find all students enrolled in Database Systems\nSELECT S.Name, S.Email\nFROM STUDENTS S\nJOIN ENROLLMENT E ON S.StudentID = E.StudentID\nJOIN COURSES C ON E.CourseID = C.CourseID\nWHERE C.CourseName = 'Database Systems';\n\n-- Count enrollments per course\nSELECT C.CourseName, COUNT(E.StudentID) as Enrollment_Count\nFROM COURSES C\nLEFT JOIN ENROLLMENT E ON C.CourseID = E.CourseID\nGROUP BY C.CourseName;\n\nREAL-WORLD APPLICATIONS:\n\n1. Banking Systems: Account management, transactions, customer data\n   • Relational model ensures ACID properties for financial transactions\n   • Complex queries for fraud detection and reporting\n\n2. Airline Reservation Systems: Flight schedules, bookings, passenger info\n   • High concurrency handling thousands of simultaneous bookings\n   • Complex relationships between flights, passengers, seats\n\n3. E-Commerce Platforms: Products, orders, customers, inventory\n   • Flexible schema for diverse product catalogs\n   • Transaction support for payment processing\n\n4. Healthcare Systems: Patient records, appointments, prescriptions\n   • Data integrity critical for patient safety\n   • HIPAA compliance through access control",
           practical: "PRACTICAL USAGE AND IMPLEMENTATION:\n\n1. Choosing the Right Model:\n   • Use Relational for: General-purpose applications, ACID requirements, complex queries\n   • Consider NoSQL (modern evolution) for: Massive scale, flexible schema, specific access patterns\n\n2. Database Design Process:\n   Step 1: Requirements Analysis - Understand what data to store and how it will be used\n   Step 2: Conceptual Design - Create ER diagram showing entities and relationships\n   Step 3: Logical Design - Convert ER to relational schema with normalization\n   Step 4: Physical Design - Optimize with indexes, partitioning, clustering\n\n3. Real Implementation Example (MySQL):\n\n-- Create database\nCREATE DATABASE UniversityDB;\nUSE UniversityDB;\n\n-- Create tables with constraints\nCREATE TABLE Students (\n    StudentID INT PRIMARY KEY AUTO_INCREMENT,\n    Name VARCHAR(100) NOT NULL,\n    Email VARCHAR(100) UNIQUE,\n    Major VARCHAR(50),\n    EnrollmentDate DATE DEFAULT CURRENT_DATE\n);\n\nCREATE TABLE Courses (\n    CourseID VARCHAR(10) PRIMARY KEY,\n    CourseName VARCHAR(100) NOT NULL,\n    Credits INT CHECK (Credits > 0),\n    Department VARCHAR(50)\n);\n\nCREATE TABLE Enrollment (\n    StudentID INT,\n    CourseID VARCHAR(10),\n    Semester VARCHAR(20),\n    Grade CHAR(2),\n    PRIMARY KEY (StudentID, CourseID, Semester),\n    FOREIGN KEY (StudentID) REFERENCES Students(StudentID)\n        ON DELETE CASCADE,\n    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)\n        ON UPDATE CASCADE\n);\n\n4. Industry Best Practices:\n   • Always use foreign keys to maintain referential integrity\n   • Create indexes on frequently queried columns\n   • Regular backups and disaster recovery plans\n   • Monitor performance and optimize queries\n   • Implement proper access control and authentication\n\n5. Career Relevance:\n   • Database Administrator (DBA): Manages database systems, ensures performance and security\n   • Data Engineer: Designs and builds data pipelines\n   • Backend Developer: Implements database interactions in applications\n   • Data Analyst: Writes complex SQL queries for business insights",
           exam: "IMPORTANT EXAM QUESTIONS:\n\n1. Define Database and DBMS. What are the main characteristics of the database approach?\n   Answer: Cover self-describing nature, program-data independence, multiple views, sharing\n\n2. List and explain the advantages of using a DBMS over file systems.\n   Key points: Redundancy control, restricted access, persistent storage, backup/recovery, integrity constraints\n\n3. Compare and contrast Hierarchical, Network, and Relational database models.\n   Create table showing: Structure, relationships supported, advantages, disadvantages, examples\n\n4. Why did the Relational Model become dominant over Hierarchical and Network models?\n   Focus on: Simplicity, data independence, SQL standardization, flexibility\n\n5. Explain the concept of data independence with examples.\n   Distinguish between logical and physical data independence\n\n6. What are the disadvantages of file-based systems that led to database systems?\n   Points: Data redundancy, inconsistency, difficulty in access, integrity problems, atomicity issues, security problems\n\n7. Describe the structure and limitations of the Hierarchical database model.\n   Include: Tree structure, 1:N relationships, navigation, IMS example\n\n8. Draw a simple example showing how M:N relationships are handled differently in Hierarchical, Network, and Relational models.\n\n9. What is a view in a database? Why are multiple views important?\n   Explain: Security, customization, simplicity for different user groups\n\n10. Explain the term 'self-describing' nature of a database system.\n    Focus on: System catalog, metadata, data dictionary\n\nQUICK REVISION POINTS:\n• Database = Collection of related data\n• DBMS = Software to manage database\n• Hierarchical = Tree (1:N only)\n• Network = Graph (M:N supported)\n• Relational = Tables (Most flexible)\n• SQL = Standard query language for relational databases\n• Data Independence = Change structure without affecting programs",
           takeaways: "KEY TAKEAWAYS:\n\n✓ A database is a collection of related data; DBMS is the software that manages it\n\n✓ Database approach provides: data independence, controlled redundancy, concurrent access, backup/recovery, security\n\n✓ Three major historical models: Hierarchical (tree), Network (graph), Relational (tables)\n\n✓ Hierarchical model: Simple but limited to 1:N relationships, used in IBM's IMS\n\n✓ Network model: More flexible with M:N relationships but complex navigation\n\n✓ Relational model: Dominant today due to simplicity, SQL standardization, and data independence\n\n✓ Relational databases organize data in tables with rows (tuples) and columns (attributes)\n\n✓ SQL provides declarative querying - specify WHAT you want, not HOW to get it\n\n✓ Modern applications almost exclusively use relational or NoSQL (evolution of database concepts)\n\n✓ Understanding database evolution helps appreciate why certain design decisions were made\n\n✓ Database systems are critical infrastructure for: banking, healthcare, e-commerce, government, education\n\n✓ Career opportunities: DBA, Data Engineer, Backend Developer, Data Analyst all require database knowledge\n\nREMEMBER: The shift from Hierarchical → Network → Relational represents increasing flexibility and decreasing complexity for users, while the system handles complexity internally.\n\n![ER Model Overview](/images/unit1/er%20model.png)\n\n![Object-Oriented Data Model](/images/unit1/object%20oriented%20data%20model.png)"
@@ -99,11 +99,11 @@ export const units: Unit[] = [
         cos: ["CO01"],
         content: {
           introduction: "A data model is a collection of concepts for describing data, relationships between data, and constraints on data. In practice, data models help database designers and users communicate clearly about what must be stored, how it is connected, and what rules must always be true.",
-          concept: "In DBMS (as outlined in the master notes), a **data model** has three major parts:\n\n1. **Structure part**: Rules that define how databases can be constructed (tables/records/objects).\n2. **Manipulative part**: Operations allowed on data (queries and updates).\n3. **Integrity rules**: Constraints that keep data accurate and consistent.\n\nData models are commonly grouped as:\n\n- **Object-based / conceptual models**: ER model, Object-oriented model (good for understanding requirements).\n- **Record-based models**: Relational, Network, Hierarchical (used to implement data logically).\n- **Physical data models**: How the system will be implemented on a specific DBMS (tables, keys, indexes, storage details).",
-          technicalDepth: "## 1) Entity–Relationship (ER) Model\n\nThe ER model is the most widely used conceptual model for database design because it is easy to understand and maps well to relational tables.\n\n**ER building blocks**\n- **Entity**: real-world object (Student, Course, Account)\n- **Attribute**: property of an entity (StudentID, Name)\n- **Relationship**: association between entities (Student ENROLLS Course)\n\n![ER Symbols (Master Notes)](/images/unit2/ER%20data%20model%20symbol%20table.png)\n\n### Advantages (from master.txt)\n- Simple and easy to build\n- Effective communication tool\n- Easy conversion to relational model\n\n### Disadvantages (from master.txt)\n- No single industry-standard notation\n- Some details can remain hidden because ER is a high-level view\n\n### How to draw ER diagram (master.txt checklist)\n1. Identify entities (rectangles)\n2. Identify relationships (diamonds) and connect entities\n3. Attach attributes to entities\n4. Remove redundant entities/relationships\n5. Finalize constraints clearly (keys, participation, cardinality)\n\n![Cardinality Examples](/images/unit2/er-cardinality-examples.svg)\n\n![Banking ER Example](/images/unit2/E-R%20diagram%20for%20the%20Banking%20Enterprise.png)\n\n## 2) Record-Based Data Models\n\n### Relational model (tables)\n- Data stored as relations (tables); rows = tuples, columns = attributes\n- Relationships maintained using keys (primary/foreign keys)\n\n![Relational Data Model](/images/unit2/relational%20data%20model.png)\n\n### Hierarchical model (tree)\n- Tree structure with single parent for each child\n- Simple and fast traversal, but weak at complex relationships\n\n### Network model (graph)\n- Graph-like structure; a child can have multiple parents\n- Faster access in many cases; more complex to manage\n\n![Network Data Model](/images/unit2/network%20data%20model.png)\n\n## 3) Object-Oriented Data Model\nFrom master.txt: objects combine data + relationships in a single structure; useful for complex data like multimedia.\n\n![Object-Oriented Data Model](/images/unit2/object%20oriented%20data%20model.png)\n\n## 4) Integrity Constraints (must always hold)\n- **Domain constraint**: values must come from an allowed domain (Age between 0–120)\n- **Entity integrity**: primary key cannot be NULL\n- **Referential integrity**: foreign key must match a referenced primary key (or be NULL if allowed)\n\n## 5) Data Manipulation Operations (DML)\n- **SELECT** (read)\n- **INSERT** (add new rows)\n- **UPDATE** (modify rows)\n- **DELETE** (remove rows)",
+          concept: "In DBMS, a **data model** has three major parts:\n\n1. **Structure part**: Rules that define how databases can be constructed (tables/records/objects).\n2. **Manipulative part**: Operations allowed on data (queries and updates).\n3. **Integrity rules**: Constraints that keep data accurate and consistent.\n\nData models are commonly grouped as:\n\n- **Object-based / conceptual models**: ER model, Object-oriented model (good for understanding requirements).\n- **Record-based models**: Relational, Network, Hierarchical (used to implement data logically).\n- **Physical data models**: How the system will be implemented on a specific DBMS (tables, keys, indexes, storage details).",
+          technicalDepth: "## 1) Entity–Relationship (ER) Model\n\nThe ER model is the most widely used conceptual model for database design because it is easy to understand and maps well to relational tables.\n\n**ER building blocks**\n- **Entity**: real-world object (Student, Course, Account)\n- **Attribute**: property of an entity (StudentID, Name)\n- **Relationship**: association between entities (Student ENROLLS Course)\n\n![ER Symbols](/images/unit2/ER%20data%20model%20symbol%20table.png)\n\n### Advantages of ER Model\n- Simple and easy to build\n- Effective communication tool\n- Easy conversion to relational model\n\n### Disadvantages of ER Model\n- No single industry-standard notation\n- Some details can remain hidden because ER is a high-level view\n\n### How to draw ER diagram\n1. Identify entities (rectangles)\n2. Identify relationships (diamonds) and connect entities\n3. Attach attributes to entities\n4. Remove redundant entities/relationships\n5. Finalize constraints clearly (keys, participation, cardinality)\n\n![Cardinality Examples](/images/unit2/er-cardinality-examples.svg)\n\n![Banking ER Example](/images/unit2/E-R%20diagram%20for%20the%20Banking%20Enterprise.png)\n\n## 2) Record-Based Data Models\n\n### Relational model (tables)\n- Data stored as relations (tables); rows = tuples, columns = attributes\n- Relationships maintained using keys (primary/foreign keys)\n\n![Relational Data Model](/images/unit2/relational%20data%20model.png)\n\n### Hierarchical model (tree)\n- Tree structure with single parent for each child\n- Simple and fast traversal, but weak at complex relationships\n\n### Network model (graph)\n- Graph-like structure; a child can have multiple parents\n- Faster access in many cases; more complex to manage\n\n![Network Data Model](/images/unit2/network%20data%20model.png)\n\n## 3) Object-Oriented Data Model\nObjects objects combine data + relationships in a single structure; useful for complex data like multimedia.\n\n![Object-Oriented Data Model](/images/unit2/object%20oriented%20data%20model.png)\n\n## 4) Integrity Constraints (must always hold)\n- **Domain constraint**: values must come from an allowed domain (Age between 0–120)\n- **Entity integrity**: primary key cannot be NULL\n- **Referential integrity**: foreign key must match a referenced primary key (or be NULL if allowed)\n\n## 5) Data Manipulation Operations (DML)\n- **SELECT** (read)\n- **INSERT** (add new rows)\n- **UPDATE** (modify rows)\n- **DELETE** (remove rows)",
           examples: "### Example: ER → Relational mapping (student enrollment)\n\n**Entities**\n- Student(StudentID, Name, Email)\n- Course(CourseID, CourseName, Credits)\n\n**Relationship (M:N)**\n- Student ENROLLS Course\n\n**Relational implementation (junction table)**\n\n    CREATE TABLE Student (\n      StudentID INT PRIMARY KEY,\n      Name VARCHAR(100) NOT NULL,\n      Email VARCHAR(150) UNIQUE\n    );\n\n    CREATE TABLE Course (\n      CourseID VARCHAR(10) PRIMARY KEY,\n      CourseName VARCHAR(100) NOT NULL,\n      Credits INT CHECK (Credits > 0)\n    );\n\n    CREATE TABLE Enrollment (\n      StudentID INT,\n      CourseID VARCHAR(10),\n      Semester VARCHAR(20),\n      Grade CHAR(2),\n      PRIMARY KEY (StudentID, CourseID, Semester),\n      FOREIGN KEY (StudentID) REFERENCES Student(StudentID),\n      FOREIGN KEY (CourseID) REFERENCES Course(CourseID)\n    );\n\nThis is the standard way to represent M:N relationships in the relational model.",
-          practical: "**Where this is used in real projects**\n\n- ER diagrams are typically created during requirements/design (before coding).\n- Physical data models are then built in tools (e.g., MySQL Workbench) to generate DDL.\n\n**Quick workflow**\n1. Gather requirements → identify entities/relationships\n2. Draw ER → validate with stakeholders\n3. Map ER → relational schema\n4. Add constraints and indexes (physical design)\n5. Implement DDL + DML\n\nTools: MySQL Workbench, draw.io, Lucidchart.",
-          exam: "Important questions (Unit II focus)\n\n1. Define data model. Explain structure/manipulative/integrity parts.\n2. Explain ER model with symbols and an example diagram.\n3. Advantages and disadvantages of ER model (from master.txt).\n4. Explain cardinality (1:1, 1:N, M:N) with examples.\n5. Compare Relational vs Hierarchical vs Network models.\n6. Explain integrity constraints: domain, entity integrity, referential integrity.\n7. How is an M:N relationship represented in relational databases?",
+          practical: "**Where this is used in real projects**\n\n- ER diagrams are typically created during requirements/design (before coding).\n- Physical data models are then built in tools (e.g., MySQL Workbench) to generate DDL.\n\n**Quick workflow**\n1. Gather requirements → identify entities/relationships\n2. Draw ER → validate with stakeholders\n3. Map ER → relational schema\n4. Add constraints and indexes (physical design)\n5. Implement DDL + DML\n\nTools: MySQL Workbench, draw.io, Lucidchart.\n\n## Physical Data Model\n\nThe physical data model represents how data will be implemented in a specific DBMS. It includes storage details, indexes, and optimization strategies.\n\n### ER Model Representation\n\n![ER Model Representation](/images/unit1/er%20model.png)\n\nThe ER diagram shows entities, attributes, and relationships in a visual format that is easy to understand and communicate with stakeholders.\n\n### ER Model Explanation\n\nThe Entity-Relationship model provides:\n- **Entities**: Real-world objects (rectangles)\n- **Attributes**: Properties of entities (ovals)\n- **Relationships**: Associations between entities (diamonds)\n- **Cardinality**: One-to-One, One-to-Many, Many-to-Many\n- **Participation**: Total (double line) or Partial (single line)\n\n### ER Notation Styles\n\nDifferent notation styles exist for ER diagrams:\n- Chen notation (original)\n- Crow's Foot notation (popular in industry)\n- UML notation (used in software engineering)\n\n## Converting ER Diagrams to Tables\n\nFollowing rules are used for converting an ER diagram into relational tables:\n\n### Rule-01: Strong Entity Set With Only Simple Attributes\n\n**Rule**: A strong entity set with only simple attributes will require only one table in the relational model.\n- Attributes of the table will be the attributes of the entity set\n- The primary key of the table will be the key attribute of the entity set\n\n![ER to Table Conversion Rule 1](/images/unit2/er_to_table%20Conversion_rule1.png)\n\n**Example**:\n```\nEntity: Student (StudentID, Name, Email, Major)\n↓\nTable: Student\nStudentID (PK) | Name | Email | Major\n```\n\n### Rule-02: Strong Entity Set With Composite Attributes\n\n**Rule**: A strong entity set with any number of composite attributes will require only one table.\n- While conversion, simple attributes of the composite attributes are taken into account, not the composite attribute itself\n\n![ER to Table Conversion Rule 2](/images/unit2/er_to_table_conversion_rule2.png)\n\n**Example**:\n```\nEntity: Employee (EmpID, Name, Address{Street, City, Zip})\n↓\nTable: Employee\nEmpID (PK) | Name | Street | City | Zip\n```\n\n### Rule-03: Strong Entity Set With Multi-Valued Attributes\n\n**Rule**: A strong entity set with any number of multi-valued attributes will require two tables.\n- One table will contain all the simple attributes with the primary key\n- Other table will contain the primary key and all the multi-valued attributes\n\n![ER to Table Conversion Rule 3](/images/unit2/er-to-table-conversion-rule3.png)\n\n**Example**:\n```\nEntity: Employee (EmpID, Name, {PhoneNumbers})\n↓\nTable 1: Employee\nEmpID (PK) | Name\n\nTable 2: EmployeePhones\nEmpID (FK) | PhoneNumber\nPRIMARY KEY (EmpID, PhoneNumber)\n```\n\n### Rule-04: Translating Relationship Set into a Table\n\n**Rule**: A relationship set will require one table in the relational model.\n\n**Attributes of the table are**:\n- Primary key attributes of the participating entity sets\n- Its own descriptive attributes if any\n- Set of non-descriptive attributes will be the primary key\n\n![ER to Table Conversion Rule 4](/images/unit2/er-to-table-conversion-rule4.png)\n\n**Note**: If we consider the overall ER diagram, three tables will be required:\n- One table for entity set \"Employee\"\n- One table for entity set \"Department\"\n- One table for relationship set \"Works_in\"\n\n### Rule-05: Binary Relationships With Cardinality Ratios\n\nFour cases are possible:\n\n**Case-01: Binary Relationship With Cardinality Ratio m:n**\n\n![ER to Table Conversion Rule 5 Case 1](/images/unit2/er-to-table-conversion-rule5-case1.png)\n\nHere, three tables will be required:\n```\nA (a1, a2)\nR (a1, b1)  -- Junction table\nB (b1, b2)\n```\n\n**Case-02: Binary Relationship With Cardinality Ratio 1:n**\n\n![ER to Table Conversion Rule 5 Case 2](/images/unit2/er-to-table-conversion-rule5-case2.png)\n\nHere, two tables will be required:\n```\nA (a1, a2)\nBR (a1, b1, b2)  -- Combined table for B and R\n```\nNote: Combined table is drawn for entity set B and relationship set R.\n\n**Case-03: Binary Relationship With Cardinality Ratio m:1**\n\n![ER to Table Conversion Rule 5 Case 3](/images/unit2/er-to-table-conversion-rule5-case3.png)\n\nHere, two tables will be required:\n```\nAR (a1, a2, b1)  -- Combined table for A and R\nB (b1, b2)\n```\nNote: Combined table is drawn for entity set A and relationship set R.\n\n**Case-04: Binary Relationship With Cardinality Ratio 1:1**\n\n![ER to Table Conversion Rule 5 Case 4](/images/unit2/er-to-table-conversion-rule5-case4.png)\n\nHere, two tables will be required. Either combine 'R' with 'A' or 'B':\n\nWay-01:\n```\nAR (a1, a2, b1)\nB (b1, b2)\n```\n\nWay-02:\n```\nA (a1, a2)\nBR (a1, b1, b2)\n```\n\n### Rule-06: Binary Relationship With Cardinality and Participation Constraints\n\n**Cardinality constraints**: Implemented as discussed in Rule-05\n\n**Total participation constraint**: Foreign key acquires NOT NULL constraint (i.e., foreign key cannot be null)\n\n**Case-01: Cardinality Constraint and Total Participation From One Side**\n\n![ER to Table Conversion Rule 6 Case 1](/images/unit2/er-to-table-conversion-rule6-case1.png)\n\nBecause cardinality ratio = 1:n, we combine entity set B and relationship set R:\n```\nA (a1, a2)\nBR (a1 NOT NULL, b1, b2)\n```\nBecause of total participation, foreign key a1 has acquired NOT NULL constraint.\n\n**Case-02: Cardinality Constraint and Total Participation From Both Sides**\n\n![ER to Table Conversion Rule 6 Case 2](/images/unit2/er-to-table-conversion-rule6-case2.png)\n\nIf there is a key constraint from both sides with total participation, then that binary relationship is represented using only a single table:\n```\nARB (a1, a2, b1, b2)\n```\n\n### Rule-07: Binary Relationship With Weak Entity Set\n\n**Rule**: Weak entity set always appears in association with identifying relationship with total participation constraint.\n\n![ER to Table Conversion Rule 7](/images/unit2/er-to-table-conversion-rule7.png)\n\nHere, two tables will be required:\n```\nA (a1, a2)\nBR (a1, b1, b2)\n```\nWhere B is the weak entity and A is the strong (owner) entity.",
+          exam: "Important questions (Unit II focus)\n\n1. Define data model. Explain structure/manipulative/integrity parts.\n2. Explain ER model with symbols and an example diagram.\n3. Advantages and disadvantages of ER model.\n4. Explain cardinality (1:1, 1:N, M:N) with examples.\n5. Compare Relational vs Hierarchical vs Network models.\n6. Explain integrity constraints: domain, entity integrity, referential integrity.\n7. How is an M:N relationship represented in relational databases?\n8. Explain the rules for converting ER diagrams to relational tables.\n9. What is the difference between strong and weak entity sets?\n10. Explain the table conversion rules for different cardinality ratios.",
           takeaways: "- Data models help represent real-world data clearly and correctly.\n- ER model is the standard conceptual model and converts easily to tables.\n- Integrity constraints protect correctness as data changes.\n- Record-based models define how data is organized logically; physical models focus on DBMS-specific implementation details."
         }
       },
@@ -115,12 +115,12 @@ export const units: Unit[] = [
         cos: ["CO02"],
         content: {
           introduction: "Query languages let users request information from a database. In the relational world, the theoretical foundations are **relational algebra (procedural)** and **relational calculus (declarative)**, while SQL is the practical language used in real DBMS products.",
-          concept: "From the master notes:\n\n- **Procedural languages**: specify *what* you want and *how* to obtain it (Relational Algebra).\n- **Non-procedural / declarative languages**: specify *what* you want; the system finds *how* (Relational Calculus, SQL style).\n\nRelational algebra is an algebra where **operands are relations** and **operators create new relations** (closure property). This is why it underpins SQL optimization and query execution planning.",
-          technicalDepth: "## Relational model (quick base)\n- A relation can be viewed as a set of tuples over domains (D1 × D2 × … × Dn).\n- Attribute values should be atomic (1NF idea); NULL values exist but complicate theory.\n\n## Relational algebra operations (master list)\nBasic operations include: **Select (σ), Project (π), Union (∪), Set Difference (−), Cartesian Product (×)** and **Rename (ρ)**.\n\n![Relational Algebra Operations](/images/unit2/relational-algebra-operations.svg)\n\n### Selection (σ)\nFilters tuples that satisfy a predicate.\nExample idea: σ(branch='Perryridge')(loan)\n\n### Projection (π)\nKeeps only selected attributes and removes duplicates.\nExample idea: π(account_number, balance)(account)\n\n### Composition\nOperations can be combined (e.g., selection after product to form a join-like result).\n\n## Tuple and Domain Relational Calculus\n- **Tuple relational calculus (TRC)**: describes the set of tuples that satisfy a predicate.\n- **Domain relational calculus (DRC)**: uses variables over domains (attribute values).\n\nSQL is closest to tuple relational calculus (declarative), but practical DBMS also perform procedural planning internally.\n\n## Open-source vs commercial DBMS\n- **Open source**: PostgreSQL, MySQL, MariaDB, SQLite\n- **Commercial**: Oracle, Microsoft SQL Server, IBM DB2\n\n(Choice depends on scale, licensing, tooling, and enterprise features.)",
-              examples: "### Example 1: Names of students enrolled in DBMS\n\nRelational Algebra:\nπ(Name)(σ(CourseName='DBMS')(Student ⋈ Enrollment ⋈ Course))\n\nSQL (conceptual form):\n\n    SELECT DISTINCT S.Name\n    FROM Student S\n    JOIN Enrollment E ON S.SID = E.SID\n    JOIN Course C ON E.CID = C.CID\n    WHERE C.CourseName = 'DBMS';\n\n### Example 2: Students with no enrollments\n\nRelational Algebra:\nπ(SID)(Student) − π(SID)(Enrollment)\n\n### Example 3: Why union-compatibility matters\nUnion requires same number of attributes and compatible domains.\nExample idea: π(customer_name)(depositor) ∪ π(customer_name)(borrower)",
+          concept: "Query languages are categorized into two types:\n\n- **Procedural languages**: specify *what* you want and *how* to obtain it (Relational Algebra).\n- **Non-procedural / declarative languages**: specify *what* you want; the system finds *how* (Relational Calculus, SQL style).\n\nRelational algebra is an algebra where **operands are relations** and **operators create new relations** (closure property). This is why it underpins SQL optimization and query execution planning.\n\n## Query Languages Overview\n\nA query language is a language in which a user requests information from the database.\n\n**Categories of languages**:\n- **Procedural**: User specifies what data is required and how to get it\n- **Non-procedural (Declarative)**: User specifies what data is required without specifying how to get it\n\n**\"Pure\" languages that form the underlying basis**:\n- Relational Algebra (Procedural)\n- Tuple Relational Calculus (Non-procedural)\n- Domain Relational Calculus (Non-procedural)\n\nThese pure languages form the theoretical foundation of query languages that people use in practice (like SQL).",
+          technicalDepth: "## What is Algebra?\n\nAlgebra is a mathematical model consisting of:\n- **Operands**: Variables or values\n- **Operators**: Symbols denoting procedures that construct new values from given values\n\n**Relational Algebra** is an algebra whose operands are relations and operators are designed to do the most common things that we need to do with relations.\n\n## Relational model (quick base)\n- A relation can be viewed as a set of tuples over domains (D1 × D2 × … × Dn).\n- Attribute values should be atomic (1NF idea); NULL values exist but complicate theory.\n\n## Relational algebra operations\nBasic operations include: **Select (σ), Project (π), Union (∪), Set Difference (−), Cartesian Product (×)** and **Rename (ρ)**.\n\n![Relational Algebra Operations](/images/unit2/relational-algebra-operations.svg)\n\n### Selection (σ)\nFilters tuples that satisfy a predicate.\nExample: σ(branch='Perryridge')(loan)\n\n### Projection (π)\nKeeps only selected attributes and removes duplicates.\nExample: π(account_number, balance)(account)\n\n### Composition\nOperations can be combined (e.g., selection after product to form a join-like result).\n\n## Relational Calculus\n\nRelational calculus is an alternate way of formulating queries, known as a **non-procedural query language**.\n\n### Key Characteristics\n\n- In non-procedural query language, the user is concerned with **what to retrieve** rather than **how to retrieve** it\n- The relational calculus tells **what to do** but never explains **how to do**\n- Most commercial relational languages are based on aspects of relational calculus including SQL, QBE, and QUEL\n- It is based on **Predicate Calculus**, derived from a branch of symbolic logic\n\n### Predicate and Proposition\n\n- A **predicate** is a truth-valued function with arguments\n- On substituting values for the arguments, the function results in an expression called a **proposition**\n- A proposition can be either **true** or **false**\n\n### Differences: Relational Algebra vs Relational Calculus\n\n| Relational Algebra | Relational Calculus |\n|-------------------|---------------------|\n| Procedural language | Non-procedural/Declarative language |\n| Specifies how to retrieve data | Specifies what data to retrieve |\n| Sequence of operations matters | Only the result specification matters |\n| Based on operations (σ, π, ⋈, etc.) | Based on predicate logic |\n| Query evaluation follows operation order | DBMS decides evaluation strategy |\n\n### Quantifiers in Relational Calculus\n\nMany calculus expressions involve the use of **Quantifiers**:\n\n**Universal Quantifier (∀)**:\n- Denoted by ∀\n- Read as \"for all\"\n- Means that in a given set of tuples, **all tuples** satisfy a given condition\n\n**Existential Quantifier (∃)**:\n- Denoted by ∃\n- Read as \"there exists\"\n- Means that in a given set of tuples, there is **at least one occurrence** whose value satisfies a given condition\n\n## Types of Relational Calculus\n\n### 1. Tuple Relational Calculus (TRC)\n\n**Definition**: Non-procedural query language based on finding tuple variables (range variables) for which a predicate holds true.\n\n**Characteristics**:\n- Describes the desired information without giving a specific procedure for obtaining it\n- Specified to select the tuples in a relation\n- Filtering variable uses the tuples of a relation\n- Result can have one or more tuples\n- Each tuple variable ranges over a particular database relation\n\n**Notation**:\n```\n{T | P(T)}   or   {T | Condition(T)}\n```\nWhere:\n- T is the resulting tuples\n- P(T) is the condition (Boolean expression) involving t\n- P(T) evaluates to either TRUE or FALSE for different tuple assignments\n- Result is the set of all tuples t that satisfy the condition (evaluate P(t) to TRUE)\n\n**Example**:\n```\n{T.name | Author(T) AND T.article = 'database'}\n```\nOutput: Selects tuples from AUTHOR relation, returns 'name' from Author who has written an article on 'database'.\n\n**With Quantifiers**:\n```\n{R | ∃T ∈ Authors(T.article='database' AND R.name=T.name)}\n```\nOutput: Yields the same result using existential quantifier.\n\n**Expression and Formula in TRC**:\n\nLet:\n- Rel → relation name\n- R, S → tuple variables\n- a → attribute of R\n- b → attribute of S\n- op → operator in {<, ≤, >, ≥, =, !=}\n\n**Rule 1 - Atomic Formula**:\n- R ∈ Rel\n- R.a op S.b\n- R.a op Constant or Constant op R.a\n\n**Rule 2 - Boolean Formulas**:\nIf F1 and F2 are formulas, then so are:\n- F1 AND F2\n- F1 OR F2\n- NOT(F1) or NOT(F2)\n\n**Rule 3 - Existential Quantifier**:\nIf F is a formula, then (∃t)(F) is also a formula, where t is a tuple variable.\n- (∃t)(F) is TRUE if F evaluates to TRUE for at least one tuple assigned to t\n- Otherwise (∃t)(F) is FALSE\n\n**Rule 4 - Universal Quantifier**:\nIf F is a formula, then (∀t)(F) is also a formula, where t is a tuple variable.\n- (∀t)(F) is TRUE if F evaluates to TRUE for ALL tuples assigned to t\n- Otherwise (∀t)(F) is FALSE\n\n**TRC Examples**:\n\n*Example 1*: Find all sailors with rating above 4\n```\n{s | SAILOR(s) AND s.rating > 4}\n```\n- SAILOR(s) specifies that range relation of tuple variable s is SAILOR\n- Each SAILOR tuple s satisfying s.rating>4 will be retrieved\n\n*Example 2*: Retrieve details of employees whose salary is greater than 50000\n```\n{e | EMPLOYEE(e) AND e.salary > 50000}\n```\n\nTo retrieve only specific attributes (Emp_ID and Fname):\n```\n{e.Emp_ID, e.Fname | EMPLOYEE(e) AND e.salary > 50000}\n```\n\n*Example 3*: Retrieve birth date and address of employee named John B. Smith\n```\n{e.dob, e.address | EMPLOYEE(e) AND e.Fname='John' AND e.Minit='B' AND e.Lname='Smith'}\n```\n\n### 2. Domain Relational Calculus (DRC)\n\n**Definition**: Uses variables that take their values from domains of attributes rather than tuples of relations.\n\n**Key Difference from TRC**:\n- TRC uses tuple variables\n- DRC uses domain variables (variables range over attribute domains)\n\n**Notation**:\n```\n{<x1, x2, ..., xn> | P(x1, x2, ..., xn)}\n```\nWhere:\n- x1, x2, ..., xn are domain variables\n- P is a predicate involving these variables\n\n## Tuple and Domain Relational Calculus\n- **Tuple relational calculus (TRC)**: describes the set of tuples that satisfy a predicate.\n- **Domain relational calculus (DRC)**: uses variables over domains (attribute values).\n\nSQL is closest to tuple relational calculus (declarative), but practical DBMS also perform procedural planning internally.\n\n## Open-source vs commercial DBMS\n- **Open source**: PostgreSQL, MySQL, MariaDB, SQLite\n- **Commercial**: Oracle, Microsoft SQL Server, IBM DB2\n\n(Choice depends on scale, licensing, tooling, and enterprise features.)",
+              examples: "### Example 1: Names of students enrolled in DBMS\n\nRelational Algebra:\nπ(Name)(σ(CourseName='DBMS')(Student ⋈ Enrollment ⋈ Course))\n\nSQL (conceptual form):\n\n    SELECT DISTINCT S.Name\n    FROM Student S\n    JOIN Enrollment E ON S.SID = E.SID\n    JOIN Course C ON E.CID = C.CID\n    WHERE C.CourseName = 'DBMS';\n\n**Output**:\n```\nName\n--------\nJohn Doe\nJane Smith\nBob Wilson\n```\n\n### Example 3: Cartesian Product Operations\n\n**Scenario**: Find the names of all customers who have a loan at the Perryridge branch.\n\n**Step 1**: Perform Cartesian Product\n```\nσ(branch_name=\"Perryridge\")(borrower × loan)\n```\n\n**Explanation**:\n- The Cartesian product (borrower × loan) associates every tuple of loan with every tuple of borrower\n- The customer-name column may contain customers who do not have a loan at the Perryridge branch\n- This is because Cartesian product takes all possible pairings of each tuple from borrower with each tuple of loan\n\n**Result of borrower × loan**:\n\nThe customer-name column contains all customers, including those without Perryridge loans, because Cartesian product creates all possible combinations.\n\n**Step 2**: Apply Join Condition\n\nSince we know that if a customer has a loan at Perryridge branch, there must be some tuple in borrower×loan that contains their name where:\n```\nborrower.loan_number = loan.loan_number\n```\n\nComplete query:\n```\nσ(borrower.loan_number=loan.loan_number)\n  (σ(branch_name=\"Perryridge\")(borrower×loan))\n```\n\n**Result**: We get only those tuples of borrower × loan that pertain to customers who have a loan at the Perryridge branch.\n\n**Step 3**: Final Projection\n\nSince we want only customer_name:\n```\nΠ(customer_name)\n  (σ(borrower.loan_number=loan.loan_number)\n    (σ(branch_name=\"Perryridge\")(borrower×loan)))\n```\n\n**Output**:\n```\ncustomer_name\n-------------\nJones\nSmith\nHayes\n```\n\n### Example 4: Tuple Relational Calculus - Sailor Database\n\n**Schema**: Sailor(sid, sname, rating, age)\n\n**Query 1**: Find all sailors with a rating above 4\n```\n{s | SAILOR(s) AND s.rating > 4}\n```\n\n**Output**:\n```\nsid | sname    | rating | age\n----|----------|--------|----\n22  | Dustin   | 7      | 45\n31  | Lubber   | 8      | 55\n58  | Rusty    | 10     | 35\n```\n\n**Query 2**: Find sailors with rating > 7 and age < 40\n```\n{s | SAILOR(s) AND s.rating > 7 AND s.age < 40}\n```\n\n**Output**:\n```\nsid | sname  | rating | age\n----|--------|--------|----\n58  | Rusty  | 10     | 35\n```\n\n### Example 5: Employee Database Examples\n\n**Query 1**: Retrieve details of employees with salary > 50000\n```\n{e | EMPLOYEE(e) AND e.salary > 50000}\n```\n\n**Output** (all attributes):\n```\nEmp_ID | Fname | Lname | Salary | Dept\n-------|-------|-------|--------|------\nE001   | John  | Smith | 65000  | IT\nE003   | Mary  | Brown | 72000  | HR\nE007   | James | Wilson| 58000  | IT\n```\n\n**Query 2**: Retrieve only Emp_ID and Fname for salary > 50000\n```\n{e.Emp_ID, e.Fname | EMPLOYEE(e) AND e.salary > 50000}\n```\n\n**Output** (specific attributes):\n```\nEmp_ID | Fname\n-------|-------\nE001   | John\nE003   | Mary\nE007   | James\n```\n\n**Query 3**: Retrieve birth date and address of employee John B. Smith\n```\n{e.dob, e.address | EMPLOYEE(e) AND e.Fname='John' AND e.Minit='B' AND e.Lname='Smith'}\n```\n\n**Output**:\n```\ndob        | address\n-----------|----------------------\n1985-03-15 | 123 Main St, Boston\n```\n\n### Example 6: Advanced Relational Calculus with Quantifiers\n\n**Query**: Find customers who have accounts at ALL branches located in Brooklyn\n\n**Using Universal Quantifier**:\n```\n{c | CUSTOMER(c) AND \n     (∀b)(BRANCH(b) AND b.city='Brooklyn' → \n          (∃a)(ACCOUNT(a) AND a.customer_id=c.id AND a.branch_id=b.id))}\n```\n\n**Interpretation**:\n- For all branches b in Brooklyn\n- There exists an account a\n- Where customer c has that account at branch b\n\n**Query**: Find employees who work on at least one project\n\n**Using Existential Quantifier**:\n```\n{e | EMPLOYEE(e) AND \n     (∃p)(PROJECT(p) AND \n          (∃w)(WORKS_ON(w) AND w.emp_id=e.id AND w.project_id=p.id))}\n```\n\n**Output Example**:\n```\nemp_id | emp_name\n-------|----------\nE001   | John\nE003   | Mary\nE005   | David\n```",
           practical: "**Practical tips**\n- SQL engines translate queries into internal algebra/plan trees, then optimize join order and access paths.\n- Learning relational algebra makes it easier to understand why indexes and join order affect performance.\n\n**Recommended practice**\n- Write a SQL query → mentally map to σ/π/⋈ operations → simplify by pushing σ early.",
-          exam: "Expected exam questions\n\n1. Define relational algebra. List basic operations and their purpose.\n2. Explain selection and projection with examples.\n3. What is union compatibility?\n4. Differentiate relational algebra vs tuple/domain relational calculus.\n5. Convert a SQL query to a relational algebra expression (and vice versa).\n6. Compare open-source and commercial DBMS with examples.",
-          takeaways: "- Relational algebra is procedural and forms the basis of query processing/optimization.\n- Selection (σ) reduces rows; projection (π) reduces columns and duplicates.\n- Union/difference require compatible schemas.\n- SQL is practical and largely declarative, but DBMS executes it via optimized internal plans." 
+          exam: "Expected exam questions\n\n1. Define relational algebra. List basic operations and their purpose.\n2. Explain selection and projection with examples.\n3. What is union compatibility?\n4. Differentiate relational algebra vs tuple/domain relational calculus.\n5. Convert a SQL query to a relational algebra expression (and vice versa).\n6. Compare open-source and commercial DBMS with examples.\n7. Explain tuple relational calculus with examples.\n8. What are quantifiers in relational calculus? Explain with examples.\n9. Write TRC queries for given scenarios.\n10. Explain the difference between procedural and non-procedural query languages.",
+          takeaways: "- Relational algebra is procedural and forms the basis of query processing/optimization.\n- Selection (σ) reduces rows; projection (π) reduces columns and duplicates.\n- Union/difference require compatible schemas.\n- SQL is practical and largely declarative, but DBMS executes it via optimized internal plans.\n- Relational calculus is non-procedural: specify what you want, not how to get it.\n- Tuple Relational Calculus (TRC) uses tuple variables to describe query results.\n- Domain Relational Calculus (DRC) uses domain variables for attributes.\n- Quantifiers (∃ and ∀) allow expressing complex queries in relational calculus.\n- Understanding both algebra and calculus helps in query optimization and database theory." 
         }
       }
     ]
@@ -137,9 +137,151 @@ export const units: Unit[] = [
         cos: ["CO03"],
         content: {
           introduction: "Database design is the art and science of organizing data to minimize redundancy while ensuring integrity. Poor design leads to data anomalies—inconsistencies that creep in during updates, deletions, or insertions. Normalization is the systematic process that transforms poorly designed schemas into well-structured ones.",
-          concept: `Normalization decomposes relations with anomalies into smaller, well-structured relations. The goal is to reduce redundancy and avoid anomalies **without losing information**.
+          concept: `## Keys Concept
 
-From the master notes, the classic anomalies are:
+In relational databases, keys are fundamental to identifying records uniquely and establishing relationships between tables.
+
+### Types of Keys
+
+**1. Primary Key**
+- Uniquely identifies each row in a table
+- Cannot contain NULL values
+- Each table has exactly ONE primary key
+- Example: Student_ID in a Students table
+
+**2. Candidate Key**
+- An attribute (or set of attributes) that can uniquely identify a tuple
+- A table can have multiple candidate keys
+- One candidate key is chosen as the primary key
+- Example: In Students table, both Roll_No and Email could be candidate keys
+
+**3. Super Key**
+- Any combination of columns that uniquely identifies a row
+- Can include extra columns beyond what's needed for uniqueness
+- Every candidate key is a super key, but not vice versa
+- Example: {Student_ID}, {Student_ID, Name}, {Student_ID, Email} are all super keys
+
+**4. Foreign Key**
+- A field in one table that refers to the primary key in another table
+- Establishes relationships between tables
+- Can contain NULL values (unless specified otherwise)
+- Enforces referential integrity
+- Example: Department_ID in Employees table referencing Department_ID in Departments table
+
+**5. Composite Key**
+- Primary key composed of multiple columns
+- Used when no single column can uniquely identify a record
+- Example: {Student_ID, Course_ID} in Enrollment table
+
+### Key Relationships Diagram
+
+\`\`\`
+Table: STUDENTS
+┌─────────────┬──────────┬─────────┬────────────────┐
+│ Roll_No (PK)│ Name     │ Email   │ Department_ID  │
+│             │          │         │ (FK)           │
+└─────────────┴──────────┴─────────┴────────────────┘
+                                         │
+                                         │ References
+                                         ▼
+Table: DEPARTMENTS
+┌────────────────┬─────────────────┐
+│ Department_ID  │ Department_Name │
+│ (PK)           │                 │
+└────────────────┴─────────────────┘
+\`\`\`
+
+## Constraints
+
+Database constraints ensure data integrity and enforce business rules at the database level.
+
+### Types of Constraints
+
+**1. Domain Constraints**
+- Define the set of valid values for an attribute
+- Enforced through data types and CHECK constraints
+- Example: Age must be between 0 and 120
+- Example: Gender must be 'M' or 'F'
+
+\`\`\`sql
+CREATE TABLE Students (
+    Student_ID INT PRIMARY KEY,
+    Name VARCHAR(50),
+    Age INT CHECK (Age >= 18 AND Age <= 100),
+    Grade CHAR(1) CHECK (Grade IN ('A', 'B', 'C', 'D', 'F'))
+);
+\`\`\`
+
+**2. Entity Integrity Constraints**
+- PRIMARY KEY constraint
+- Ensures that primary key values are unique and not NULL
+- Every table must have entity integrity
+- Guarantees each row can be uniquely identified
+
+\`\`\`sql
+CREATE TABLE Employees (
+    Employee_ID INT PRIMARY KEY,  -- Entity Integrity
+    Name VARCHAR(100) NOT NULL,
+    Salary DECIMAL(10,2)
+);
+\`\`\`
+
+**3. Referential Integrity Constraints**
+- FOREIGN KEY constraint
+- Ensures that a foreign key value must either:
+  - Match a value in the referenced primary key, OR
+  - Be NULL (if allowed)
+- Prevents orphan records
+- Can specify CASCADE actions on UPDATE/DELETE
+
+\`\`\`sql
+CREATE TABLE Orders (
+    Order_ID INT PRIMARY KEY,
+    Customer_ID INT,
+    Order_Date DATE,
+    FOREIGN KEY (Customer_ID) REFERENCES Customers(Customer_ID)
+        ON DELETE CASCADE
+        ON UPDATE CASCADE
+);
+\`\`\`
+
+**Additional Common Constraints:**
+
+**NOT NULL Constraint**
+- Ensures a column cannot store NULL values
+- Example: \`Name VARCHAR(50) NOT NULL\`
+
+**UNIQUE Constraint**
+- Ensures all values in a column are different
+- Can have multiple UNIQUE constraints per table
+- Unlike PRIMARY KEY, can contain NULL values
+- Example: \`Email VARCHAR(100) UNIQUE\`
+
+**DEFAULT Constraint**
+- Provides a default value when no value is specified
+- Example: \`Status VARCHAR(20) DEFAULT 'Active'\`
+
+### Constraint Enforcement Example
+
+\`\`\`sql
+CREATE TABLE Enrollment (
+    Student_ID INT,
+    Course_ID INT,
+    Enrollment_Date DATE DEFAULT CURRENT_DATE,
+    Grade CHAR(2) CHECK (Grade IN ('A', 'B', 'C', 'D', 'F', 'W')),
+    PRIMARY KEY (Student_ID, Course_ID),  -- Composite key
+    FOREIGN KEY (Student_ID) REFERENCES Students(Student_ID),
+    FOREIGN KEY (Course_ID) REFERENCES Courses(Course_ID)
+);
+\`\`\`
+
+---
+
+## Normalization and Functional Dependencies
+
+Normalization decomposes relations with anomalies into smaller, well-structured relations. The goal is to reduce redundancy and avoid anomalies **without losing information**.
+
+The classic anomalies are:
 
 - **Update anomaly**: the same fact is repeated in multiple rows, so changing it requires multiple updates (and missing one row makes the database inconsistent).
 - **Insertion anomaly**: you cannot insert a new fact because another attribute (unrelated to that fact) would be forced to NULL or missing.
@@ -148,7 +290,7 @@ From the master notes, the classic anomalies are:
 The engine behind normalization is the **functional dependency (FD)**.
 
 - X → Y means: if two tuples agree on X, they must agree on Y.
-- A **candidate key** can be tested using **attribute closure** (the same technique used in the master.txt 2NF/3NF examples).`,
+- A **candidate key** can be tested using **attribute closure** .`,
           technicalDepth: `## Functional dependencies and inference
 
 ### Armstrong's axioms
@@ -168,10 +310,10 @@ Compute X+ under the FD set. If X+ contains all attributes of R, then X is a sup
 ### 1NF
 All attribute values are atomic.
 
-### 2NF (master definition)
+### 2NF
 In 1NF, and **no non-prime attribute** is **partially dependent** on a candidate key (key should not be “broken”).
 
-### 3NF (master definitions)
+### 3NF
 In 2NF, and **no non-prime attribute** is **transitively dependent** on the key.
 
 Practical FD test used in notes: for every non-trivial X → Y, either:
@@ -186,11 +328,11 @@ For every non-trivial FD X → Y, X must be a superkey.
 ### Lossless join
 Decomposition should reconstruct the original relation without spurious tuples.
 
-### Dependency preservation (master)
+### Dependency preservation
 In a decomposition R -> R1, R2, ..., every dependency of R must either hold completely inside some decomposed relation, or be derivable from the union of dependencies across the decomposed relations.
 
-Master example: if R(A,B,C,D) has A → BC and we decompose into R1(ABC) and R2(AD), it is dependency-preserving because A → BC is enforced in R1(ABC).`,
-          examples: `## Worked example (2NF) — based on master.txt
+Example: if R(A,B,C,D) has A → BC and we decompose into R1(ABC) and R2(AD), it is dependency-preserving because A → BC is enforced in R1(ABC).`,
+          examples: `## Worked example (2NF)
 
 Given R(A,B,C,D) with FD set { AB → CD, B → C }.
 
@@ -206,11 +348,11 @@ Given R(A,B,C,D) with FD set { AB → CD, B → C }.
 - AB → CD is fine (full dependency on the key)
 - B → C violates 2NF (a non-prime attribute depends on a proper subset of a composite key)
 
-### Step 3: Convert to 2NF (master decomposition)
+### Step 3: Convert to 2NF
 - R1(B, C)
 - R2(A, B, D)
 
-## Worked example (3NF) — based on master.txt
+## Worked example (3NF)
 
 Given R(X,Y,Z) with FD set { X → Y, Y → Z }.
 
@@ -220,14 +362,14 @@ X+ = XYZ so **X is a candidate key**.
 ### Step 2: Check 3NF
 FD Y → Z violates 3NF because Y is not a superkey and Z is not prime.
 
-### Step 3: Convert to 3NF (master decomposition)
+### Step 3: Convert to 3NF
 - R1(X, Y)
 - R2(Y, Z)`,
           practical: `## Practical design workflow
 
 1) Draft relations from requirements.
 2) List likely FDs (business rules, uniqueness constraints).
-3) Use **closure** to confirm candidate keys (as in master examples).
+3) Use **closure** to confirm candidate keys .
 4) Normalize to **3NF** for most OLTP designs.
 5) Ensure decompositions are **lossless** and preferably **dependency-preserving** (important both in exams and in real enforcement).
 
@@ -237,14 +379,20 @@ FD Y → Z violates 3NF because Y is not a superkey and Z is not prime.
 - Enforce FDs using constraints: PK/FK/UNIQUE/CHECK (and sometimes triggers).`,
           exam: `## Exam prompts
 
-1) Find candidate keys using **attribute closure**.
-2) Identify whether a relation is in 2NF/3NF/BCNF given FDs.
-3) Convert to 2NF/3NF using decomposition (like the master 2NF/3NF worked problems).
-4) Define and illustrate update/insertion/deletion anomalies.
-5) State Armstrong's axioms and use them to infer an FD.
-6) Check decomposition for **lossless join** and **dependency preservation**.
-7) Explain the practical difference between 3NF and BCNF.`,
-          takeaways: `- Anomalies are the symptom; FDs are the cause.
+1) Define and distinguish between primary key, candidate key, super key, foreign key, and composite key.
+2) Explain domain, entity integrity, and referential integrity constraints with examples.
+3) Find candidate keys using **attribute closure**.
+4) Identify whether a relation is in 2NF/3NF/BCNF given FDs.
+5) Convert to 2NF/3NF using decomposition.
+6) Define and illustrate update/insertion/deletion anomalies.
+7) State Armstrong's axioms and use them to infer an FD.
+8) Check decomposition for **lossless join** and **dependency preservation**.
+9) Explain the practical difference between 3NF and BCNF.
+10) Write SQL statements demonstrating all types of constraints.`,
+          takeaways: `- Keys (Primary, Candidate, Super, Foreign, Composite) are fundamental to database structure and integrity.
+- Constraints (Domain, Entity Integrity, Referential Integrity) enforce data validity at the database level.
+- Primary keys ensure entity integrity; foreign keys ensure referential integrity.
+- Anomalies are the symptom; FDs are the cause.
 - Closure is the most reliable tool to reason about keys.
 - 2NF removes partial dependency; 3NF removes transitive dependency.
 - Good decompositions are **lossless** and ideally **dependency-preserving**.
@@ -261,7 +409,7 @@ FD Y → Z violates 3NF because Y is not a superkey and Z is not prime.
           introduction: "When you write a SQL query, the database doesn't just blindly execute it. Behind the scenes, the query processor analyzes, transforms, and optimizes your query to find the fastest way to get results. Understanding this process helps you write better queries and diagnose performance issues.",
           concept: `Query processing is the set of activities performed by the DBMS to translate a high-level query (SQL) into an efficient execution plan.
 
-From master.txt, the pipeline is:
+The pipeline is:
 1. **Parsing and translation**
 2. **Optimization** (the DML compiler chooses the lowest-cost evaluation plan among alternatives)
 3. **Evaluation** (execute the chosen plan)
@@ -290,7 +438,7 @@ Why it matters: pushing selections/projections early can drastically reduce inte
           introduction: "The gap between memory speed and disk speed is vast—memory access takes nanoseconds, disk access takes milliseconds. That's a million-fold difference. Storage strategies bridge this gap through clever data structures, caching, and organization techniques that minimize disk I/O, the primary bottleneck in database performance.",
           concept: `Storage strategies deal with how data is organized on disk and cached in memory so the DBMS can minimize disk I/O.
 
-From master.txt (disk storage section): large databases rely on disk storage and maintain:
+Large databases rely on disk storage and maintain:
 - **Data files** (the database itself)
 - **Data dictionary** (metadata / schema)
 - **Indices** (fast access paths)
@@ -310,8 +458,8 @@ An index provides **pointers** to data items that hold a particular value. Good 
         clos: ["CLO05"],
         cos: ["CO05"],
         content: {
-          introduction: "Imagine transferring $500 from your savings to checking account. The bank's system must: (1) deduct $500 from savings, (2) add $500 to checking. What if the system crashes between steps? You'd lose $500! Transactions ensure that either both steps happen, or neither does—no in-between states.",
-          concept: `From master.txt:
+          introduction: "Imagine transferring ₹500 from your savings to checking account. The bank's system must: (1) deduct ₹500 from savings, (2) add ₹500 to checking. What if the system crashes between steps? You'd lose ₹500! Transactions ensure that either both steps happen, or neither does—no in-between states.",
+          concept: `Objects
 
 A **transaction** is a single logical unit of work that accesses and possibly modifies the contents of a database using read and write operations.
 
@@ -322,7 +470,7 @@ DBMS enforces **ACID**:
 - **Durability**: once committed, updates persist on disk even after failures.
 
 This is why a money transfer must either complete both updates or roll back completely if the system fails mid-way.`,
-          technicalDepth: `## Transaction states (master)
+          technicalDepth: `## Transaction states
 
 - **Active**: instructions are executing
 - **Partially committed**: all operations done, changes in buffer/main memory
@@ -331,7 +479,7 @@ This is why a money transfer must either complete both updates or roll back comp
 - **Aborted**: rollback to undo partial effects
 - **Terminated**: system is consistent and ready for new transactions
 
-## Schedules (master)
+## Schedules
 
 ### Serial schedule
 No transaction starts until the running transaction ends.
@@ -341,7 +489,7 @@ Operations of multiple transactions are interleaved. This improves CPU utilizati
 
 The notes classify concurrent schedules into **serializable** and **non-serializable**.
 
-## Serializability (master)
+## Serializability
 
 ### Conflict serializability
 Conflicting operations satisfy all:
@@ -354,13 +502,99 @@ To test conflict serializability using a **precedence graph**:
 2) add an edge Ti -> Tj when an operation of Ti must occur before a conflicting operation of Tj
 3) schedule is conflict-serializable iff the graph has **no cycle**
 
+#### Testing Conflict Serializability Algorithm (Detailed Steps)
+
+**Step 1**: For each transaction Ti participating in schedule S, create a node in the precedence graph.
+
+**Step 2**: For each case where Ti executes **Write(X)** before Tj executes **Read(X)**, create a directed edge from Ti to Tj.
+- This represents the write-read (WR) dependency
+
+**Step 3**: For each case where Ti executes **Read(X)** before Tj executes **Write(X)**, create a directed edge from Ti to Tj.
+- This represents the read-write (RW) dependency
+
+**Step 4**: For each case where Ti executes **Write(X)** before Tj executes **Write(X)**, create a directed edge from Ti to Tj.
+- This represents the write-write (WW) dependency
+
+**Step 5**: The schedule S is **conflict serializable** if and only if the precedence graph has **no cycle**. If a cycle exists, the schedule is **not conflict serializable**.
+
+#### Example: Non-Conflict Serializable Schedule
+
+Consider this schedule with transactions T3 and T4:
+
+\`\`\`
+Schedule S:
+T3          T4
+Read(Q)
+            Write(Q)
+Write(Q)
+            Read(Q)
+\`\`\`
+
+**Analysis:**
+1. T3 reads Q, then T4 writes Q → Edge: T3 → T4 (Read-Write conflict)
+2. T4 writes Q, then T3 writes Q → Edge: T4 → T3 (Write-Write conflict)
+
+**Precedence Graph:**
+\`\`\`
+T3 ⟷ T4
+\`\`\`
+
+A **cycle** is created in the graph: T3 → T4 → T3
+
+**Conclusion:** The schedule is **NOT conflict serializable** because we cannot reorder the operations to obtain an equivalent serial schedule (either <T3, T4> or <T4, T3>).
+
 ### View serializability
 Two schedules are view equivalent if they preserve:
 1) initial reads
 2) final writes
 3) updated reads
 
-## Concurrency-control techniques (master)
+#### View Serializability Example (Detailed)
+
+Consider schedule **S** with three transactions T1, T2, and T3:
+
+\`\`\`
+Schedule S:
+T1          T2          T3
+Read(Q)
+            Write(Q)
+Write(Q)
+                        Write(Q)
+\`\`\`
+
+**Testing View Equivalence with Serial Schedule S1 = T1 → T2 → T3:**
+
+**Step 1: Check Initial Read**
+- The initial read operation in Schedule S is done by **T1** (reads Q)
+- In Serial Schedule S1, the initial read is also done by **T1**
+- ✓ Initial read condition satisfied
+
+**Step 2: Check Final Write**
+- The final write operation in Schedule S is done by **T3** (writes Q)
+- In Serial Schedule S1, the final write is also done by **T3**
+- ✓ Final write condition satisfied
+
+**Step 3: Check Updated Reads (Intermediate Reads)**
+- In Schedule S: There is no read operation that reads a value written by another transaction (except the initial read)
+- In Serial Schedule S1: Same situation—no intermediate read operations
+- ✓ Updated reads condition satisfied
+
+**Conclusion:**
+
+Schedule S satisfies **all three conditions** of view equivalence with serial schedule S1.
+
+Therefore:
+- Schedule S is **view equivalent** to serial schedule S1 = **T1 → T2 → T3**
+- Schedule S is **view serializable**
+
+**Note:** View serializability is a broader concept than conflict serializability. Some schedules that are NOT conflict serializable may still be view serializable.
+
+\`\`\`
+View Serializability ⊇ Conflict Serializability
+(View serializable schedules include all conflict serializable schedules plus some additional schedules)
+\`\`\`
+
+## Concurrency-control techniques
 
 ### Lock-based protocols
 
@@ -377,7 +611,7 @@ Lock modes:
 
 Notes highlight common drawbacks: deadlocks and cascading rollback.
 
-Strict / rigorous 2PL (master):
+Strict / rigorous 2PL:
 - **Strict 2PL**: hold exclusive locks till commit/abort
 - **Rigorous 2PL**: hold all locks till commit/abort (serial order matches commit order)
 
@@ -398,7 +632,7 @@ Three phases:
 2) validation
 3) write phase if validated; otherwise rollback
 
-## Recoverability and recovery (master)
+## Recoverability and recovery
 
 ### Recoverable vs irrecoverable schedules
 - **Recoverable**: if a transaction performs a dirty read, its commit is delayed until the writer commits or aborts.
@@ -422,8 +656,8 @@ Recovery techniques in the notes:
 - **Immediate update**: undo/redo (log is written before applying updates)`,
           examples: "Example 1: Transaction in SQL\n\n-- Bank Transfer: Savings to Checking\nBEGIN TRANSACTION;\n\n-- Step 1: Deduct from savings\nUPDATE Account\nSET Balance = Balance - 500\nWHERE AccountID = 101 AND AccountType = 'Savings';\n\n-- Step 2: Add to checking\nUPDATE Account\nSET Balance = Balance + 500\nWHERE AccountID = 101 AND AccountType = 'Checking';\n\n-- Verify balance constraints\nIF (SELECT Balance FROM Account WHERE AccountID=101 AND AccountType='Savings') < 0\n  ROLLBACK;\nELSE\n  COMMIT;\nEND TRANSACTION;\n\nExample 2: Deadlock Scenario\n\nTime | Transaction T1              | Transaction T2\n-----|----------------------------|---------------------------\nt1   | BEGIN                      |\nt2   |                            | BEGIN\nt3   | LOCK A (Exclusive)         |\nt4   |                            | LOCK B (Exclusive)\nt5   | UPDATE A SET ...           |\nt6   |                            | UPDATE B SET ...\nt7   | LOCK B (Wait for T2)       |\nt8   |                            | LOCK A (Wait for T1)\nt9   | DEADLOCK DETECTED          |\nt10  | T2 ABORTED (Victim)        |\nt11  | LOCK B (Acquired)          |\nt12  | COMMIT                     |\n\nExample 3: Recovery Scenario\n\nLog Contents:\n<T1 start>\n<T1, X, 100, 150>\n<T1, Y, 200, 250>\n<T1 commit>\n<T2 start>\n<T2, X, 150, 200>\n<T2, Y, 250, 300>\n--- CRASH ---\n\nRecovery:\n1. Redo T1 (committed): X=150, Y=250\n2. Undo T2 (not committed): X=150 (revert T2's change), Y=250\n\nFinal State: X=150, Y=250\n\nExample 4: Isolation Levels in Action\n\n-- Session 1\nSET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;\nBEGIN TRANSACTION;\nSELECT Balance FROM Account WHERE ID=101; -- Reads 1000\n-- (Session 2 updates Balance to 500 but doesn't commit)\nSELECT Balance FROM Account WHERE ID=101; -- Reads 500 (DIRTY READ!)\nCOMMIT;\n\n-- With READ COMMITTED\nSET TRANSACTION ISOLATION LEVEL READ COMMITTED;\nBEGIN TRANSACTION;\nSELECT Balance FROM Account WHERE ID=101; -- Reads 1000\n-- (Session 2 updates to 500 but doesn't commit)\nSELECT Balance FROM Account WHERE ID=101; -- Still reads 1000\nCOMMIT;\n\n-- With SERIALIZABLE (PostgreSQL)\nSET TRANSACTION ISOLATION LEVEL SERIALIZABLE;\nBEGIN TRANSACTION;\nSELECT SUM(Balance) FROM Account; -- Reads sum\n-- (Session 2 inserts new account)\nSELECT SUM(Balance) FROM Account; -- Same sum (no phantom)\nCOMMIT;",
           practical: "Best Practices:\n\n1. Transaction Design:\n   - Keep transactions short\n   - Acquire locks in consistent order (prevent deadlock)\n   - Avoid user interaction within transaction\n   - Handle exceptions (rollback on error)\n\n2. Choosing Isolation Level:\n   - READ UNCOMMITTED: Never (except analytics)\n   - READ COMMITTED: Default for most applications\n   - REPEATABLE READ: Financial transactions, reports\n   - SERIALIZABLE: Critical data, when correctness > performance\n\n3. Performance Tuning:\n   - Monitor lock wait times\n   - Identify long-running transactions\n   - Use row-level locking (not table-level)\n   - Consider optimistic locking for low contention\n\n4. Deadlock Prevention:\n   - Access tables in same order\n   - Use timeouts\n   - Keep transactions short\n   - Retry aborted transactions\n\n5. Application-Level Considerations:\n   - Implement retry logic\n   - Use connection pooling\n   - Consider eventual consistency (NoSQL)\n   - Saga pattern for distributed transactions\n\nReal-World Usage:\n- Banking: SERIALIZABLE for transfers\n- E-commerce: READ COMMITTED for order processing\n- Social media: READ COMMITTED, eventual consistency for likes\n- Stock trading: SERIALIZABLE with strict locking\n- Analytics: READ UNCOMMITTED (stale data acceptable)",
-          exam: "Key Questions:\n\n1. Explain ACID properties with examples\n2. Draw transaction state diagram\n3. What problems arise from concurrent transactions? Give examples.\n4. Explain Two-Phase Locking protocol. How does it ensure serializability?\n5. Compare timestamp-based vs lock-based concurrency control\n6. What is a deadlock? Explain detection and prevention strategies.\n7. Explain Write-Ahead Logging and its importance in recovery\n8. Describe ARIES recovery algorithm (Analysis, Redo, Undo)\n9. Compare SQL isolation levels. Which allows which anomalies?\n10. Given a schedule, determine if it's serializable\n11. Show recovery steps given transaction log and crash point\n12. Explain MVCC. Why do readers not block writers?",
-          takeaways: "Core Concepts:\n\n• ACID properties guarantee reliable transactions\n• Atomicity: All or nothing (enforced by logging and recovery)\n• Consistency: Maintain constraints (enforced by application + DBMS)\n• Isolation: Concurrent transactions don't interfere (concurrency control)\n• Durability: Committed changes survive crashes (write-ahead logging)\n• Two-Phase Locking ensures serializability but can deadlock\n• MVCC allows high concurrency by keeping multiple versions\n• Recovery uses logs to redo committed and undo uncommitted transactions\n• Isolation levels balance consistency with performance"
+          exam: "Key Questions:\n\n1. Explain ACID properties with examples\n2. Draw transaction state diagram\n3. What problems arise from concurrent transactions? Give examples.\n4. Explain Two-Phase Locking protocol. How does it ensure serializability?\n5. Compare timestamp-based vs lock-based concurrency control\n6. What is a deadlock? Explain detection and prevention strategies.\n7. Explain Write-Ahead Logging and its importance in recovery\n8. Describe ARIES recovery algorithm (Analysis, Redo, Undo)\n9. Compare SQL isolation levels. Which allows which anomalies?\n10. Given a schedule, determine if it's conflict serializable using precedence graph\n11. Show recovery steps given transaction log and crash point\n12. Explain MVCC. Why do readers not block writers?\n13. Construct precedence graph for given schedule and determine serializability\n14. Explain the detailed algorithm for testing conflict serializability\n15. What is view serializability? How does it differ from conflict serializability?\n16. Given a schedule, check if it is view serializable using the three conditions",
+          takeaways: "Core Concepts:\n\n• ACID properties guarantee reliable transactions\n• Atomicity: All or nothing (enforced by logging and recovery)\n• Consistency: Maintain constraints (enforced by application + DBMS)\n• Isolation: Concurrent transactions don't interfere (concurrency control)\n• Durability: Committed changes survive crashes (write-ahead logging)\n• Conflict serializability uses precedence graph: no cycle = serializable\n• View serializability is broader than conflict serializability\n• Testing serializability: construct precedence graph from read/write conflicts\n• Two-Phase Locking ensures serializability but can deadlock\n• MVCC allows high concurrency by keeping multiple versions\n• Recovery uses logs to redo committed and undo uncommitted transactions\n• Isolation levels balance consistency with performance"
         }
       }
     ]

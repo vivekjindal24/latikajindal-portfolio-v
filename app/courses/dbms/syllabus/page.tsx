@@ -1,4 +1,4 @@
-import { units } from '../data/syllabus';
+import { units } from '@/data/syllabus';
 import Link from 'next/link';
 
 export default function SyllabusPage() {
@@ -18,7 +18,7 @@ export default function SyllabusPage() {
                     <div className="flex justify-between items-start">
                       <div>
                         <h3 className="font-semibold text-lg text-gray-900 mb-1">
-                          <Link href={`/courses/dbms/${unit.id}/${topic.id}`} className="hover:text-blue-600 hover:underline">
+                          <Link href={`/${unit.id}/${topic.id}`} className="hover:text-blue-600 hover:underline">
                             {topic.title}
                           </Link>
                         </h3>

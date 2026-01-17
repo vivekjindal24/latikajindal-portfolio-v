@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .entity-box { fill: #3b82f6; stroke: #1e40af; stroke-width: 2; }
+      .relationship-diamond { fill: #10b981; stroke: #059669; stroke-width: 2; }
+      .text { fill: white; font-family: Arial, sans-serif; font-size: 16px; font-weight: bold; text-anchor: middle; }
+      .line { stroke: #374151; stroke-width: 2; fill: none; }
+      .property-text { fill: #374151; font-family: Arial, sans-serif; font-size: 14px; text-anchor: middle; }
+    </style>
+  </defs>
+  
+  <!-- Students Entity -->
+  <rect x="50" y="150" width="140" height="60" rx="5" class="entity-box"/>
+  <text x="120" y="185" class="text">Students</text>
+  
+  <!-- Enrollment Relationship -->
+  <path d="M 350,180 L 400,150 L 450,180 L 400,210 Z" class="relationship-diamond"/>
+  <text x="400" y="185" class="text">Enrollment</text>
+  
+  <!-- Courses Entity -->
+  <rect x="610" y="150" width="140" height="60" rx="5" class="entity-box"/>
+  <text x="680" y="185" class="text">Courses</text>
+  
+  <!-- Departments Entity -->
+  <rect x="50" y="310" width="140" height="60" rx="5" class="entity-box"/>
+  <text x="120" y="345" class="text">Departments</text>
+  
+  <!-- Instructors Entity -->
+  <rect x="610" y="310" width="140" height="60" rx="5" class="entity-box"/>
+  <text x="680" y="345" class="text">Instructors</text>
+  
+  <!-- Lines connecting entities -->
+  <!-- Students to Enrollment -->
+  <line x1="190" y1="180" x2="350" y2="180" class="line"/>
+  
+  <!-- Enrollment to Courses -->
+  <line x1="450" y1="180" x2="610" y2="180" class="line"/>
+  
+  <!-- Students to Departments -->
+  <line x1="120" y1="210" x2="120" y2="310" class="line"/>
+  
+  <!-- Courses to Instructors -->
+  <line x1="680" y1="210" x2="680" y2="310" class="line"/>
+  
+  <!-- Enrollment to Properties (downward) -->
+  <line x1="400" y1="210" x2="400" y2="260" class="line"/>
+  
+  <!-- Property labels -->
+  <text x="400" y="240" class="property-text">Properties:</text>
+  <text x="400" y="260" class="property-text">Grade, Semester</text>
+</svg>
