@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import "./globals.css";
 import Navbar from "./components/Navbar";
 import Sidebar from "./components/Sidebar";
 
@@ -13,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="bg-gray-50 text-gray-900 antialiased">
       <Navbar />
       <div className="flex">
         <Sidebar />
@@ -21,6 +22,6 @@ export default function RootLayout({
           {children}
         </main>
       </div>
-    </>
+    </div>
   );
 }
