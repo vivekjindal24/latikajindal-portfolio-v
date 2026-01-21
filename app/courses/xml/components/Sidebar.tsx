@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { units } from '../data/syllabusData2';
+import { units } from '@/data/syllabusData2';
 
 const Sidebar = () => {
   return (
@@ -19,7 +19,7 @@ const Sidebar = () => {
                 {unit.topics.map((topic) => (
                   <li key={topic.id}>
                     <Link
-                      href={`/courses/xml/${unit.id}/${topic.id}`}
+                      href={`/${unit.id}/${topic.id}`}
                       className="block py-1.5 text-sm text-gray-600 hover:text-gray-900 transition-colors"
                     >
                       {topic.title}
