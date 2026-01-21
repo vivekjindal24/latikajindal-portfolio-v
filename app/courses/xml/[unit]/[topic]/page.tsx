@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
-import { units } from '@/data/syllabusData2';
-import TopicContent from '@/components/TopicContent';
+import { units } from '../../data/syllabusData2';
+import TopicContent from '../../components/TopicContent';
 
 interface PageProps {
   params: Promise<{

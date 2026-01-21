@@ -1,4 +1,4 @@
-import { units } from '@/data/syllabusData2';
+import { units } from '../data/syllabusData2';
 import Link from 'next/link';
 
 export default function SyllabusPage() {

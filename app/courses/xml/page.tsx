@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { units, clos, cos } from '@/data/syllabusData2';
+import { units, clos, cos } from './data/syllabusData2';
 
 export default function Home() {
   return (
