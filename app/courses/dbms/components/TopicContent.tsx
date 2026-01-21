@@ -301,7 +301,7 @@ const TopicContent = ({ topic, unitId, topicId }: TopicContentProps) => {
       <div className="flex justify-between items-center gap-4 pt-8 mt-16 border-t border-gray-200">
         {prevTopic && prevUnit ? (
           <Link
-            href={`/${prevUnit.id}/${prevTopic.id}`}
+            href={`/courses/dbms/${prevUnit.id}/${prevTopic.id}`}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
           >
             <span className="group-hover:-translate-x-1 transition-transform">←</span>
@@ -316,7 +316,7 @@ const TopicContent = ({ topic, unitId, topicId }: TopicContentProps) => {
         
         {nextTopic && nextUnit ? (
           <Link
-            href={`/${nextUnit.id}/${nextTopic.id}`}
+            href={`/courses/dbms/${nextUnit.id}/${nextTopic.id}`}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group text-right ml-auto"
           >
             <div>

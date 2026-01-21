@@ -21,13 +21,13 @@ export default function Home() {
           </p>
           <div className="flex gap-4 flex-wrap">
             <Link 
-              href={`/${units[0].id}/${units[0].topics[0].id}`} 
+              href={`/courses/dbms/${units[0].id}/${units[0].topics[0].id}`} 
               className="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition-colors"
             >
               Jump into Unit 1
             </Link>
             <Link 
-              href="/syllabus" 
+              href="/courses/dbms/syllabus" 
               className="bg-white text-gray-700 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-colors"
             >
               View Full Syllabus
@@ -78,7 +78,7 @@ export default function Home() {
           {units.map((unit, idx) => (
             <Link 
               key={unit.id} 
-              href={`/${unit.id}/${unit.topics[0].id}`}
+              href={`/courses/dbms/${unit.id}/${unit.topics[0].id}`}
               className="block group"
             >
               <div className="bg-white p-6 rounded-xl border-2 border-gray-200 hover:border-blue-500 transition-all">
