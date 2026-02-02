@@ -23,6 +23,12 @@ const Navbar = () => {
             >
               Syllabus
             </Link>
+            <Link
+              href="/courses/xml/lab-manual"
+              className="text-gray-600 hover:text-gray-900 text-sm font-medium transition-colors"
+            >
+              Lab Manual
+            </Link>
           </nav>
         </div>
       </div>
