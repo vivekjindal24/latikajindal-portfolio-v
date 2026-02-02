@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400">
+  <!-- STUDENT Entity -->
+  <rect x="50" y="150" width="120" height="60" fill="white" stroke="#2563eb" stroke-width="2"/>
+  <text x="110" y="185" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">STUDENT</text>
+  
+  <!-- ENROLLS Relationship -->
+  <path d="M 170,180 L 270,180 L 310,160 L 350,180 L 310,200 Z" fill="white" stroke="#dc2626" stroke-width="2"/>
+  <text x="310" y="185" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold">ENROLLS</text>
+  <text x="210" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#dc2626">M</text>
+  <text x="410" y="170" text-anchor="middle" font-family="Arial" font-size="12" fill="#dc2626">N</text>
+  
+  <!-- COURSE Entity -->
+  <rect x="450" y="150" width="120" height="60" fill="white" stroke="#2563eb" stroke-width="2"/>
+  <text x="510" y="185" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">COURSE</text>
+  
+  <!-- Connection lines -->
+  <line x1="110" y1="210" x2="110" y2="280" stroke="#666" stroke-width="2"/>
+  <line x1="510" y1="210" x2="510" y2="280" stroke="#666" stroke-width="2"/>
+  
+  <!-- Cardinality labels for vertical connections -->
+  <text x="120" y="250" font-family="Arial" font-size="12" fill="#dc2626">N</text>
+  <text x="520" y="250" font-family="Arial" font-size="12" fill="#dc2626">N</text>
+  
+  <!-- DEPARTMENT Entity -->
+  <rect x="30" y="280" width="160" height="60" fill="white" stroke="#2563eb" stroke-width="2"/>
+  <text x="110" y="315" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">DEPARTMENT</text>
+  
+  <!-- INSTRUCTOR Entity -->
+  <rect x="430" y="280" width="160" height="60" fill="white" stroke="#2563eb" stroke-width="2"/>
+  <text x="510" y="315" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold">INSTRUCTOR</text>
+  
+  <!-- Title -->
+  <text x="310" y="30" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#1e40af">University ER Diagram</text>
+  
+  <!-- Legend -->
+  <text x="310" y="380" text-anchor="middle" font-family="Arial" font-size="11" fill="#666">Blue rectangles = Entities | Red diamond = Relationship | M:N = Many-to-Many</text>
+</svg>
