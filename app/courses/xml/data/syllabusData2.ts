@@ -535,103 +535,500 @@ minOccurs / maxOccurs mirrors ?, *, + from DTD.`,
       {
         id: 'xsd-advanced',
         title: 'Advanced XSD: Restrictions, Extensions, and Identity Constraints',
-        subtopics: ['Facets', 'Enumerations', 'Patterns', 'Type derivation', 'key/unique/keyref'],
+        subtopics: ['XSD Restrictions (Facets)', 'Enumerations & Patterns', 'XSD Extensions (Type Inheritance)', 'Identity Constraints (key/unique/keyref)', 'Database Constraint Comparison', 'Common Validation Errors'],
         clos: ['CLO02', 'CLO05'],
         cos: ['CO03'],
         content: {
           introduction:
-            'Beyond structure, XSD lets you express business rules: allowed ranges, controlled vocabularies, and relational links. It also supports reuse through type derivation.',
-          concept: `## Facets = constraints
+            'XML Schema Definition (XSD) is a powerful language used to describe and validate the structure and content of XML documents. It goes far beyond DTDs by supporting data types, namespaces, and complex constraints. Advanced XSD features — including restrictions, extensions, and identity constraints — help create robust and reliable XML systems used in real-world enterprise applications. This topic covers how to control input values at the schema level, how type inheritance works for reusable schema design, and how identity constraints enforce data uniqueness and referential integrity — similar to how primary keys and foreign keys work in relational databases.',
+          concept: `## What XSD Helps You Do
 
-- Range: minInclusive, maxInclusive, minExclusive, maxExclusive.
-- Vocabulary: enumeration.
-- Shape: length, minLength, maxLength.
-- Pattern: regular expressions for formats (phone, code, ids).
+- **Define Structure** — Specify the exact hierarchy, elements, and attributes your XML documents must follow.
+- **Enforce Data Types** — Require elements to contain specific data types like integers, dates, strings, and more.
+- **Apply Constraints** — Set validation rules including value ranges, patterns, uniqueness, and referential integrity.
+- **Enable Data Integrity** — Ensure that data exchanged between systems is valid, consistent, and reliable.
 
-## Derivation strategies
-- Restriction: narrow an existing type.
-- Extension: add elements/attributes to an existing type.
+## XSD Restrictions (Facets)
 
-## Identity constraints
-- xs:unique → values must be unique in scope.
-- xs:key → primary-key-like constraint.
-- xs:keyref → foreign-key-like reference.`,
-          technicalDepth: `## Concrete snippets
+A **restriction** limits the values that an element or attribute can take. Restrictions are applied using **facets** — built-in constraining rules provided by XML Schema.
 
-Range restriction
-~~~xml
-<xs:simpleType name="CgpaType">
-  <xs:restriction base="xs:decimal">
-    <xs:minInclusive value="0.0"/>
-    <xs:maxInclusive value="10.0"/>
+### Basic Syntax
+
+\`\`\`xml
+<xs:simpleType name="AgeType">
+  <xs:restriction base="xs:integer">
+    <xs:minInclusive value="18"/>
+    <xs:maxInclusive value="60"/>
   </xs:restriction>
 </xs:simpleType>
-~~~
+\`\`\`
 
-Enumeration
-~~~xml
-<xs:simpleType name="DeptType">
+This defines a custom type \`AgeType\` that only accepts integer values between **18** and **60** (inclusive).
+
+### Important Restriction Facets
+
+| Facet | Purpose | Example |
+|-------|---------|---------|
+| **minInclusive** | Minimum value allowed (inclusive) | \`value="18"\` → 18 is allowed |
+| **maxInclusive** | Maximum value allowed (inclusive) | \`value="60"\` → 60 is allowed |
+| **minExclusive** | Value must be strictly greater | \`value="0"\` → must be > 0 |
+| **maxExclusive** | Value must be strictly smaller | \`value="100"\` → must be < 100 |
+| **length** | Fixed character length | \`value="10"\` → exactly 10 chars |
+| **minLength** | Minimum characters required | \`value="2"\` → at least 2 chars |
+| **maxLength** | Maximum characters allowed | \`value="50"\` → at most 50 chars |
+| **pattern** | Regular expression validation | \`value="[A-Z]{3}"\` → 3 uppercase |
+| **enumeration** | List of allowed values | \`value="A"\`, \`value="B"\` |
+| **totalDigits** | Total number of numeric digits | \`value="5"\` → max 5 digits |
+| **fractionDigits** | Decimal digits after point | \`value="2"\` → max 2 decimals |
+
+### Inclusive vs Exclusive Bounds
+
+\`\`\`xml
+<!-- Inclusive: value CAN be exactly 0 or 100 -->
+<xs:minInclusive value="0"/>    <!-- 0 ≤ value -->
+<xs:maxInclusive value="100"/>  <!-- value ≤ 100 -->
+
+<!-- Exclusive: value CANNOT be exactly 0 or 100 -->
+<xs:minExclusive value="0"/>    <!-- 0 < value -->
+<xs:maxExclusive value="100"/>  <!-- value < 100 -->
+\`\`\`
+
+- **Inclusive (minInclusive / maxInclusive)** — The boundary value IS allowed. \`minInclusive="18"\` → 18 is valid.
+- **Exclusive (minExclusive / maxExclusive)** — The boundary value is NOT allowed. \`minExclusive="18"\` → 18 is invalid, 19 is valid.
+
+## XSD Extensions
+
+**Extension** allows creation of new types by adding elements or attributes to an existing type. This supports **type inheritance** in XML schema — similar to how classes inherit from other classes in object-oriented programming.
+
+### Restriction vs Extension
+
+- **Restriction** — Reduces allowed values or narrows an existing type. Limits data range, constrains existing elements, makes types more specific.
+- **Extension** — Adds new elements or attributes to a base type. Adds new fields, inherits base type structure, makes types more detailed.
+
+## Identity Constraints
+
+Identity constraints ensure **data uniqueness and referential integrity** in XML documents. They work similarly to database constraints.
+
+### Three Main Mechanisms
+
+- **xs:unique** — Values must be unique within their scope, but the element is optional (like UNIQUE constraint in SQL).
+- **xs:key** — Values must be unique AND mandatory. The element must exist and have a non-null value (like PRIMARY KEY in SQL).
+- **xs:keyref** — References another key constraint. The value must exist in the referenced key set (like FOREIGN KEY in SQL).
+
+### Comparison with Database Constraints
+
+| XSD Constraint | Database Equivalent | Mandatory? | Unique? | References? |
+|---------------|-------------------|-----------|---------|------------|
+| **xs:unique** | UNIQUE constraint | No | Yes | No |
+| **xs:key** | PRIMARY KEY | Yes | Yes | No |
+| **xs:keyref** | FOREIGN KEY | Yes | No | Yes |`,
+          technicalDepth: `## Detailed Restriction Examples
+
+### Enumeration — Fixed List of Allowed Values
+
+\`\`\`xml
+<xs:simpleType name="GradeType">
   <xs:restriction base="xs:string">
-    <xs:enumeration value="CSE"/>
-    <xs:enumeration value="ECE"/>
-    <xs:enumeration value="ME"/>
+    <xs:enumeration value="A"/>
+    <xs:enumeration value="B"/>
+    <xs:enumeration value="C"/>
   </xs:restriction>
 </xs:simpleType>
-~~~
+\`\`\`
 
-Identity constraints
-~~~xml
-<xs:element name="library">
-  <xs:complexType>
-    <xs:sequence>
-      <xs:element name="book" maxOccurs="unbounded">
-        <xs:complexType>
-          <xs:attribute name="id" type="xs:ID" use="required"/>
-        </xs:complexType>
-      </xs:element>
-    </xs:sequence>
-    <xs:key name="bookId">
-      <xs:selector xpath="book"/>
-      <xs:field xpath="@id"/>
-    </xs:key>
-  </xs:complexType>
-</xs:element>
-~~~`,
-          examples: `## Pattern example
+Only "A", "B", or "C" are valid values. Any other value will trigger a validation error.
 
-~~~xml
+### Pattern — Regular Expression Validation
+
+\`\`\`xml
 <xs:simpleType name="PhoneType">
   <xs:restriction base="xs:string">
     <xs:pattern value="[0-9]{10}"/>
   </xs:restriction>
 </xs:simpleType>
-~~~
+\`\`\`
 
-## Extension example
-~~~xml
-<xs:complexType name="StaffType">
+This allows only exactly **10 digits**. Values like \`"9876543210"\` are valid but \`"123"\` or \`"abc"\` are not.
+
+### Length Constraints
+
+\`\`\`xml
+<xs:simpleType name="UsernameType">
+  <xs:restriction base="xs:string">
+    <xs:minLength value="3"/>
+    <xs:maxLength value="20"/>
+  </xs:restriction>
+</xs:simpleType>
+\`\`\`
+
+Username must be between **3 and 20 characters** long.
+
+### Digit Constraints
+
+\`\`\`xml
+<xs:simpleType name="PriceType">
+  <xs:restriction base="xs:decimal">
+    <xs:totalDigits value="7"/>
+    <xs:fractionDigits value="2"/>
+  </xs:restriction>
+</xs:simpleType>
+\`\`\`
+
+Allows up to **7 total digits** with a max of **2 decimal places**. Example: \`12345.67\` is valid, \`12345.678\` is not.
+
+## Extension — Type Inheritance
+
+\`\`\`xml
+<!-- Base Type: Person -->
+<xs:complexType name="Person">
+  <xs:sequence>
+    <xs:element name="name" type="xs:string"/>
+  </xs:sequence>
+</xs:complexType>
+
+<!-- Derived Type: Student extends Person -->
+<xs:complexType name="Student">
   <xs:complexContent>
-    <xs:extension base="PersonType">
-      <xs:attribute name="role" type="xs:string" use="required"/>
+    <xs:extension base="Person">
+      <xs:sequence>
+        <xs:element name="rollno" type="xs:int"/>
+      </xs:sequence>
     </xs:extension>
   </xs:complexContent>
 </xs:complexType>
-~~~`,
-          practical: `## Do it
+\`\`\`
 
-- Add an enumeration for department codes and a pattern for phone numbers.
-- Introduce xs:key for unique IDs and xs:keyref for referencing them.
-- Derive one new type using extension (e.g., StaffType extends PersonType).`,
-          exam: `## Exam direction
+The \`Student\` type **inherits** the \`name\` element from \`Person\` and **adds** a new \`rollno\` element. This is type inheritance in XSD.
 
-- Explain how facets differ from derivation.
-- Write one example each for key and keyref.
-- State two real benefits of identity constraints in XML integration.`,
-          takeaways: `## Takeaways
+## Identity Constraint Details
+
+### xs:unique — Unique Values (Optional Presence)
+
+\`\`\`xml
+<xs:element name="students">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="student" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="email" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Unique constraint on email -->
+  <xs:unique name="uniqueEmail">
+    <xs:selector xpath="student"/>
+    <xs:field xpath="email"/>
+  </xs:unique>
+</xs:element>
+\`\`\`
+
+Two students **cannot** have the same email address. But a student without an email is still valid.
+
+### xs:key — Unique + Mandatory (Primary Key)
+
+\`\`\`xml
+<xs:element name="students">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="student" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="id" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Key: every student MUST have a unique id -->
+  <xs:key name="studentID">
+    <xs:selector xpath="student"/>
+    <xs:field xpath="id"/>
+  </xs:key>
+</xs:element>
+\`\`\`
+
+Every student **must have** an \`id\`, each \`id\` must be **unique**, and it acts like a **primary key** in DBMS.
+
+### xs:keyref — Foreign Key Reference
+
+\`\`\`xml
+<xs:element name="university">
+  <xs:complexType>
+    <xs:sequence>
+      <xs:element name="course" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="courseId" type="xs:string"/>
+            <xs:element name="title" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="enrollment" maxOccurs="unbounded">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="student" type="xs:string"/>
+            <xs:element name="course" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <!-- Primary key for courses -->
+  <xs:key name="courseID">
+    <xs:selector xpath="course"/>
+    <xs:field xpath="courseId"/>
+  </xs:key>
+  <!-- Foreign key: enrollment course must exist -->
+  <xs:keyref name="courseRef" refer="courseID">
+    <xs:selector xpath="enrollment"/>
+    <xs:field xpath="course"/>
+  </xs:keyref>
+</xs:element>
+\`\`\`
+
+Every \`enrollment/course\` value **must exist** in the \`course/courseId\` list. If a student enrolls in course \`"CS101"\`, that course **must be defined** in the courses.`,
+          examples: `## Practical Use Cases
+
+Advanced XSD features are used extensively in real-world enterprise systems:
+
+- **Student Information Systems** — Validate student records, enforce unique IDs
+- **E-Commerce XML Data** — Validate product catalogs, enforce price constraints
+- **Banking XML Documents** — Ensure transaction integrity with key references
+- **Web Service Data Validation** — Validate SOAP messages against schemas
+- **Healthcare Data Exchange** — HL7 message validation with strict type constraints
+- **Financial Reporting (XBRL)** — Enforce reporting standards with enumerations and patterns
+
+## Real-World Example: University Enrollment System
+
+In a university enrollment system, XSD ensures:
+- **Restrictions** → Student age must be 16-65, grades must be A/B/C/D/F
+- **Extensions** → GraduateStudent inherits from Student and adds thesis fields
+- **Key** → Every student has a unique student ID
+- **Keyref** → Course enrollment references a valid course ID
+
+## Lab Exercise 1: Age Restriction (18–60)
+
+\`\`\`xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="AgeType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value="18"/>
+      <xs:maxInclusive value="60"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="age" type="AgeType"/>
+</xs:schema>
+
+<!-- Valid XML:   <age>25</age>  -->
+<!-- Invalid XML: <age>15</age>  (below 18) -->
+<!-- Invalid XML: <age>65</age>  (above 60) -->
+\`\`\`
+
+## Lab Exercise 2: Enumeration for Course Types
+
+\`\`\`xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="CourseType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Science"/>
+      <xs:enumeration value="Commerce"/>
+      <xs:enumeration value="Arts"/>
+      <xs:enumeration value="Engineering"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="course" type="CourseType"/>
+</xs:schema>
+
+<!-- Valid:   <course>Science</course>     -->
+<!-- Invalid: <course>Music</course>       -->
+\`\`\`
+
+## Lab Exercise 3: Extension — Employee → Manager
+
+\`\`\`xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <!-- Base Type: Employee -->
+  <xs:complexType name="Employee">
+    <xs:sequence>
+      <xs:element name="name" type="xs:string"/>
+      <xs:element name="empId" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- Derived Type: Manager extends Employee -->
+  <xs:complexType name="Manager">
+    <xs:complexContent>
+      <xs:extension base="Employee">
+        <xs:sequence>
+          <xs:element name="department" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+  <xs:element name="manager" type="Manager"/>
+</xs:schema>
+
+<!-- Valid XML:
+<manager>
+  <name>Alice</name>
+  <empId>101</empId>
+  <department>Sales</department>
+</manager> -->
+\`\`\`
+
+## Lab Exercise 4: Student ID Key Constraint
+
+\`\`\`xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="students">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="student" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="id" type="xs:string"/>
+              <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="studentID">
+      <xs:selector xpath="student"/>
+      <xs:field xpath="id"/>
+    </xs:key>
+  </xs:element>
+</xs:schema>
+\`\`\`
+
+## Lab Exercise 5: Course Enrollment using keyref
+
+\`\`\`xml
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="university">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="courses">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="course" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="courseId" type="xs:string"/>
+                    <xs:element name="title" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="enrollments">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="enrollment" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="studentName" type="xs:string"/>
+                    <xs:element name="courseRef" type="xs:string"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+    <xs:key name="courseKey">
+      <xs:selector xpath="courses/course"/>
+      <xs:field xpath="courseId"/>
+    </xs:key>
+    <xs:keyref name="enrollmentCourseRef" refer="courseKey">
+      <xs:selector xpath="enrollments/enrollment"/>
+      <xs:field xpath="courseRef"/>
+    </xs:keyref>
+  </xs:element>
+</xs:schema>
+\`\`\``,
+          practical: `## Practice Exercises
+
+1. **Age Restriction** — Create an XSD schema with a simple type \`AgeType\` that restricts an integer to values between 18 and 60 (inclusive). Then create an element \`age\` that uses this type.
+
+2. **Enumeration for Course Types** — Create an XSD type \`CourseType\` that only allows the values: "Science", "Commerce", "Arts", and "Engineering".
+
+3. **Extension: Employee → Manager** — Design a schema where \`Employee\` has \`name\` and \`empId\`. Then create a \`Manager\` type that extends \`Employee\` with a \`department\` element.
+
+4. **Student ID Key Constraint** — Design a schema for a list of students where each student has an \`id\` and \`name\`. Implement a \`xs:key\` constraint to ensure every student has a unique, mandatory \`id\`.
+
+5. **Course Enrollment using keyref** — Create a schema with a list of courses (each with a unique \`courseId\`) and enrollments (each referencing a \`courseId\`). Use \`xs:key\` and \`xs:keyref\` to enforce referential integrity.
+
+## Advanced Topics to Explore
+
+- **Complex Type Inheritance** — Multiple levels of derivation creating deep type hierarchies for complex data models.
+- **XML Schema Reuse** — Using \`xs:include\` and \`xs:import\` to reference other schema files.
+- **Schema Modularization** — Breaking large schemas into smaller, manageable modules for better maintainability.
+- **Namespace Integration** — Using \`targetNamespace\` and qualified names to avoid element name conflicts.
+- **XML Validation Tools** — Using tools like XMLSpy, Oxygen XML, or command-line validators to validate XML against XSD.
+- **XSD 1.1 Features** — Assertions, conditional type assignment, and other modern schema capabilities.`,
+          exam: `## Quiz & Exam Preparation
+
+**Q1.** Which XSD facet restricts values to a specific list of allowed entries?
+→ **enumeration** — it restricts values to a predefined list of allowed entries.
+
+**Q2.** What does xs:extension do in XSD?
+→ It **adds new elements/attributes to a base type**, enabling type inheritance.
+
+**Q3.** Which identity constraint is equivalent to a PRIMARY KEY in databases?
+→ **xs:key** — ensures values are both unique and mandatory.
+
+**Q4.** What is the difference between xs:unique and xs:key?
+→ \`xs:key\` requires the element to exist (mandatory + unique), while \`xs:unique\` only enforces uniqueness if the element is present.
+
+**Q5.** If minExclusive value="0", which value is VALID?
+→ **1** — with minExclusive="0", the value must be strictly greater than 0.
+
+**Q6.** xs:keyref is similar to which database concept?
+→ **Foreign Key** — it references values defined in another key constraint.
+
+**Q7.** Which facet would you use to allow only a 10-digit number pattern?
+→ **pattern** — using \`[0-9]{10}\` to match exactly 10 digits.
+
+**Q8.** In XSD extension, the derived type:
+→ **Inherits all elements from the base type and adds new ones**.
+
+## Common Validation Errors
+
+- **Value violates restriction** — e.g., Age value is 15 but minInclusive is set to 18.
+- **Duplicate key values** — e.g., Two students have the same id="S001", violating xs:key.
+- **Missing key references** — e.g., Enrollment references course "CS999" which does not exist, violating xs:keyref.
+- **Incorrect pattern format** — e.g., Phone number is "12345" but pattern requires [0-9]{10}.
+- **Enumeration mismatch** — e.g., Grade value is "E" but only "A", "B", "C" are allowed.
+- **Length constraint violation** — e.g., Username is "ab" but minLength is 3.`,
+          takeaways: `## Key Takeaways
+
+1. Apply **XSD restriction facets** to control data values — including ranges, patterns, enumerations, and length constraints.
+2. Create **schema inheritance using extension** to build reusable, hierarchical type definitions.
+3. Implement **identity constraints** (unique, key, keyref) to enforce data uniqueness and referential integrity.
+4. Understand **XML validation logic** and debug common schema validation errors.
+5. Design **real-world schema models** for practical applications like student systems, e-commerce, and web services.
+
+## Summary
 
 - Facets encode business rules; derivation encodes reuse.
 - Identity constraints give XML relational-style integrity.
-- Always document the scope of selectors when using keys.`,
+- xs:key = PRIMARY KEY (unique + mandatory), xs:unique = UNIQUE (unique only), xs:keyref = FOREIGN KEY (referential).
+- Always document the scope of selectors when using keys.
+- Use restrictions to narrow types and extensions to expand them — never confuse the two.`,
         },
       },
       {
