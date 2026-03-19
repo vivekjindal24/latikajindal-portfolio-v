@@ -1189,6 +1189,808 @@ Customer  ──(reads)──▶  Menu (WSDL)
 - **Memory trick:** *"XML is the language programs use to talk politely and clearly."*`,
         },
       },
+      {
+        id: 'web-services-implementation',
+        title: 'Web Services Implementation: SOAP, REST, Security & Integration',
+        subtopics: [
+          'Why Web Services exist',
+          'SOA, WSDL, UDDI architecture',
+          'SOAP messages and WSDL structure',
+          'Building SOAP services with Python (spyne)',
+          'REST principles and Flask APIs',
+          'SOAP vs REST comparison',
+          'API security: HTTPS, API Keys, OAuth, JWT, WS-Security',
+          'Service-to-service integration (Mini Project)',
+        ],
+        clos: ['CLO02', 'CLO05'],
+        cos: ['CO03', 'CO05'],
+        content: {
+          introduction:
+            'This topic is a comprehensive, hands-on guide to Web Services Implementation — covering everything from motivation and architecture to building real SOAP and REST services, securing them, and integrating multiple services together. You already know XML; now discover how XML became the foundation of communication between every app, bank, and service on the internet. The content is organised in six phases: Motivation, Core Concepts, SOAP, REST, Security, and a Mini Project.',
+
+          concept: `## Phase 1 — Why Do Web Services Exist?
+
+### The Problem Web Services Solve
+
+Imagine three applications: a **mobile banking app** written in Swift, a **merchant website** in PHP, and a **fraud detection engine** in Python. They run on different OS, different languages, different machines. How do they talk to each other?
+
+Web Services are the answer — a **universal, platform-independent communication layer** that any system can speak, regardless of language or OS.
+
+> **XML Bridge:** You already know how XML structures data with tags and nesting. Web Services use XML as their shared language — one system writes an XML message, another reads it. That's the core idea.
+
+### What Is a Web Service?
+- A **software component** accessible over a network (usually HTTP)
+- Uses **standard protocols** so any language can call it
+- Exchanges data using **XML** (SOAP) or **JSON** (REST)
+- **Self-describing** — tells callers what operations it supports via WSDL
+
+### The Three-Role Model
+- 🏢 **Service Provider** — creates and hosts the service (e.g., a bank's payment API)
+- 📱 **Service Requester** — calls the service (e.g., a shopping app)
+- 📋 **Service Registry (UDDI)** — a directory where providers register their services
+
+> **Think of it like this:** UDDI is like Google for web services. The registry holds XML documents (WSDL files) describing each service. When you "discover" a service, you're reading its XML description.
+
+---
+
+## Phase 2 — Core Concepts & Architecture
+
+### Service-Oriented Architecture (SOA)
+
+SOA is a design philosophy where software is built as a collection of **independent services** communicating over a network. Each service does one job and exposes it through a standard interface.
+
+- **Loose coupling** — services don't need to know how each other works internally
+- **Interoperability** — Java service can talk to Python service can talk to .NET service
+- **Reusability** — the same authentication service is used by 50 different apps
+
+> **XML in SOA:** Services communicate their capabilities via WSDL files (which ARE XML documents). The registry stores WSDL files. Messages sent between services ARE XML (in SOAP). XML is literally the language of SOA.
+
+### Two Types of Web Services
+
+**🧱 SOAP Web Services (XML heavy)**
+- Protocol-based (strict rules)
+- Messages are XML envelopes
+- Service described by WSDL (XML)
+- Heavy but highly reliable
+- Used in banking, healthcare, ERP
+
+**🌿 REST Web Services (lightweight)**
+- Architectural style (flexible)
+- Messages can be JSON, XML, text
+- Uses plain HTTP verbs
+- Lightweight and fast
+- Used in social media, mobile apps
+
+### Key Technologies
+- 📄 **WSDL** (Web Services Description Language) — An XML document describing what a service does, what parameters it needs, and what it returns. The service's "contract".
+- 🔌 **SOAP** (Simple Object Access Protocol) — A messaging protocol that wraps data in an XML "envelope" for transmission.
+- 📋 **UDDI** (Universal Description, Discovery & Integration) — A registry where web services are published and discovered (like a phonebook for services).
+- 🔄 **REST** (Representational State Transfer) — An architectural style using standard HTTP methods to interact with resources.`,
+
+          technicalDepth: `## Phase 3 — SOAP Web Services (Deep Dive)
+
+### SOAP Message Structure
+
+- 📦 **Envelope** — Root element. Required. Wraps everything. Defines namespaces.
+- 🏷️ **Header** — Optional. Contains metadata: auth tokens, transaction IDs, routing info.
+- 📄 **Body** — Required. Contains the actual request or response data.
+- ⚠️ **Fault** — Inside Body. Returned on error. Contains faultcode, faultstring, detail.
+
+> **XML Connection:** SOAP is literally XML with a schema. The Envelope root element, namespace declarations, nested Header and Body — it's standard XML with defined element names. You can parse any SOAP message with any XML parser you already know.
+
+### WSDL Structure (Each Element Is XML)
+- \`<types>\` — Defines XML Schema for data types used
+- \`<message>\` — Defines input/output message structures
+- \`<portType>\` — Defines operations (like a Java interface)
+- \`<binding>\` — Specifies protocol and message format
+- \`<service>\` — Gives the actual network URL of the service
+
+### SOAP Request Example (with labels)
+
+~~~xml
+<!-- ROOT: The Envelope wraps everything -->
+<soap:Envelope
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:m="http://tempuri.org/">
+
+  <!-- HEADER: Optional metadata (auth tokens, etc.) -->
+  <soap:Header>
+    <m:AuthToken>ABC123XYZ</m:AuthToken>
+  </soap:Header>
+
+  <!-- BODY: The actual operation and data -->
+  <soap:Body>
+    <m:Add>
+      <m:intA>10</m:intA>
+      <m:intB>25</m:intB>
+    </m:Add>
+  </soap:Body>
+
+</soap:Envelope>
+~~~
+
+### SOAP Response Example
+
+~~~xml
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <AddResponse xmlns="http://tempuri.org/">
+      <AddResult>35</AddResult>
+    </AddResponse>
+  </soap:Body>
+</soap:Envelope>
+~~~
+
+### Lab 3 — Build a SOAP Service with Python (spyne)
+
+**Objective:** Build a Student Marks SOAP web service in Python. It will auto-generate a WSDL file and accept SOAP XML requests.
+
+**Tools:** Python 3, spyne (SOAP library), Postman, VS Code
+
+**Step 1 — Install Dependencies**
+
+~~~bash
+# Check Python version (need 3.7+)
+python --version
+
+# Install spyne and lxml
+pip install spyne lxml
+~~~
+
+**Step 2 — Create student_service.py**
+
+~~~python
+from spyne import Application, rpc, ServiceBase, Integer, Unicode
+from spyne.protocol.soap import Soap11
+from spyne.server.wsgi import WsgiApplication
+from wsgiref.simple_server import make_server
+
+# In-memory data store (simulates a database)
+students = {
+    "CS001": {"name": "Priya Sharma", "marks": 87},
+    "CS002": {"name": "Rahul Verma",  "marks": 74},
+    "CS003": {"name": "Anjali Singh", "marks": 91},
+}
+
+class StudentMarksService(ServiceBase):
+    """SOAP Web Service for Student Marks"""
+
+    @rpc(Unicode, _returns=Integer)
+    def getMarks(ctx, rollNo):
+        """Returns marks for a given roll number"""
+        student = students.get(rollNo)
+        if student:
+            return student["marks"]
+        return -1  # -1 = not found
+
+    @rpc(Unicode, Unicode, Integer, _returns=Unicode)
+    def addStudent(ctx, rollNo, name, marks):
+        """Adds a new student record"""
+        students[rollNo] = {"name": name, "marks": marks}
+        return f"Student {name} added successfully"
+
+    @rpc(_returns=Unicode)
+    def getAllStudents(ctx):
+        """Returns all students as a formatted string"""
+        result = []
+        for roll, info in students.items():
+            result.append(f"{roll}: {info['name']} = {info['marks']}")
+        return "\\n".join(result)
+
+# Create and register the SOAP Application
+application = Application(
+    [StudentMarksService],
+    tns='student.marks.service',
+    in_protocol=Soap11(validator='lxml'),
+    out_protocol=Soap11()
+)
+
+wsgi_app = WsgiApplication(application)
+
+if __name__ == '__main__':
+    server = make_server('0.0.0.0', 8000, wsgi_app)
+    print("SOAP Service running at: http://localhost:8000")
+    print("WSDL available at:       http://localhost:8000/?wsdl")
+    server.serve_forever()
+~~~
+
+**Step 3 — Run the Service**
+
+~~~bash
+python student_service.py
+~~~
+
+You should see: \`SOAP Service running at: http://localhost:8000\`
+
+**Step 4 — View the Auto-Generated WSDL**
+
+Open browser → \`http://localhost:8000/?wsdl\`. See the complete XML WSDL document spyne generated. Identify the \`<portType>\` and \`<operation>\` XML elements.
+
+**Step 5 — Test with Postman**
+
+New POST request → \`http://localhost:8000/\` | Header: \`Content-Type: text/xml\`
+
+**SOAP Request: getMarks**
+~~~xml
+<soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:stu="student.marks.service">
+  <soapenv:Body>
+    <stu:getMarks>
+      <stu:rollNo>CS001</stu:rollNo>
+    </stu:getMarks>
+  </soapenv:Body>
+</soapenv:Envelope>
+~~~
+
+**SOAP Request: addStudent**
+~~~xml
+<soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:stu="student.marks.service">
+  <soapenv:Body>
+    <stu:addStudent>
+      <stu:rollNo>CS004</stu:rollNo>
+      <stu:name>Kiran Patel</stu:name>
+      <stu:marks>88</stu:marks>
+    </stu:addStudent>
+  </soapenv:Body>
+</soapenv:Envelope>
+~~~
+
+**Expected Output:** A SOAP XML response with \`<getMarksResult>87</getMarksResult>\` for roll number CS001.
+
+**Common Errors + Fixes:**
+- **Port 8000 already in use** → Run \`lsof -i:8000\` (Mac/Linux) or change port to 8001
+- **spyne not found** → Run \`pip install spyne lxml\` again
+- **lxml validation error** → Remove \`validator='lxml'\` from Soap11() temporarily
+- **Namespace error in Postman** → \`xmlns:stu\` must match the \`tns=\` value in Python exactly
+
+---
+
+## Phase 4 — REST Web Services
+
+### REST Principles
+- 🌐 **Resources** — Everything is a resource identified by a URI. e.g., \`/students/CS001\`
+- 🔄 **HTTP Verbs** — GET (read), POST (create), PUT (update), DELETE (remove)
+- 📭 **Stateless** — Each request is fully independent. Server stores no session.
+- 🗃️ **Uniform Interface** — Consistent URL patterns and response formats
+
+### HTTP Methods → CRUD Mapping
+
+~~~
+GET    /students        → Get all students      (Read All)
+GET    /students/CS001  → Get student CS001     (Read One)
+POST   /students        → Add new student       (Create)
+PUT    /students/CS001  → Update student CS001  (Update)
+DELETE /students/CS001  → Remove student CS001  (Delete)
+~~~
+
+### SOAP vs REST — Side-by-Side Comparison
+
+| Aspect | 🧱 SOAP (XML heavy) | 🌿 REST (lightweight) |
+|---|---|---|
+| **Protocol** | Strict SOAP protocol over HTTP/SMTP | Uses HTTP directly — no extra protocol |
+| **Data Format** | XML only — always an Envelope | JSON (mostly), XML, plain text |
+| **Service Description** | WSDL (XML document) | OpenAPI/Swagger (JSON/YAML) |
+| **Error Handling** | Built-in SOAP Fault element | HTTP status codes (404, 500, etc.) |
+| **Security** | WS-Security (message-level XML) | HTTPS + OAuth + JWT (transport-level) |
+| **Performance** | Slower — XML parsing overhead | Faster — JSON is compact |
+| **Best For** | Banking, enterprise, government | Mobile apps, web APIs, microservices |
+
+> **XML still matters in REST:** REST APIs *can* return XML responses. Many enterprise REST APIs (like Salesforce) support both JSON and XML. Add \`Accept: application/xml\` header to any REST API that supports it.
+
+### Lab 4 — Build a REST API with Flask (Python)
+
+**Objective:** Build a complete Books REST API with full CRUD operations. Test every endpoint using Postman.
+
+**Tools:** Python 3, Flask (Web framework), Postman
+
+**Step 1 — Install Flask**
+
+~~~bash
+pip install flask
+~~~
+
+**Step 2 — Create books_api.py**
+
+~~~python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# In-memory database
+books = [
+    {"id": 1, "title": "Clean Code",            "author": "Robert Martin"},
+    {"id": 2, "title": "The Pragmatic Programmer", "author": "Hunt and Thomas"},
+    {"id": 3, "title": "Design Patterns",         "author": "Gang of Four"},
+]
+
+# ── GET all books ─────────────────────────────────
+@app.route('/books', methods=['GET'])
+def get_books():
+    return jsonify(books), 200
+
+# ── GET a single book ──────────────────────────────
+@app.route('/books/<int:book_id>', methods=['GET'])
+def get_book(book_id):
+    book = next((b for b in books if b["id"] == book_id), None)
+    if not book:
+        return jsonify({"error": "Book not found"}), 404
+    return jsonify(book), 200
+
+# ── POST create a new book ─────────────────────────
+@app.route('/books', methods=['POST'])
+def create_book():
+    data = request.get_json()
+    if not data or 'title' not in data:
+        return jsonify({"error": "Title is required"}), 400
+    new_book = {
+        "id":     len(books) + 1,
+        "title":  data["title"],
+        "author": data.get("author", "Unknown")
+    }
+    books.append(new_book)
+    return jsonify(new_book), 201  # 201 = Created
+
+# ── PUT update a book ──────────────────────────────
+@app.route('/books/<int:book_id>', methods=['PUT'])
+def update_book(book_id):
+    book = next((b for b in books if b["id"] == book_id), None)
+    if not book:
+        return jsonify({"error": "Book not found"}), 404
+    data = request.get_json()
+    book.update(data)
+    return jsonify(book), 200
+
+# ── DELETE remove a book ───────────────────────────
+@app.route('/books/<int:book_id>', methods=['DELETE'])
+def delete_book(book_id):
+    global books
+    orig = len(books)
+    books = [b for b in books if b["id"] != book_id]
+    if len(books) == orig:
+        return jsonify({"error": "Book not found"}), 404
+    return jsonify({"message": "Deleted successfully"}), 200
+
+if __name__ == '__main__':
+    print("REST API running at http://localhost:5000")
+    app.run(debug=True, port=5000)
+~~~
+
+**Step 3 — Run the API**
+
+~~~bash
+python books_api.py
+# Output: Running on http://127.0.0.1:5000
+~~~
+
+**Step 4 — Test All Endpoints in Postman**
+
+~~~
+GET    http://localhost:5000/books        → All books (200)
+GET    http://localhost:5000/books/1      → Book id=1 (200)
+GET    http://localhost:5000/books/99     → Not found (404)
+
+POST   http://localhost:5000/books
+Body: {"title": "DDIA", "author": "Kleppmann"}
+→ Returns new book id=4 (201)
+
+PUT    http://localhost:5000/books/1
+Body: {"title": "Clean Code 2nd Ed"}
+→ Returns updated book (200)
+
+DELETE http://localhost:5000/books/2      → Deleted (200)
+~~~
+
+**Expected Output (GET /books):**
+\`[{"id":1,"title":"Clean Code","author":"Robert Martin"},{"id":2,...},{"id":3,...}]\`
+
+**Common Errors + Fixes:**
+- **Port 5000 in use (Mac)** → macOS uses port 5000 for AirPlay. Change to port 5001.
+- **415 Unsupported Media Type** → In Postman, set Header: \`Content-Type: application/json\`
+- **400 Bad Request** → Ensure JSON body has correct keys and valid JSON format
+- **ModuleNotFoundError: flask** → Run \`pip install flask\` again`,
+
+          examples: `## Real-Life Examples Across All Phases
+
+### Motivation — Why Web Services Matter
+
+| Example | What Happens |
+|---|---|
+| 📱 **PhonePe / Paytm Payment** | When you pay via UPI, your app calls a web service at your bank. The service verifies balance, debits your account, credits the merchant — all via XML/JSON over HTTPS in milliseconds. |
+| 🌤️ **Weather Apps (AccuWeather)** | Every weather app calls the AccuWeather or OpenWeather web service API. The app sends a city name; the service responds with forecast data. Different apps, one shared service. |
+| 🛒 **Amazon / Flipkart Checkout** | Your cart app, the logistics service, payment gateway, and inventory tracker all communicate using web services. When you order, 4–5 different services are called in sequence. |
+| 🔐 **Login with Google / Facebook** | "Login with Google" is a web service call. Your site calls Google's OAuth API, Google validates credentials, returns a token — all web service communication behind the scenes. |
+| ✈️ **Flight Booking (MakeMyTrip)** | MakeMyTrip doesn't own airline data. It calls each airline's web service API to fetch seat availability, pricing, and booking confirmations in real time. |
+| 🏦 **IRCTC / NEFT Transfer** | Bank-to-bank transfers use SOAP web services — strict, secure XML messages. The banking sector was one of the earliest major adopters precisely because of SOAP's formal XML structure. |
+
+### SOA & Architecture Examples
+
+| Example | What Happens |
+|---|---|
+| 🏥 **Hospital Management (SOA)** | A hospital uses SOA: Patient Service, Appointment Service, Billing Service, Lab Service — all independent services communicating via SOAP/WSDL over a secure intranet. |
+| 📦 **Amazon Microservices (REST)** | Amazon has 500+ microservices (small REST APIs): Product Catalogue, Cart, Recommendations, Reviews, Shipping — each independently deployed and scaled. |
+| 🏛️ **Government Portals (SOAP + WSDL)** | DigiLocker, Aadhaar verification, Income Tax e-filing — all use SOAP web services with strict WSDL contracts for formal, auditable, structured XML transactions. |
+
+### SOAP Examples
+
+| Example | What Happens |
+|---|---|
+| 💳 **VISA / Mastercard Payment Processing** | Card payment networks use SOAP. When you tap your card, a SOAP XML message with card details, amount, and merchant ID flies to VISA's server and back in under 2 seconds. |
+| ✈️ **Airline Booking (Amadeus GDS)** | Amadeus (used by 90%+ of booking sites) exposes SOAP web services. Every "Check Availability" or "Book Seat" call is a SOAP XML message to their servers. |
+| 🏛️ **IRCTC / Indian Railways** | IRCTC's backend uses SOAP services for train availability, PNR status, and booking — strict XML transactions required for government audit trails. |
+
+### REST Examples
+
+| Example | What Happens |
+|---|---|
+| 📸 **Instagram / Twitter APIs** | Social media platforms expose REST APIs. GET /tweets/{id} fetches a tweet. POST /tweets creates one. DELETE /tweets/{id} removes it. Pure REST, pure JSON. |
+| 🗺️ **Google Maps API** | Every app showing a map calls Google Maps REST API. GET /maps/geocode?address=Delhi returns coordinates. Same API powers Uber, Zomato, Ola. |
+| 🎵 **Spotify API** | Spotify exposes REST APIs for everything: search songs, get artist details, create playlists, control playback. Third-party apps build on these endpoints. |
+| 🚗 **Uber / Ola Backend** | Requesting a ride, tracking a driver, processing payment — separate REST microservices. The driver's location updates every 2 seconds via a REST call. |
+
+### Security Examples
+
+| Example | What Happens |
+|---|---|
+| 🔑 **RapidAPI / Any Public API** | Every API on RapidAPI uses API Keys. You get a unique key per account. The API server checks the key in every request header. No valid key = 401 Unauthorized. |
+| 🔐 **Google / Facebook OAuth** | "Login with Google" flow: App redirects to Google → user logs in → Google returns auth code → app exchanges for access token → token used to call Google APIs. |
+| 🏦 **Bank SOAP Services (WS-Security)** | NEFT/RTGS transactions use SOAP with WS-Security. Each XML message is digitally signed by the sending bank. The receiving bank verifies the signature before processing. |
+| 📱 **JWT in Mobile Apps** | When you log into Swiggy/Zomato, their server returns a JWT. Your app sends this JWT in every subsequent request. Server validates the token signature — no session storage needed. |`,
+
+          practical: `## Phase 5 — Security & Standards
+
+### Why Security Matters for Web Services
+
+A web service exposed on the internet is accessible by *anyone* — including attackers. Without security, someone can call your payment API, flood your server with fake requests, steal user data, or impersonate legitimate users.
+
+### Security Layers
+- 🔒 **Transport Security (HTTPS)** — Encrypts data in transit using TLS/SSL. Prevents eavesdropping. Mandatory for any public API.
+- 🗝️ **API Keys** — A secret token passed in headers. Simple, effective for server-to-server calls. e.g., \`X-API-Key: abc123xyz\`
+- 🎟️ **OAuth 2.0** — Industry standard for delegated authorization. "Login with Google" uses OAuth. Returns a time-limited token.
+- 📋 **JWT (JSON Web Token)** — A signed token containing user claims. Server validates the signature — no DB lookup needed per request.
+- 🛡️ **WS-Security (SOAP)** — XML-based message-level security. Signs and encrypts individual SOAP elements. Used in banking SOAP services.
+
+### Common Web Service Attacks
+- ⚡ **Injection Attacks** — Malicious XML/JSON in input fields. Always validate and sanitize all input.
+- 🌊 **DDoS / Rate Abuse** — Flooding the service with thousands of calls. Fix: Rate limiting (e.g., 100 requests/minute per key).
+- 🕵️ **Man-in-the-Middle** — Intercepting unencrypted traffic. Fix: Always use HTTPS — never HTTP in production.
+- 🔑 **Broken Authentication** — Weak or exposed API keys. Fix: Rotate keys, never log them, store in environment variables.
+
+> **XML Security Standards:** WS-Security is built entirely on XML. It adds a \`<wsse:Security>\` element to the SOAP Header — containing \`<wsse:UsernameToken>\`, \`<ds:Signature>\`, and \`<xenc:EncryptedData>\` — all XML standards you can parse and read.
+
+### Lab 5 — API Key Authentication in Flask
+
+**Objective:** Add API key authentication to the Books REST API from Lab 4. Test both authorized (200) and unauthorized (401) access using Postman.
+
+**Step 1 — Add API Key Authentication Decorator**
+
+Add these lines to your \`books_api.py\` from Lab 4:
+
+~~~python
+from functools import wraps
+
+# Valid API keys (in production, store in DB or env vars)
+VALID_KEYS = {"key_student_001", "key_faculty_999"}
+
+def require_api_key(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        key = request.headers.get("X-API-Key")
+        if not key or key not in VALID_KEYS:
+            return jsonify({
+                "error":   "Unauthorized",
+                "message": "Valid X-API-Key header required"
+            }), 401
+        return f(*args, **kwargs)
+    return decorated
+
+# Protect your routes by adding @require_api_key decorator
+@app.route('/books', methods=['GET'])
+@require_api_key  # <-- Add this line above each route
+def get_books():
+    return jsonify(books), 200
+~~~
+
+**Step 2 — Test Without API Key (Should Fail)**
+
+In Postman: GET \`http://localhost:5000/books\` — no headers added.
+
+Expected: HTTP 401 — \`{"error": "Unauthorized", "message": "Valid X-API-Key header required"}\`
+
+**Step 3 — Test With Valid API Key (Should Succeed)**
+
+In Postman: GET \`http://localhost:5000/books\`
+
+Under Headers tab: \`Key = X-API-Key\` | \`Value = key_student_001\`
+
+Expected: HTTP 200 — Full list of books in JSON
+
+**Step 4 — Study a WS-Security Header (SOAP)**
+
+This WS-Security header is just SOAP Header XML — notice its structure:
+
+~~~xml
+<soap:Header>
+  <wsse:Security
+    xmlns:wsse="http://schemas.xmlsoap.org/ws/2002/12/secext">
+    <wsse:UsernameToken>
+      <wsse:Username>student_user</wsse:Username>
+      <wsse:Password
+        Type="PasswordDigest">hashed_password_here</wsse:Password>
+    </wsse:UsernameToken>
+  </wsse:Security>
+</soap:Header>
+~~~
+
+This is WS-Security at its core — just XML nested inside a SOAP Header element.
+
+**Common Errors + Fixes:**
+- **401 even with correct key** → Check for typos. Headers are case-sensitive on some servers.
+- **AttributeError: NoneType** → \`request.headers.get()\` returns None if header not present — handle it with \`if not key\` check.
+- **CORS errors in browser** → Install flask-cors: \`pip install flask-cors\` and add \`CORS(app)\` after creating Flask app.
+
+> **Security Rule:** Never hardcode API keys in source code. In production, use environment variables: \`import os; key = os.environ.get('API_KEY')\` and store keys in a \`.env\` file (add .env to .gitignore!).
+
+---
+
+## Phase 6 — Mini Project: Full Integration
+
+### Project: Student Result + Country Enrichment Service
+
+Build a REST API that manages student results AND enriches each student's record with their home country info by calling an external public API — demonstrating **service-to-service communication**.
+
+### System Architecture
+
+~~~
+[ Postman / Mobile App / Browser ]
+         |
+         | HTTP + API Key in header
+         v
+[ Your Flask REST API ] --- student data in memory
+         |
+         | Calls external REST API (on GET /students/{id})
+         v
+[ restcountries.com/v3.1 ] --- country database
+         |
+         +---> Returns enriched student record with country details
+~~~
+
+### Endpoints to Build
+- GET \`/students\` — All students (protected)
+- GET \`/students/{rollNo}\` — Student + live country info from external API
+- POST \`/students\` — Add student (protected)
+- PUT \`/students/{rollNo}/marks\` — Update marks (protected)
+- DELETE \`/students/{rollNo}\` — Remove student (protected)
+
+### Lab 6 — Complete Mini Project Code
+
+**Step 1 — Install Dependencies**
+
+~~~bash
+pip install flask requests
+~~~
+
+**Step 2 — Create mini_project.py**
+
+~~~python
+from flask import Flask, request, jsonify
+import requests
+from functools import wraps
+
+app = Flask(__name__)
+
+# ── Config ─────────────────────────────────────────
+VALID_KEYS  = {"key_student_001", "key_faculty_999"}
+COUNTRY_API = "https://restcountries.com/v3.1/name/{}"
+
+# ── Data Store ──────────────────────────────────────
+students = {
+    "CS001": {"name": "Priya Sharma", "marks": 87, "country": "India"},
+    "CS002": {"name": "Yuki Tanaka",  "marks": 92, "country": "Japan"},
+    "CS003": {"name": "Lena Mueller", "marks": 78, "country": "Germany"},
+}
+
+# ── Auth Decorator ──────────────────────────────────
+def require_api_key(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        key = request.headers.get("X-API-Key")
+        if key not in VALID_KEYS:
+            return jsonify({"error": "Unauthorized"}), 401
+        return f(*args, **kwargs)
+    return decorated
+
+# ── External API Call ───────────────────────────────
+def get_country_info(country_name):
+    try:
+        resp = requests.get(
+            COUNTRY_API.format(country_name.lower()),
+            timeout=3
+        )
+        if resp.status_code == 200:
+            data = resp.json()[0]
+            return {
+                "capital":    data.get("capital", ["N/A"])[0],
+                "population": data.get("population", 0),
+                "currency":   list(data.get("currencies", {}).keys())[0]
+            }
+    except Exception:
+        pass
+    return {"capital": "N/A", "population": 0, "currency": "N/A"}
+
+# ── Routes ──────────────────────────────────────────
+
+@app.route('/students', methods=['GET'])
+@require_api_key
+def get_students():
+    return jsonify(students), 200
+
+@app.route('/students/<roll_no>', methods=['GET'])
+@require_api_key
+def get_student(roll_no):
+    student = students.get(roll_no)
+    if not student:
+        return jsonify({"error": "Student not found"}), 404
+    # Call external REST API to enrich our data
+    country_info = get_country_info(student["country"])
+    enriched = {**student, "country_details": country_info}
+    return jsonify(enriched), 200
+
+@app.route('/students', methods=['POST'])
+@require_api_key
+def add_student():
+    data = request.get_json()
+    roll = data.get("rollNo")
+    if not roll or roll in students:
+        return jsonify({"error": "Invalid or duplicate roll number"}), 400
+    students[roll] = {
+        "name":    data.get("name", "Unknown"),
+        "marks":   data.get("marks", 0),
+        "country": data.get("country", "India")
+    }
+    return jsonify({"message": "Student added", "rollNo": roll}), 201
+
+@app.route('/students/<roll_no>/marks', methods=['PUT'])
+@require_api_key
+def update_marks(roll_no):
+    if roll_no not in students:
+        return jsonify({"error": "Not found"}), 404
+    data = request.get_json()
+    students[roll_no]["marks"] = data.get("marks", students[roll_no]["marks"])
+    return jsonify(students[roll_no]), 200
+
+@app.route('/students/<roll_no>', methods=['DELETE'])
+@require_api_key
+def delete_student(roll_no):
+    if roll_no not in students:
+        return jsonify({"error": "Not found"}), 404
+    del students[roll_no]
+    return jsonify({"message": f"{roll_no} deleted"}), 200
+
+if __name__ == '__main__':
+    print("Mini Project API: http://localhost:5000")
+    app.run(debug=True, port=5000)
+~~~
+
+**Step 3 — Run & Test All Endpoints**
+
+~~~
+# Header: X-API-Key: key_student_001
+
+# Test 1: Get all students
+GET  http://localhost:5000/students
+
+# Test 2: Get student with LIVE country data (calls external API!)
+GET  http://localhost:5000/students/CS002
+
+# Test 3: Add new student
+POST http://localhost:5000/students
+Body: {"rollNo":"CS004","name":"Ali Hassan","marks":85,"country":"Egypt"}
+
+# Test 4: Update marks
+PUT  http://localhost:5000/students/CS001/marks
+Body: {"marks": 95}
+
+# Test 5: Delete student
+DELETE http://localhost:5000/students/CS003
+
+# Test 6: Unauthorized access (no API key)
+GET  http://localhost:5000/students  → Should return 401
+~~~
+
+**Step 4 — Observe the Enriched Response**
+
+GET \`/students/CS002\` returns Yuki Tanaka's data PLUS live country info from external REST API:
+
+~~~json
+{
+  "name":    "Yuki Tanaka",
+  "marks":   92,
+  "country": "Japan",
+  "country_details": {
+    "capital":    "Tokyo",
+    "population": 125681593,
+    "currency":   "JPY"
+  }
+}
+~~~
+
+**Common Errors + Fixes:**
+- **ConnectionError on country API** → Check internet connection. The try/except handles this gracefully.
+- **KeyError: capital** → Country name may not match exactly. Try lowercase. The external API is case-flexible.
+- **Timeout error** → Increase: \`requests.get(..., timeout=5)\``,
+
+          exam: `## Exam Pointers Across All Phases
+
+### Phase 1 — Motivation
+- **Define Web Service** — "A software system designed to support interoperable machine-to-machine interaction over a network using XML-based messaging."
+- **List the three roles** — Service Provider, Service Requester, Service Registry (UDDI).
+
+### Phase 2 — Core Concepts
+- **Define SOA** — "A design philosophy where software is built as independent services communicating over a network."
+- **Compare SOAP vs REST** (table format: protocol, data format, service description, error handling, security, performance, best use case).
+- **List four key technologies** — SOAP, WSDL, UDDI, REST.
+
+### Phase 3 — SOAP
+- **Draw SOAP message structure** — Envelope → Header (optional) + Body (required). Fault inside Body on error.
+- **List five WSDL elements** — types, message, portType, binding, service.
+- **Write a sample SOAP request/response pair** — Always include Envelope and Body tags with proper namespace.
+
+### Phase 4 — REST
+- **Map HTTP verbs to CRUD** — GET=Read, POST=Create, PUT=Update, DELETE=Delete.
+- **List four REST principles** — Resources, HTTP Verbs, Stateless, Uniform Interface.
+- **Design a REST API** — Given "student management", list 5 endpoints with methods and URLs.
+
+### Phase 5 — Security
+- **List five security mechanisms** — HTTPS, API Keys, OAuth 2.0, JWT, WS-Security.
+- **Explain WS-Security** — XML-based message-level security in SOAP Header using UsernameToken, Signature, EncryptedData.
+- **List four common attacks** — Injection, DDoS, Man-in-the-Middle, Broken Authentication.
+
+### Phase 6 — Integration
+- **Explain service aggregation pattern** — Your API calls another API and combines results.
+- **Explain API Gateway pattern** — All requests go through validation before reaching business logic.
+- **Explain data enrichment pattern** — Store minimal data, fetch the rest on demand from external services.`,
+
+          takeaways: `## Key Takeaways
+
+### Phase 1 — Motivation
+- Web Services are a universal, platform-independent communication layer.
+- XML is the shared language that makes cross-platform communication possible.
+- Always explore the API response in Postman before building anything.
+
+### Phase 2 — Core Concepts
+- SOA = independent services communicating over a network using standard interfaces.
+- SOAP = strict, XML-heavy, formal contracts (banking, government).
+- REST = lightweight, flexible, JSON-based (mobile apps, web APIs).
+- WSDL is the service's contract — always read it first.
+
+### Phase 3 — SOAP
+- Never write WSDL by hand — let frameworks auto-generate it.
+- Always handle SOAP Fault responses for structured error info.
+- Use WS-Security for sensitive services (message-level encryption).
+
+### Phase 4 — REST
+- Use correct HTTP status codes (200, 201, 400, 401, 404, 500).
+- Design URLs as nouns, not verbs (\`/books\` not \`/getBooks\`).
+- Always version your API (\`/api/v1/books\`).
+
+### Phase 5 — Security
+- HTTPS is non-negotiable in production.
+- Implement rate limiting to prevent abuse.
+- Never hardcode API keys — use environment variables.
+- Always log security events (401/403 with timestamp and IP).
+
+### Phase 6 — Integration
+- Service aggregation, API gateway, and data enrichment are real production patterns.
+- Add a real database (SQLite/PostgreSQL) instead of in-memory storage.
+- Document with Swagger UI for interactive API exploration.
+- Deploy to cloud (Railway.app, Render.com) to make your API publicly accessible.
+
+**You can now:** explain why web services exist, read WSDL XML files, call SOAP services, build REST APIs, secure them with API keys, and integrate multiple services together. This covers the complete Web Services Implementation content.`,
+        },
+      },
     ],
   },
   {
