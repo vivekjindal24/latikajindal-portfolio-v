@@ -40,10 +40,10 @@ export default function PptxViewer({ material }: PptxViewerProps) {
       isMounted = false;
       viewerElement?.replaceChildren();
     };
-  }, [material.path]);
+  }, [material.fileName, material.path]);
 
   return (
-    <section className="space-y-4" aria-labelledby="viewer-title">
+    <section className="space-y-4" aria-labelledby="viewer-title" aria-live="polite">
       <div className="flex items-center justify-between gap-4 flex-wrap">
         <div>
           <p className="text-sm text-gray-500">{material.unit}</p>
@@ -61,7 +61,7 @@ export default function PptxViewer({ material }: PptxViewerProps) {
         </a>
       </div>
 
-      <div className="bg-gray-100 border border-gray-200 rounded-xl p-3 md:p-6 min-h-[320px] overflow-x-auto">
+      <div className="bg-gray-100 border border-gray-200 rounded-xl p-3 md:p-6 min-h-[320px] overflow-x-auto" role="region" aria-label="Presentation viewer">
         {state === "loading" && (
           <div className="min-h-[280px] flex flex-col items-center justify-center gap-3 text-gray-600">
             <LoaderCircle className="animate-spin text-blue-600" size={32} />

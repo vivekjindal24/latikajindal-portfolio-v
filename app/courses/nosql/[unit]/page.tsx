@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
@@ -10,6 +11,18 @@ type UnitPageProps = {
 
 export function generateStaticParams() {
   return materials.map((material) => ({ unit: material.id }));
+}
+
+export async function generateMetadata({ params }: UnitPageProps): Promise<Metadata> {
+  const { unit } = await params;
+  const material = materials.find((item) => item.id === unit);
+
+  if (!material) return { title: "Unit Not Found | NoSQL Course" };
+
+  return {
+    title: `${material.unit}: ${material.title} | NoSQL Course`,
+    description: `View the ${material.title} presentation for the NoSQL course.`,
+  };
 }
 
 export default async function UnitPage({ params }: UnitPageProps) {
