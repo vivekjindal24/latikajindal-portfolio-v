@@ -7,40 +7,40 @@ import { FileCheck, Users, MapPin } from "lucide-react";
 
 const patents = [
   {
-    title: "Blockchain and IOT's role in the Indian banking sector's digital transition and development of integrated digital backing system with E-commerce platform",
-    inventors: "Dr. S. Ahmad Murtaza Alvi Motashim Rasool, Dr. Latika Jindal, Dr. Shweta singh Samrat Ray, Dr. Sheshang Degadwala",
+    title: "Blockchain and IoT’s Role in the Indian Banking Sector’s Digital Transition and Development of Integrated Digital Banking System with E-Commerce Platform",
+    inventors: "Dr. S. Ahmad Murtaza Alvi, Dr. Latika Jindal, Dr. Shweta Singh, Samrat Ray, and Dr. Sheshang Degadwala",
     applicant: "Dr. S. Ahmad Murtaza Alvi",
     applicationNo: "202211014117 A",
     status: "Published",
     country: "India"
   },
   {
-    title: "A novel system for mental health tracking using naive bayes classifier model",
-    inventors: "Dr. Latika Jindal, Dr. Kailash Chandra Bandhu, Dr. Prabin Kumar Panigrahi, Dr. Ratnesh Litoriya, Mr. Sanket Gupta, Ms. Kriti Joshi, Ms. Divya Kumawat",
+    title: "A Novel System for Mental Health Tracking Using Naive Bayes Classifier Model",
+    inventors: "L. Jindal, K. C. Bandhu, P. K. Panigrahi, R. Litoriya, S. Gupta, K. Joshi, and D. Kumawat",
     applicant: "Dr. Ratnesh Litoriya",
     applicationNo: "202321076104 A",
     status: "Published",
     country: "India"
   },
   {
-    title: "A blockchain enabled system for securing financial transactions in crypto currency market",
-    inventors: "Dr. Latika Jindal, Kriti Joshi, Mrs. Swati Sumit Vaidya",
+    title: "A Blockchain Enabled System for Securing Financial Transactions in Crypto Currency Market",
+    inventors: "Dr. Latika Jindal, Kriti Joshi, and Mrs. Swati Sumit Vaidya",
     applicant: "Dr. Latika Jindal",
     applicationNo: "202321055713 A",
     status: "Published",
     country: "India"
   },
   {
-    title: "A Hybrid Blockchain Architecture Employing ML Models for Real-time Fraud Detection",
-    inventors: "Dr. Latika Jindal, Ms. Bhavna Tiwari, Mrs. Swati Sumit Vaidya, Mr Sumit Vaidya, Vivek Jindal",
+    title: "A Hybrid Blockchain Architecture Employing ML Models for Real-Time Fraud Detection",
+    inventors: "L. Jindal, B. Tiwari, S. S. Vaidya, and V. Jindal",
     applicant: "Dr. Latika Jindal",
     applicationNo: "202421088334",
     status: "Published",
     country: "India"
   },
   {
-    title: "A Wheat Stripe Rust Disease Detection System Using CNN and Ensemble Learning for improved Diagnostic Accuracy",
-    inventors: "Ms. Bhavna Tiwari, Dr. Latika Jindal, Mrs. Swati Sumit Vaidya, Mr Sumit Vaidya",
+    title: "A Wheat Stripe Rust Disease Detection System Using CNN and Ensemble Learning for Improved Diagnostic Accuracy",
+    inventors: "Ms. Bhavna Tiwari, Dr. Latika Jindal, Mrs. Swati Sumit Vaidya, and Mr. Sumit Vaidya",
     applicant: "Ms. Bhavna Tiwari",
     applicationNo: "202421089354",
     status: "Published",
@@ -48,7 +48,7 @@ const patents = [
   },
   {
     title: "An Intelligent Diabetic Retinopathy Detection System Using Deep Learning Techniques",
-    inventors: "Mrs. Swati Sumit Vaidya, Dr. Latika Jindal, Ms. Bhavna Tiwari, Mr Sumit Vaidya",
+    inventors: "Mrs. Swati Sumit Vaidya, Dr. Latika Jindal, Ms. Bhavna Tiwari, and Mr. Sumit Vaidya",
     applicant: "Mrs. Swati Sumit Vaidya",
     applicationNo: "202421091831 A",
     status: "Published",

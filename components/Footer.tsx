@@ -9,7 +9,7 @@ export default function Footer() {
           Associate Professor, Department of Computer Science & Engineering
         </p>
         <p className="text-sm text-white/70">
-          Medicaps University, Indore
+          MediCaps University, Indore
         </p>
       </div>
     </footer>

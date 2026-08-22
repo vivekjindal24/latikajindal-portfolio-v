@@ -12,12 +12,12 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Dr. Latika Jindal",
-  description: "Associate Professor of Computer Science & Engineering at Medicaps University. Versatile academic with 15+ years of teaching, research, and innovation.",
-  keywords: "Computer Science, Associate Professor, Research, Machine Learning, Blockchain, Medicaps University",
+  description: "Associate Professor, Computer Science & Engineering at MediCaps University with 11+ years of teaching, research supervision, and institutional leadership.",
+  keywords: "Dr. Latika Jindal, Associate Professor, Computer Science, MediCaps University, Machine Learning, Cyber Security, Research",
   authors: [{ name: "Dr. Latika Jindal" }],
   openGraph: {
     title: "Dr. Latika Jindal",
-    description: "Associate Professor with 15+ years of expertise in teaching, research, and innovation",
+    description: "Associate Professor in Computer Science & Engineering at MediCaps University, Indore.",
     type: "website",
   },
 };

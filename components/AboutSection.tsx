@@ -24,24 +24,21 @@ export default function AboutSection() {
         <div className="w-24 h-1 bg-gold mx-auto mb-12" />
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
-          {/* Text Content */}
           <div className="space-y-6">
             <p className="text-lg text-text leading-relaxed">
-              I am <strong>Dr. Latika Jindal</strong>, an Associate Professor in the Department of Computer Science & Engineering at Medicaps University, Indore. With over 15 years of dedicated experience in academia, I specialize in teaching, research, and curriculum development, with a focus on emerging technologies.
+              I am <strong>Dr. Latika Jindal</strong>, an Associate Professor in the Department of Computer Science & Engineering at <strong>MediCaps University</strong>, Indore. With 11+ years of academic experience, I have taught core CSE courses such as <strong>Data Structures, Algorithms, Database Systems, and Cyber Security</strong> to B.Tech and M.Tech students.
             </p>
 
             <p className="text-lg text-text leading-relaxed">
-              My research interests span across <strong>Machine Learning, Deep Learning, Blockchain Technology, Cybersecurity, and IoT</strong>. I have published extensively in reputed international journals and conferences, and hold multiple patents in innovative technological solutions.
+              My work spans <strong>teaching, curriculum development, research supervision, and institutional leadership</strong>. I have guided postgraduate research projects, supervised thesis work, and mentored students in publishing in Scopus and Web of Science indexed journals.
             </p>
 
             <p className="text-lg text-text leading-relaxed">
-              I am passionate about fostering student engagement, advancing academic excellence, and contributing to the broader academic community through workshops, certifications, and collaborative research initiatives.
+              My research interests include <strong>Machine Learning, Deep Learning, Blockchain, Cybersecurity, IoT, and applied AI</strong>. I actively contribute to workshops, FDPs, conferences, and collaborative research initiatives that advance technology and academia.
             </p>
           </div>
 
-          {/* Contact Information Cards */}
           <div className="space-y-4">
-            {/* Professional Info Card */}
             <motion.div
               className="bg-gradient-to-br from-navy to-navy/90 text-white p-6 rounded-xl shadow-lg border border-gold/20"
               initial={{ opacity: 0, x: 20 }}
@@ -65,12 +62,11 @@ export default function AboutSection() {
                 </div>
                 <div>
                   <p className="text-sm text-white/60 mb-1">Institution</p>
-                  <p className="font-semibold text-white">Medicaps University, Indore</p>
+                  <p className="font-semibold text-white">MediCaps University, Indore</p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Contact Details Card */}
             <motion.div
               className="bg-white border-2 border-gold/30 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
               initial={{ opacity: 0, x: 20 }}
@@ -81,25 +77,21 @@ export default function AboutSection() {
                 <div className="bg-navy/10 p-2 rounded-lg">
                   <Mail className="text-navy" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-navy">Email</h3>
+                <h3 className="text-xl font-bold text-navy">Contact</h3>
               </div>
               <div className="space-y-2 ml-1">
-                <a 
-                  href="mailto:latika.mehrotra@medicaps.ac.in"
-                  className="block text-text hover:text-gold transition-colors font-medium"
-                >
+                <a href="tel:+919479889242" className="block text-text hover:text-gold transition-colors font-medium">
+                  +91-94798-89242
+                </a>
+                <a href="mailto:latika.mehrotra@medicaps.ac.in" className="block text-text hover:text-gold transition-colors font-medium">
                   latika.mehrotra@medicaps.ac.in
                 </a>
-                <a 
-                  href="mailto:Latika19mehrotra@gmail.com"
-                  className="block text-text hover:text-gold transition-colors font-medium"
-                >
+                <a href="mailto:Latika19mehrotra@gmail.com" className="block text-text hover:text-gold transition-colors font-medium">
                   Latika19mehrotra@gmail.com
                 </a>
               </div>
             </motion.div>
 
-            {/* Office Address Card */}
             <motion.div
               className="bg-white border-2 border-navy/30 p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow"
               initial={{ opacity: 0, x: 20 }}
@@ -110,14 +102,13 @@ export default function AboutSection() {
                 <div className="bg-navy/10 p-2 rounded-lg">
                   <Building2 className="text-navy" size={24} />
                 </div>
-                <h3 className="text-xl font-bold text-navy">Office Address</h3>
+                <h3 className="text-xl font-bold text-navy">Institution</h3>
               </div>
               <div className="ml-1">
                 <p className="text-text font-medium leading-relaxed">
-                  V-127, V Block<br />
                   Department of Computer Science & Engineering<br />
-                  Medicaps University<br />
-                  Indore 453331, India
+                  MediCaps University<br />
+                  Indore, India
                 </p>
               </div>
             </motion.div>

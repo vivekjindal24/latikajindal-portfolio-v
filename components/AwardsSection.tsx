@@ -7,20 +7,24 @@ import { Award } from "lucide-react";
 
 const awards = [
   {
-    title: "Srijan For Data Base Management System",
-    session: "Academic Session 2013-2014",
+    title: "Srijan Award for Database Management System",
+    session: "Academic Session 2013–14",
   },
   {
-    title: "Srijan For Object Oriented Programming",
-    session: "Academic Session 2013-2014",
+    title: "Srijan Award for Object Oriented Programming",
+    session: "Academic Session 2013–14",
   },
   {
-    title: "Srijan For Data Base Management System",
-    session: "Academic Session 2014-2015",
+    title: "Srijan Award for Database Management System",
+    session: "Academic Session 2014–15",
   },
   {
-    title: "Srijan For Cyber Security",
-    session: "Academic Session 2017-2018",
+    title: "Srijan Award for Cyber Security",
+    session: "Academic Session 2017–18",
+  },
+  {
+    title: "MediCaps Best Faculty Award",
+    session: "2020",
   },
 ];
 

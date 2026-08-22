@@ -7,133 +7,141 @@ import { FileText, ExternalLink } from "lucide-react";
 
 const publications = [
   {
-    authors: "Bhavana Tiwari, Latika Jindal",
+    authors: "S. Vaidya and L. Jindal",
+    title: "Optimized EfficientNet-B3 for Multiclass Diabetic Retinopathy Detection: A Deep Learning Framework with Hybrid Fine-Tuning and Confidence-Aware Inference",
+    journal: "Ingénierie des Systèmes d'Information, vol. 31, no. 4, pp. 1351–1367, Apr. 2026",
+    year: "2026",
+    doi: "https://doi.org/10.18280/isi.310429",
+    type: "Journal"
+  },
+  {
+    authors: "S. Vaidya and L. Jindal",
+    title: "A Multi-Branch CNN–LSTM Framework for Modeling Disease Progression in Retinal Imaging for Diabetic Retinopathy Detection",
+    journal: "2026 3rd International Conference on Emerging Trends in Engineering and Medical Sciences (ICETEMS), Nagpur, India, 2026, pp. 1–6",
+    year: "2026",
+    doi: "https://doi.org/10.1109/ICETEMS66917.2026.11469704",
+    type: "Conference"
+  },
+  {
+    authors: "L. Jindal, M. Baniya, S. Khan, M. Patidar, and A. Verma",
+    title: "Enhanced Hybrid of SVM and GBM with Feature Selection Using Genetic Algorithms (SVM-GBM-GA) for Lung Cancer Prediction",
+    journal: "Data Science and Big Data Analytics, IDBA 2025, Springer, Cham",
+    year: "2026",
+    doi: "https://doi.org/10.1007/978-3-032-05377-0_28",
+    type: "Book Chapter"
+  },
+  {
+    authors: "A. Rai, O. A. Shah, I. A. Khan, M. A. Khan, L. Jindal, and P. Chouhan",
+    title: "Design and Development of ALU using Multi Chiplet Methodology for High-Performance Computing",
+    journal: "Buletin Ilmiah Sarjana Teknik Elektro, vol. 8, no. 1, pp. 116–128, 2026",
+    year: "2026",
+    doi: "https://doi.org/10.12928/biste.v8i1.14107",
+    type: "Journal"
+  },
+  {
+    authors: "S. Moghe and L. Jindal",
+    title: "DeciViT-Knee 2025: Precision Fuzzy Techniques of Decision Trees and ViT in Analysis of Knee Osteoarthritis",
+    journal: "Journal of Visualized Experiments (JoVE), Jan. 2026",
+    year: "2026",
+    doi: "https://doi.org/10.3791/69411",
+    type: "Journal"
+  },
+  {
+    authors: "S. Moghe and L. Jindal",
+    title: "Convo-Neur-Net: Allopathic Treatment v/s Ayurvedic Healing Practices: Their Role in Assessing Tibia and Femur Integrity",
+    journal: "Springer Book Chapter, ISBN: 978-3-032-02949-2, 2025",
+    year: "2025",
+    doi: "https://doi.org/10.1007/978-3-032-02949-2_7",
+    type: "Book Chapter"
+  },
+  {
+    authors: "S. Modh and L. Jindal",
+    title: "Near-Perfect IoT DDoS Detection on the IoT-DH Honeypot Dataset via Two-Stage Deep-Tree Modeling",
+    journal: "Proc. IEEE International Conference on Technologies for Big Data (ICTBIG 2025), pp. 1–7",
+    year: "2025",
+    doi: "https://doi.org/10.1109/ICTBIG68706.2025.11323639",
+    type: "Conference"
+  },
+  {
+    authors: "S. Goyal and L. Jindal",
+    title: "Robust Load Forecasting with Seasonal Decomposition and Gradient-Boosted Residuals",
+    journal: "Proc. IEEE International Conference on Technologies for Big Data (ICTBIG 2025), pp. 1–7",
+    year: "2025",
+    doi: "https://doi.org/10.1109/ICTBIG68706.2025.11323774",
+    type: "Conference"
+  },
+  {
+    authors: "B. Tiwari and L. Jindal",
     title: "Neural Network-Based Early Detection of Wheat Stripe Rust Disease for Enhanced Crop Management",
-    journal: "Ingenierie Des Systemes D Information 30(4), pp. 1067-1076",
+    journal: "Ingénierie Des Systèmes D’Information, vol. 30, no. 4, pp. 1067–1076, 2025",
     year: "2025",
     doi: "https://doi.org/10.18280/isi.300422",
-    type: "Scopus Journal"
+    type: "Journal"
   },
   {
-    authors: "Vivek Jindal, Latika Jindal, Kailash Chandra Bandhu and Ratnesh Litoriya",
-    title: "Automating cricket scorecards with deep neural network: a next-generation approach",
-    journal: "IET Conference Proceedings Volume 2025, Issue 7",
+    authors: "V. Jindal, L. Jindal, K. C. Bandhu, and R. Litoriya",
+    title: "Automating Cricket Scorecards with Deep Neural Network: A Next-Generation Approach",
+    journal: "Proc. Parul University International Conference on Engineering and Technology (PiCET 2025), Vadodara, India, pp. 1587–1594",
     year: "2025",
     doi: "https://doi.org/10.1049/icp.2025.1671",
-    type: "Conference Proceedings"
+    type: "Conference"
   },
   {
-    authors: "Jindal, L., Sharma, A., Prasad, K.D.V., Rivera, R., Karimovna, A.D.",
-    title: "A machine learning method for predicting disease-associated microRNA connections using network internal topology data",
-    journal: "Healthcare Analytics",
+    authors: "L. Jindal, A. Sharma, K. D. V. Prasad, R. Rivera, and A. D. Karimovna",
+    title: "A Machine Learning Method for Predicting Disease-Associated MicroRNA Connections Using Network Internal Topology Data",
+    journal: "Healthcare Analytics, vol. 4, p. 100215, 2023",
     year: "2023",
     doi: "https://doi.org/10.1016/j.health.2023.100215",
-    type: "International Journal"
+    type: "Journal"
   },
   {
-    authors: "Jindal, L., Doohan, N.V., Vaidya, S., Patel, H., Deo, A.",
-    title: "Deep learning-based heat optimization techniques for forecasting indoor temperature changes",
-    journal: "Spatial Information Research",
+    authors: "L. Jindal, N. V. Doohan, S. Vaidya, H. Patel, and A. Deo",
+    title: "Deep Learning-Based Heat Optimization Techniques for Forecasting Indoor Temperature Changes",
+    journal: "Spatial Information Research, 2023",
     year: "2023",
     doi: "https://doi.org/10.1007/s41324-023-00546-w",
-    type: "International Journal"
+    type: "Journal"
   },
   {
-    authors: "Shukla, K., Kollu, A., Panwar, P., Jindal, L., Keshta, I., Maaliw, R.R.",
-    title: "Energy-efficient resource allocation over wireless communication systems through deep reinforcement learning",
-    journal: "International Journal of Communication Systems",
+    authors: "K. Shukla, A. Kollu, P. Panwar, L. Jindal, I. Keshta, and R. R. Maaliw",
+    title: "Energy-Efficient Resource Allocation over Wireless Communication Systems through Deep Reinforcement Learning",
+    journal: "International Journal of Communication Systems, 2023",
     year: "2023",
     doi: "https://doi.org/10.1002/dac.5589",
-    type: "International Journal"
+    type: "Journal"
   },
   {
-    authors: "Latika Jindal, Harish Kumar, Yassine Aoudni, Geovanny Genaro Reivan Ortiz, Shahajan Miah and Rohit Tripathi",
+    authors: "L. Jindal, H. Kumar, Y. Aoudni, G. G. R. Ortiz, S. Miah, and R. Tripathi",
     title: "Light Weighted CNN Model to Detect DDoS Attack over Distributed Scenario",
-    journal: "Security and Communication Network",
+    journal: "Security and Communication Networks, 2022",
     year: "2022",
     doi: "https://doi.org/10.1155/2022/7585457",
-    type: "International Journal (Web of Science)"
+    type: "Journal"
   },
   {
-    authors: "Byeon, Haewon, Tammina, Manoj Ram, Soni, Mukesh, Kuzieva, Nargiza, Jindal, Latika, Keshta, Ismail, Kulkarni, Mrunalini Harish",
-    title: "Enhancing online health consultations through fuzzy logic-integrated attribute-based encryption system",
-    journal: "Journal of Intelligent & Fuzzy Systems",
+    authors: "H. Byeon, M. R. Tammina, M. Soni, N. Kuzieva, L. Jindal, I. Keshta, and M. H. Kulkarni",
+    title: "Enhancing Online Health Consultations through Fuzzy Logic-Integrated Attribute-Based Encryption System",
+    journal: "Journal of Intelligent & Fuzzy Systems, 2024",
     year: "2024",
-    doi: "10.3233/JIFS-235893",
-    type: "International Journal"
+    doi: "https://doi.org/10.3233/JIFS-235893",
+    type: "Journal"
   },
   {
-    authors: "Nikhil Kumar Singh, Sanjay Agal, Thippa Reddy Gadekallu, Mohammad Shabaz, Ismail Keshta, Latika Jindal, Mukesh Soni, Haewon Byeon, and Pavitar Parkash Singh",
+    authors: "N. K. Singh, S. Agal, T. R. Gadekallu, M. Shabaz, I. Keshta, L. Jindal, M. Soni, H. Byeon, and P. P. Singh",
     title: "Deep Learning Model for Interpretability and Explainability of Aspect-Level Sentiment Analysis Based on Social Media",
-    journal: "IEEE Transactions on Computational Social Systems",
+    journal: "IEEE Transactions on Computational Social Systems, 2024",
     year: "2024",
-    doi: "10.1109/TCSS.2023.3347664",
-    type: "International Journal"
+    doi: "https://doi.org/10.1109/TCSS.2023.3347664",
+    type: "Journal"
   },
   {
-    authors: "Mehrotra, L., Saxena, P. S., & Doohan, N. V.",
-    title: "A Data Classification Model: For Effective Classification of Intrusion in an Intrusion Detection System Based on Decision Tree Learning Algorithm",
-    journal: "Lecture Notes in Networks and Systems (LNNS, volume 9), Springer, Singapore",
-    year: "2017",
-    doi: "https://doi.org/10.1007/978-981-10-3932-4_7",
-    type: "Book Chapter"
-  },
-  {
-    authors: "Mehrotra, L., Saxena, P. S., & Doohan, N. V.",
-    title: "Implementation of Modified ID3 Algorithm",
-    journal: "Lecture Notes in Networks and Systems (LNNS, volume 9), Springer, Singapore",
-    year: "2017",
-    doi: "https://doi.org/10.1007/978-981-10-3932-4_6",
-    type: "Book Chapter"
-  },
-  {
-    authors: "Mehrotra, L., & Saxena, P. S.",
-    title: "An Assessment Report on: Statistics-Based and Signature-Based Intrusion Detection Techniques",
-    journal: "Advances in Intelligent Systems and Computing (AISC, volume 625), Springer, Singapore",
-    year: "2017",
-    doi: "https://doi.org/10.1007/978-981-10-5508-9_31",
-    type: "Conference Paper"
-  },
-  {
-    authors: "Latika Jindal, Sumit Kumar, Chetna Kaushal, Manisha Bhende, Anuradha Thakare, Mohammad Shabaz",
-    title: "Aspect-based sentiment analysis employing linguistics content over social media for Web of Things",
-    journal: "IET Communications",
+    authors: "L. Jindal, S. Kumar, C. Kaushal, M. Bhende, A. Thakare, and M. Shabaz",
+    title: "Aspect-Based Sentiment Analysis Employing Linguistics Content over Social Media for Web of Things",
+    journal: "IET Communications, Nov. 2022",
     year: "2022",
     doi: "https://doi.org/10.1049/cmu2.12538",
-    type: "International Journal (Web of Science)"
-  },
-  {
-    authors: "Holkar, N. S., & Mehrotra, L.",
-    title: "Analysis of Power Utilization and different Routing Protocols in Mobile Ad Hoc Network (MANET)",
-    journal: "International Journal of Advanced Research in Computer Engineering & Technology (IJARCET)",
-    year: "",
-    doi: "",
-    type: "Book Chapter"
-  },
-  {
-    authors: "Mehrotra L",
-    title: "High Tech Trash: Facts Figures and Recycling",
-    journal: "Green computing and E-pragati",
-    year: "",
-    doi: "",
-    type: "National Conference"
-  },
-  {
-    authors: "Mehrotra L",
-    title: "Green computing: a social responsibility of Government Product Manufactures and Customers",
-    journal: "Recent trends in computational Intelligence national workshop at CIIT",
-    year: "",
-    doi: "",
-    type: "National Workshop"
-  },
-  {
-    authors: "Mehrotra L",
-    title: "Analysis of power utilization and different routing protocols in mobile AD Hoc Network (MANET)",
-    journal: "Current trends in cloud computing and big data national conference at JNU, Jaipur",
-    year: "",
-    doi: "",
-    type: "National Conference"
-  },
+    type: "Journal"
+  }
 ];
 
 export default function PublicationsSection() {
@@ -156,7 +164,7 @@ export default function PublicationsSection() {
           Research Publications
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-4" />
-        <p className="text-center text-lg text-text/70 mb-12">16 Publications in International Journals, Conferences & Book Chapters</p>
+        <p className="text-center text-lg text-text/70 mb-12">Selected publications from international journals, conferences, and book chapters</p>
 
         <div className="max-w-6xl mx-auto space-y-6">
           {displayedPublications.map((pub, index) => (

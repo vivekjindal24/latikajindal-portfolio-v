@@ -8,24 +8,24 @@ import { Briefcase, Calendar } from "lucide-react";
 const experiences = [
   {
     title: "Associate Professor",
-    institution: "Medicaps University",
-    location: "Indore, MP",
-    duration: "Feb 2012 - Present (13+ Years)",
-    description: "Working as an Associate Professor at Medicaps University, Indore in the Computer Science & Engineering Department since Feb 2012 (13+ Years)",
+    institution: "MediCaps University",
+    location: "Indore, India",
+    period: "Feb. 2012 – Present",
+    description: "Delivered core CSE courses including Data Structures, Algorithms, Database Systems, and Cyber Security to B.Tech and M.Tech students. Guided postgraduate research projects, supervised thesis work, and mentored students in publishing papers in Scopus and Web of Science indexed journals.",
   },
   {
     title: "Assistant Professor",
     institution: "SKSITS",
-    location: "Indore",
-    period: "NOV 2011 – FEB 2012",
-    description: "Served as Assistant Professor in Computer Science & Engineering Department",
+    location: "Indore, India",
+    period: "Nov. 2011 – Feb. 2012",
+    description: "Served as an Assistant Professor in the Computer Science & Engineering Department.",
   },
   {
     title: "Assistant Professor",
     institution: "SD Bansal College of Technology",
-    location: "Indore",
+    location: "Indore, India",
     period: "2008 – 2009",
-    description: "Served as Assistant Professor in Computer Science & Engineering Department",
+    description: "Worked as an Assistant Professor in the Computer Science & Engineering department.",
   },
 ];
 
@@ -46,7 +46,7 @@ export default function ExperienceSection() {
           Experience
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-4" />
-        <p className="text-center text-lg text-text/70 mb-12">15+ Years in Academia</p>
+        <p className="text-center text-lg text-text/70 mb-12">11+ Years in Academia</p>
 
         <div className="max-w-4xl mx-auto space-y-8">
           {experiences.map((exp, index) => (

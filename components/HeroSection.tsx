@@ -59,16 +59,16 @@ export default function HeroSection() {
         >
           Department of Computer Science & Engineering
           <br />
-          Medicaps University, Indore
+          MediCaps University, Indore
         </motion.p>
 
-                <motion.p
+        <motion.p
           className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          &ldquo;Versatile academic with 15+ years of teaching, research, and innovation in emerging technologies.&rdquo;
+          &ldquo;Academic leader with 11+ years of teaching, research supervision, and institutional engagement in Computer Science & Engineering.&rdquo;
         </motion.p>
 
         <motion.div

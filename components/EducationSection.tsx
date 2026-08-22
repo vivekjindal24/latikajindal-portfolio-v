@@ -7,17 +7,17 @@ import { GraduationCap } from "lucide-react";
 
 const education = [
   {
-    degree: "Ph.D. (Computer Science and Eng.)",
+    degree: "Ph.D. in Computer Science & Engineering",
     institution: "Jaipur National University, Jaipur, India",
     year: "2019",
   },
   {
-    degree: "M.TECH. (Computer Science and Eng.)",
+    degree: "Master of Technology in Computer Science & Engineering",
     institution: "RGPV, Bhopal, India",
     year: "2012",
   },
   {
-    degree: "B.E. (Computer Science and Eng.)",
+    degree: "Bachelor of Engineering in Computer Science & Engineering",
     institution: "RGPV, Bhopal, India",
     year: "2008",
   },

@@ -71,50 +71,51 @@ export default function ContactSection() {
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Mail className="text-gold" size={24} />
+                </div>
+                <div className="flex-1">
+                  <p className="text-sm text-text/70 font-semibold mb-2">Phone</p>
+                  <a href="tel:+919479889242" className="block text-navy hover:text-gold transition-colors font-medium">
+                    +91-94798-89242
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="w-12 h-12 bg-gold/20 rounded-lg flex items-center justify-center flex-shrink-0">
                   <MapPin className="text-gold" size={24} />
                 </div>
                 <div className="flex-1">
-                  <p className="text-sm text-text/70 font-semibold mb-2">Office Address</p>
+                  <p className="text-sm text-text/70 font-semibold mb-2">Institution</p>
                   <p className="text-navy leading-relaxed font-medium">
-                    V-127, V Block<br />
                     Department of Computer Science & Engineering<br />
-                    Medicaps University<br />
-                    Indore 453331, India
+                    MediCaps University<br />
+                    Indore, India
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Social Links */}
             <div className="mt-8 pt-6 border-t border-navy/10">
               <h3 className="text-xl font-bold text-navy mb-4">Connect Online</h3>
               <div className="flex flex-wrap gap-3">
                 <a
-                  href="https://in.linkedin.com/in/dr-latika-jindal"
+                  href="https://www.drlatikajindal.com"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-all hover:scale-105 shadow-sm"
                 >
+                  <FileText size={20} />
+                  Website
+                </a>
+                <a
+                  href="https://in.linkedin.com/in/dr-latika-jindal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-gold text-navy rounded-lg hover:bg-gold/90 transition-all hover:scale-105 shadow-sm"
+                >
                   <Linkedin size={20} />
                   LinkedIn
-                </a>
-                <a
-                  href="https://scholar.google.com/citations?user=4rJX49MAAAAJ"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gold text-navy rounded-lg hover:bg-gold/90 transition-all hover:scale-105 shadow-sm"
-                >
-                  <GraduationCap size={20} />
-                  Google Scholar
-                </a>
-                <a
-                  href="https://orcid.org/0000-0003-1773-2171"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 bg-gold text-navy rounded-lg hover:bg-gold/90 transition-all hover:scale-105 shadow-sm"
-                >
-                  <FileText size={20} />
-                  ORCID
                 </a>
               </div>
             </div>
