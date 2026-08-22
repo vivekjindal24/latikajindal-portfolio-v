@@ -3,39 +3,23 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import { BookOpen, ExternalLink, Database, FileCode } from "lucide-react";
+import { BookOpen, ExternalLink, Archive, Presentation } from "lucide-react";
 
 const courses = [
   {
-    id: "dbms",
-    title: "Database Management Systems",
-    subtitle: "DBMS",
+    id: "nosql",
+    title: "NoSQL Databases",
+    subtitle: "NoSQL",
     description:
-      "Comprehensive academic platform with interactive content, study materials, and exam-oriented preparation for DBMS course.",
-    icon: Database,
-    href: "/courses/dbms",
+      "Current-semester course platform with unit-wise PPTX materials that students can open and view directly in the browser.",
+    icon: Presentation,
+    href: "/courses/nosql",
     isDeployed: true,
     features: [
-      "Interactive Diagrams",
-      "Unit-wise Materials",
-      "SQL Examples",
-      "Practice Questions"
-    ]
-  },
-  {
-    id: "xml",
-    title: "XML and Related Technologies",
-    subtitle: "XML",
-    description:
-      "Advanced learning platform with syllabus-aligned content, CLO-CO mapping, and deep technical coverage for XML course.",
-    icon: FileCode,
-    href: "/courses/xml",
-    isDeployed: true,
-    features: [
-      "DTD & XSD Examples",
-      "XSLT Transformations",
-      "Exam Preparation",
-      "Industry Applications"
+      "Five unit presentations",
+      "In-browser PPTX viewer",
+      "Original files preserved",
+      "Responsive course access"
     ]
   },
 ];
@@ -58,7 +42,7 @@ export default function CoursesSection() {
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-4" />
         <p className="text-center text-lg text-text/70 mb-12">
-          Interactive Learning Platforms for Current Semester
+          NoSQL is live for the current semester. Previous courses are preserved in the archive.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -84,7 +68,7 @@ export default function CoursesSection() {
                         {course.title}
                       </h3>
                       <span className="inline-block px-3 py-1 bg-gold/20 text-gold text-xs font-semibold rounded-full">
-                        Active Course
+                        Live Course
                       </span>
                     </div>
                   </div>
@@ -122,6 +106,19 @@ export default function CoursesSection() {
               </motion.div>
             );
           })}
+        </div>
+
+        <div className="max-w-5xl mx-auto mt-8 bg-white rounded-lg p-6 shadow-lg border border-gray-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-3">
+            <Archive size={24} className="text-gold mt-1" />
+            <div>
+              <h3 className="text-xl font-bold text-navy">Course Archive</h3>
+              <p className="text-sm text-text/70">DBMS and XML remain available with their original materials.</p>
+            </div>
+          </div>
+          <a href="/courses/archive" className="inline-flex items-center justify-center px-5 py-3 bg-navy text-white font-semibold rounded-lg hover:bg-navy/90 transition-colors">
+            Open Archive
+          </a>
         </div>
 
         {/* Info Box */}
