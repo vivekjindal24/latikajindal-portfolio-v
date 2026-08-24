@@ -22,6 +22,22 @@ const courses = [
       "Responsive course access"
     ]
   },
+  {
+    id: "blockchain",
+    title: "Blockchain Architecture",
+    subtitle: "Blockchain",
+    description:
+      "Current-semester course platform with unit-wise PPTX materials that students can open and view directly in the browser.",
+    icon: Presentation,
+    href: "/courses/blockchain",
+    isDeployed: true,
+    features: [
+      "Five unit presentations",
+      "In-browser PPTX viewer",
+      "Original files preserved",
+      "Responsive course access"
+    ]
+  },
 ];
 
 export default function CoursesSection() {
@@ -42,7 +58,7 @@ export default function CoursesSection() {
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-4" />
         <p className="text-center text-lg text-text/70 mb-12">
-          NoSQL is live for the current semester. Previous courses are preserved in the archive.
+          NoSQL and Blockchain Architecture are live for the current semester. Previous courses are preserved in the archive.
         </p>
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
