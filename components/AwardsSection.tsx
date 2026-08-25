@@ -46,14 +46,14 @@ export default function AwardsSection() {
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-12" />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+        <div className="flex flex-wrap justify-center gap-6 max-w-6xl mx-auto">
           {awards.map((award, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white p-6 rounded-lg border-2 border-gold hover:shadow-2xl transition-all hover:-translate-y-2"
+              className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] max-w-sm bg-white p-6 rounded-lg border-2 border-gold hover:shadow-2xl transition-all hover:-translate-y-2"
             >
               <div className="flex items-center justify-center mb-4">
                 <div className="w-16 h-16 bg-gold/10 rounded-full flex items-center justify-center">

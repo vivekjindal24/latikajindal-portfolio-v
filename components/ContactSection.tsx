@@ -14,17 +14,12 @@ export default function ContactSection() {
     email: "",
     message: ""
   });
-  
-  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: "", email: "", message: "" });
-    }, 3000);
+    const subject = encodeURIComponent(`Portfolio inquiry from ${formData.name}`);
+    const body = encodeURIComponent(`${formData.message}\n\n— ${formData.name}\n${formData.email}`);
+    window.location.href = `mailto:latika.mehrotra@medicaps.ac.in?subject=${subject}&body=${body}`;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -117,6 +112,24 @@ export default function ContactSection() {
                   <Linkedin size={20} />
                   LinkedIn
                 </a>
+                <a
+                  href="https://scholar.google.com/citations?user=4rJX49MAAAAJ"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white text-navy border border-navy/20 rounded-lg hover:border-gold transition-all hover:scale-105 shadow-sm"
+                >
+                  <GraduationCap size={20} />
+                  Google Scholar
+                </a>
+                <a
+                  href="https://orcid.org/0000-0003-1773-2171"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 bg-white text-navy border border-navy/20 rounded-lg hover:border-gold transition-all hover:scale-105 shadow-sm"
+                >
+                  <FileText size={20} />
+                  ORCID
+                </a>
               </div>
             </div>
           </div>
@@ -176,22 +189,14 @@ export default function ContactSection() {
 
               <button
                 type="submit"
-                disabled={submitted}
-                className={`w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
-                  submitted
-                    ? "bg-green-600 text-white"
-                    : "bg-navy text-white hover:bg-navy/90 hover:scale-105"
-                }`}
+                className="w-full py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 bg-navy text-white hover:bg-navy/90 hover:scale-105"
               >
-                {submitted ? (
-                  <>✓ Message Sent!</>
-                ) : (
-                  <>
-                    <Send size={20} />
-                    Send Message
-                  </>
-                )}
+                <Send size={20} />
+                Send Message
               </button>
+              <p className="text-xs text-text/60 text-center">
+                This opens your email app with the message pre-filled.
+              </p>
             </form>
           </div>
         </div>

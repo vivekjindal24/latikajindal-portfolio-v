@@ -3,14 +3,27 @@ export default function NoSqlLabManualPage() {
     <div className="max-w-7xl mx-auto px-6 py-8">
       <h1 className="text-3xl font-bold text-gray-900 mb-6">NoSQL Lab Manual</h1>
       <div className="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
-        <div className="w-full h-[calc(100vh-200px)]">
+        <div className="hidden md:block w-full h-[calc(100vh-200px)]">
           <iframe
             src="/NOSQL Lab Manual.pdf"
             className="w-full h-full"
             title="NoSQL Lab Manual"
           />
         </div>
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        <div className="md:hidden p-6 text-center space-y-3">
+          <p className="text-sm text-gray-600">
+            In-browser viewing is not supported on this device. Download the PDF instead:
+          </p>
+        </div>
+        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 flex flex-wrap gap-3 justify-center md:justify-start">
+          <a
+            href="/NOSQL Lab Manual.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-4 py-2 bg-navy text-white rounded-lg hover:bg-navy/90 transition-colors"
+          >
+            Open in New Tab
+          </a>
           <a
             href="/NOSQL Lab Manual.pdf"
             download

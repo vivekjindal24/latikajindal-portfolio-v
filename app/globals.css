@@ -4,6 +4,7 @@
 
 :root {
   --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-fraunces: 'Fraunces', Georgia, serif;
 }
 
 * {
@@ -12,6 +13,24 @@
 
 body {
   @apply bg-gradient-to-br from-background via-white to-gold/5 text-text antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* Offset anchored sections below the fixed navigation */
+section[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+@media (min-width: 1024px) {
+  section[id] {
+    scroll-margin-top: 1.5rem;
+  }
 }
 
 /* Add left padding for desktop side navigation */
@@ -35,5 +54,9 @@ body {
   
   .container-custom {
     @apply max-w-7xl mx-auto;
+  }
+
+  .font-display {
+    font-family: var(--font-fraunces), Georgia, serif;
   }
 }

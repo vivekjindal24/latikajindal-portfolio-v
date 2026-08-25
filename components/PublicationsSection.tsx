@@ -204,8 +204,13 @@ export default function PublicationsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [showAll, setShowAll] = useState(false);
-  
-  const displayedPublications = showAll ? publications : publications.slice(0, 6);
+
+  const datedYears = Array.from(new Set(publications.map((p) => p.year)))
+    .filter(Boolean)
+    .sort((a, b) => Number(b) - Number(a));
+  const hasUndated = publications.some((p) => !p.year);
+  const groups = hasUndated ? [...datedYears, "Early Publications"] : datedYears;
+  const visibleGroups = showAll ? groups : groups.slice(0, 2);
 
   return (
     <section id="publications" className="section-padding bg-gradient-to-br from-navy/5 via-white to-gold/5">
@@ -220,61 +225,69 @@ export default function PublicationsSection() {
           Research Publications
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-4" />
-        <p className="text-center text-lg text-text/70 mb-12">Selected publications from international journals, conferences, and book chapters</p>
+        <p className="text-center text-lg text-text/70 mb-12">Publications from international journals, conferences, and book chapters</p>
 
-        <div className="max-w-6xl mx-auto space-y-6">
-          {displayedPublications.map((pub, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="bg-gradient-to-r from-white to-gold/5 p-6 rounded-lg border-l-4 border-gold hover:shadow-xl hover:border-navy transition-all"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <FileText className="text-gold" size={24} />
-                </div>
-                <div className="flex-1">
-                  <div className="flex items-start justify-between gap-4 mb-2">
-                    <h3 className="text-lg font-bold text-navy leading-tight flex-1">
-                      {pub.title}
-                    </h3>
-                    {pub.year && (
-                      <span className="flex-shrink-0 px-3 py-1 bg-navy text-gold text-sm font-semibold rounded-full">
-                        {pub.year}
-                      </span>
-                    )}
-                  </div>
-                  <p className="text-sm text-text/70 mb-2">
-                    <strong>Authors:</strong> {pub.authors}
-                  </p>
-                  <p className="text-sm text-text/80 mb-2">
-                    <strong>Published in:</strong> {pub.journal}
-                  </p>
-                  <div className="flex items-center gap-4 flex-wrap">
-                    <span className="text-xs px-3 py-1 bg-gold/20 text-navy font-semibold rounded">
-                      {pub.type}
-                    </span>
-                    {pub.doi && (
-                      <a
-                        href={pub.doi}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-sm text-gold hover:underline"
-                      >
-                        <ExternalLink size={14} />
-                        DOI Link
-                      </a>
-                    )}
-                  </div>
-                </div>
+        <div className="max-w-6xl mx-auto space-y-12">
+          {visibleGroups.map((year) => (
+            <div key={year}>
+              <div className="flex items-center gap-4 mb-6">
+                <span className="font-display text-3xl font-bold text-navy">{year}</span>
+                <span className="h-px grow bg-gradient-to-r from-gold to-transparent" />
+                <span className="text-sm text-text/50 font-medium">
+                  {publications.filter((p) => (year === "Early Publications" ? !p.year : p.year === year)).length} publications
+                </span>
               </div>
-            </motion.div>
+              <div className="space-y-6">
+                {publications
+                  .filter((pub) => (year === "Early Publications" ? !pub.year : pub.year === year))
+                  .map((pub, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+                      transition={{ duration: 0.4, delay: index * 0.05 }}
+                      className="bg-gradient-to-r from-white to-gold/5 p-6 rounded-lg border-l-4 border-gold hover:shadow-xl hover:border-navy transition-all"
+                    >
+                      <div className="flex items-start gap-4">
+                        <div className="flex-shrink-0 mt-1">
+                          <FileText className="text-gold" size={24} />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-lg font-bold text-navy leading-tight mb-2">
+                            {pub.title}
+                          </h3>
+                          <p className="text-sm text-text/70 mb-2">
+                            <strong>Authors:</strong> {pub.authors}
+                          </p>
+                          <p className="text-sm text-text/80 mb-2">
+                            <strong>Published in:</strong> {pub.journal}
+                          </p>
+                          <div className="flex items-center gap-4 flex-wrap">
+                            <span className="text-xs px-3 py-1 bg-gold/20 text-navy font-semibold rounded">
+                              {pub.type}
+                            </span>
+                            {pub.doi && (
+                              <a
+                                href={pub.doi}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1 text-sm text-gold hover:underline"
+                              >
+                                <ExternalLink size={14} />
+                                DOI Link
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+              </div>
+            </div>
           ))}
         </div>
 
-        {publications.length > 6 && (
+        {groups.length > 2 && (
           <div className="text-center mt-8">
             <button
               onClick={() => setShowAll(!showAll)}

@@ -33,7 +33,7 @@ export default function HobbiesSection() {
         </h2>
         <div className="w-24 h-1 bg-gold mx-auto mb-12" />
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
           {hobbies.map((hobby, index) => {
             const Icon = hobby.icon;
             return (

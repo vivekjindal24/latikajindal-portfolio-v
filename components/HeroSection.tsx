@@ -1,7 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Linkedin, Mail, Download, GraduationCap, FileText } from "lucide-react";
+import { Download, Mail } from "lucide-react";
+import Image from "next/image";
+
+const stats = [
+  { value: "11+", label: "Years in Academia" },
+  { value: "24", label: "Publications" },
+  { value: "6", label: "Patents" },
+  { value: "5", label: "Awards" },
+];
 
 export default function HeroSection() {
   const containerVariants = {
@@ -39,6 +47,24 @@ export default function HeroSection() {
         initial="hidden"
         animate="visible"
       >
+        {/* Portrait */}
+        <motion.div
+          variants={itemVariants}
+          className="mb-8 flex justify-center"
+        >
+          <div className="relative">
+            <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-gold via-gold/60 to-transparent blur-sm" />
+            <Image
+              src="/latikajindal.webp"
+              alt="Dr. Latika Jindal"
+              width={168}
+              height={168}
+              priority
+              className="relative w-32 h-32 md:w-40 md:h-40 rounded-full object-cover border-4 border-gold shadow-2xl"
+            />
+          </div>
+        </motion.div>
+
         <motion.h1
           variants={itemVariants}
           className="text-5xl md:text-7xl font-bold text-white mb-6"
@@ -63,7 +89,7 @@ export default function HeroSection() {
         </motion.p>
 
         <motion.p
-          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
+          className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
@@ -76,56 +102,49 @@ export default function HeroSection() {
           className="flex flex-wrap items-center justify-center gap-4"
         >
           <a
-            href="https://in.linkedin.com/in/dr-latika-jindal"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-navy font-semibold rounded-lg hover:bg-gold/90 transition-all hover:scale-105"
-          >
-            <Linkedin size={20} />
-            LinkedIn
-          </a>
-
-          <a
-            href="mailto:latika.mehrotra@medicaps.ac.in"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white text-navy font-semibold rounded-lg hover:bg-white/90 transition-all hover:scale-105"
-          >
-            <Mail size={20} />
-            Email Me
-          </a>
-
-          <a
             href="/Dr_Latika_Jindal_CV.docx"
             download
-            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-navy transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-gold text-navy font-semibold rounded-lg hover:bg-gold/90 transition-all hover:scale-105"
           >
             <Download size={20} />
             Download CV
           </a>
 
           <a
-            href="https://scholar.google.com/citations?user=4rJX49MAAAAJ"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold hover:text-navy transition-all hover:scale-105"
+            href="mailto:latika.mehrotra@medicaps.ac.in"
+            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-navy transition-all hover:scale-105"
           >
-            <GraduationCap size={20} />
-            Google Scholar
-          </a>
-
-          <a
-            href="https://orcid.org/0000-0003-1773-2171"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 border-2 border-gold text-gold font-semibold rounded-lg hover:bg-gold hover:text-navy transition-all hover:scale-105"
-          >
-            <FileText size={20} />
-            ORCID
+            <Mail size={20} />
+            Email Me
           </a>
         </motion.div>
 
+        {/* Stats Band */}
+        <motion.dl
+          variants={itemVariants}
+          className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+        >
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="bg-white/5 backdrop-blur-sm border border-gold/20 rounded-lg px-4 py-5"
+            >
+              <dt className="sr-only">{stat.label}</dt>
+              <dd>
+                <span className="block text-3xl font-bold text-gold font-display">
+                  {stat.value}
+                </span>
+                <span className="mt-1 block text-xs md:text-sm uppercase tracking-wide text-white/70">
+                  {stat.label}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </motion.dl>
+
         <motion.div
           variants={itemVariants}
-          className="mt-16"
+          className="mt-12"
         >
           <a
             href="#about"
