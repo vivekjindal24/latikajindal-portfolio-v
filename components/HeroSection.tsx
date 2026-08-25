@@ -94,7 +94,8 @@ export default function HeroSection() {
           </a>
 
           <a
-            href="#"
+            href="/Dr_Latika_Jindal_CV.docx"
+            download
             className="inline-flex items-center gap-2 px-6 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-navy transition-all hover:scale-105"
           >
             <Download size={20} />

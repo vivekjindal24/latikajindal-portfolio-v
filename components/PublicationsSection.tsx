@@ -141,6 +141,62 @@ const publications = [
     year: "2022",
     doi: "https://doi.org/10.1049/cmu2.12538",
     type: "Journal"
+  },
+  {
+    authors: "L. Mehrotra, P. S. Saxena, and N. V. Doohan",
+    title: "A Data Classification Model: For Effective Classification of Intrusion in an Intrusion Detection System Based on Decision Tree Learning Algorithm",
+    journal: "Lecture Notes in Networks and Systems, vol. 9, Springer, Singapore, Nov. 2017",
+    year: "2017",
+    doi: "https://doi.org/10.1007/978-981-10-3932-4_7",
+    type: "Book Chapter"
+  },
+  {
+    authors: "L. Mehrotra, P. S. Saxena, and N. V. Doohan",
+    title: "Implementation of Modified ID3 Algorithm",
+    journal: "Lecture Notes in Networks and Systems, vol. 9, Springer, Singapore, Nov. 2017",
+    year: "2017",
+    doi: "https://doi.org/10.1007/978-981-10-3932-4_6",
+    type: "Book Chapter"
+  },
+  {
+    authors: "L. Mehrotra and P. S. Saxena",
+    title: "An Assessment Report on Statistics-Based and Signature-Based Intrusion Detection Techniques",
+    journal: "Advances in Intelligent Systems and Computing, vol. 625, Springer, Singapore, Oct. 2017",
+    year: "2017",
+    doi: "https://doi.org/10.1007/978-981-10-5508-9_31",
+    type: "Book Chapter"
+  },
+  {
+    authors: "N. S. Holkar and L. Mehrotra",
+    title: "Analysis of Power Utilization and Different Routing Protocols in Mobile Ad Hoc Network (MANET)",
+    journal: "International Journal of Advanced Research in Computer Engineering & Technology (IJARCET)",
+    year: "",
+    doi: "",
+    type: "Journal"
+  },
+  {
+    authors: "L. Mehrotra",
+    title: "High Tech Trash: Facts, Figures and Recycling",
+    journal: "Proc. National Conference on Green Computing and E-Pragati",
+    year: "",
+    doi: "",
+    type: "Conference"
+  },
+  {
+    authors: "L. Mehrotra",
+    title: "Green Computing: A Social Responsibility of Government, Product Manufacturers and Customers",
+    journal: "Proc. National Workshop on Recent Trends in Computational Intelligence, CIIT",
+    year: "",
+    doi: "",
+    type: "Conference"
+  },
+  {
+    authors: "L. Mehrotra",
+    title: "Analysis of Power Utilization and Different Routing Protocols in Mobile Ad Hoc Network (MANET)",
+    journal: "Proc. National Conference on Current Trends in Cloud Computing and Big Data, JNU, Jaipur",
+    year: "",
+    doi: "",
+    type: "Conference"
   }
 ];
 
