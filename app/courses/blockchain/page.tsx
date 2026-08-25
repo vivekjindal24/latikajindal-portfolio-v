@@ -20,9 +20,6 @@ export default function BlockchainCourse() {
             <BookOpen size={18} />
             Start Unit 1
           </Link>
-          <Link href="/courses/archive" className="bg-white text-gray-700 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-colors">
-            View Archive
-          </Link>
         </div>
       </section>
 

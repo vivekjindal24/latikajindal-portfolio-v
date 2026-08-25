@@ -23,9 +23,6 @@ export default function NoSQLCourse() {
           <Link href="/courses/nosql/lab-manual" className="bg-white text-gray-700 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-colors">
             Lab Manual
           </Link>
-          <Link href="/courses/archive" className="bg-white text-gray-700 font-semibold py-3 px-6 rounded-lg border-2 border-gray-300 hover:border-gray-400 transition-colors">
-            View Archive
-          </Link>
         </div>
       </section>
 
